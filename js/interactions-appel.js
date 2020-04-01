@@ -131,9 +131,9 @@ function grabDataAndGoToLink(stepLink) {
 
 document.getElementById("form-imc").addEventListener("submit", function(event) {
   // récupérer convertir les virgules en point décimal et transformer en float
-  taille = parseFloat(document.getElementById("add-taille").value.replace(",", "."));
+  taille = parseInt(document.getElementById("add-taille").value);
   poids = parseFloat(document.getElementById("add-poids").value.replace(",", "."));
-  debug(taille + " m / " + poids + " kg");
+  debug(taille + " cm / " + poids + " kg");
   computeIMC(taille, poids); // faire apparaitre la suite
 
   document
@@ -145,7 +145,7 @@ document.getElementById("form-imc").addEventListener("submit", function(event) {
 }); //calcul IMC
 
 function computeIMC(taille, poids) {
-  imc = poids / Math.pow(taille, 2);
+  imc = poids / Math.pow((taille / 100), 2);
   debug("IMC = " + imc);
 
   if (imc >= 30) {

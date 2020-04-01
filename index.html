@@ -218,11 +218,11 @@ Réalisée avec le concours de l'Agence du Numérique de la Sécurité Civile
                   <p>Ces données sont utiles pour calculer votre indice de masse corporelle.</p>
                   <ul>
                     <li>
-                      <label for="add-taille">Taille en mètres * :</label>
-                      <input type="text" required pattern="[0-9,.]+" id="add-taille" data-check-number data-check-number-min="0.5"
-                        data-check-number-max="3.0"
-                        data-check-number-error="Ce nombre ne semble pas être une taille en mètres valide."
-                        placeholder="ex : 1,65" inputmode="decimal">
+                      <label for="add-taille">Taille en centimètres * :</label>
+                      <input type="text" required pattern="[0-9]+" id="add-taille" data-check-number data-check-number-min="50"
+                        data-check-number-max="300"
+                        data-check-number-error="Ce nombre ne semble pas être une taille en centimètres valide."
+                        placeholder="ex : 165" inputmode="numeric">
                     </li>
                     <li><label for="add-poids">Poids en kilogrammes * :</label><input type="text" required pattern="[0-9,.]+"
                         id="add-poids" data-check-number data-check-number-min="10" data-check-number-max="500"
