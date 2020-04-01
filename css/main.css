@@ -302,7 +302,7 @@ video {
    ========================================================================== */
 
 body {
-  background: var(--grey-lighter);
+  background: transparent;
   margin: 0;
   font-family: "Marianne", sans-serif;
   color: var(--text-default);
