@@ -26,30 +26,30 @@ Réalisée avec le concours de l'Agence du Numérique de la Sécurité Civile
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/fontawesome.min.css" />
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/fontawesome.min.css" />
+    <link rel="stylesheet" href="./css/main.css" />
 
 
   </head>
 
   <body id="appel">
-    <div class="header_gouv"><img src="/img/header_gouv.jpg" alt=""></div>
+    <!-- <div class="header_gouv"><img src="./img/header_gouv.jpg" alt=""></div> -->
     <header>
       <ul>
         <li class="appname">Informations Covid-19</li>
       </ul>
-      <div class="menu-status call-status hidden-block">
+      <!-- <div class="menu-status call-status hidden-block">
         <p class="text"><i id="standby-banner"></i> Répondez aux questions pour savoir quel numéro appeler.</p>
-      </div>
+      </div> -->
     </header>
     <div id="main-container">
       <main>
@@ -61,7 +61,9 @@ Réalisée avec le concours de l'Agence du Numérique de la Sécurité Civile
               </p>
             </div>
           </article>
-          <a class="back" href="/proto"><i class="fas fa-arrow-left" aria-hidden="true"></i> Retour au début</a>
+          <div class="gouv-button-container">
+            <a class="gouv-button" href="./index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Retour au début</a>
+          </div>
           <!---Âge -->
           <article class="step" id="age-01">
             <h2><i class="fas fa-calendar-day"></i><span>Quel est votre âge ?</span></h2>
@@ -263,7 +265,7 @@ Réalisée avec le concours de l'Agence du Numérique de la Sécurité Civile
                 <p>Cette application n'est pas adaptée aux personnes de moins de 15 ans</p>
               </div>
               <div class="secondary-message">
-                <p>Prenez contact avec votre médecin généraliste au moindre doute. En cas d’urgence, appelez le 15 (ou contactez le 114 par SMS si vous êtes sourd ou malentendant).</p>
+                <p>Prenez contact avec votre médecin généraliste au moindre doute. En cas d’urgence, appelez le <a href="tel:15">15</a> (ou contactez le 114 par SMS si vous êtes sourd ou malentendant).</p>
               </div>
             </div>
           </article>
@@ -284,7 +286,7 @@ Réalisée avec le concours de l'Agence du Numérique de la Sécurité Civile
             <div class="card message">
               <p class="icon"><i class="fas fa-user-md anim-pulse"></i></p>
               <p class="primary-message">Votre situation peut relever d’un COVID 19, consultez un médecin</p>
-              <p class="secondary-message">Demandez une téléconsultation, un médecin généraliste ou une visite à domicile.<br />Appelez le 15 si une gêne respiratoire ou des difficultés importantes pour vous alimenter ou boire apparaissent pendant plus de 24 heures.</p>
+              <p class="secondary-message">Demandez une téléconsultation, un médecin généraliste ou une visite à domicile.<br />Appelez le <a href="tel:15">15</a> si une gêne respiratoire ou des difficultés importantes pour vous alimenter ou boire apparaissent pendant plus de 24 heures.</p>
             </div>
           </article>
 
@@ -325,7 +327,7 @@ Réalisée avec le concours de l'Agence du Numérique de la Sécurité Civile
             <div class="card message">
               <p class="icon"><i class="fas fa-virus-slash anim-pulse"></i></p>
               <p class="primary-message">Votre situation peut relever d’un COVID 19</p>
-              <p class="secondary-message">Un avis médical est recommandé. Au moindre doute, appelez le 15 (ou contactez le 114 par SMS si vous êtes sourd ou malentendant). Nous vous conseillons de rester à votre domicile.</p>
+              <p class="secondary-message">Un avis médical est recommandé. Au moindre doute, appelez le <a href="tel:15">15</a> (ou contactez le 114 par SMS si vous êtes sourd ou malentendant). Nous vous conseillons de rester à votre domicile.</p>
             </div>
           </article>
 
@@ -338,15 +340,16 @@ Réalisée avec le concours de l'Agence du Numérique de la Sécurité Civile
               <p class="secondary-message">N’hésitez pas à contacter votre médecin en cas de doute.<br />Vous pouvez refaire le test en cas de nouveau symptôme pour réévaluer la situation.<br />Pour toute information concernant le COVID 19, composez le <a href="tel:0800130000">0 800 130 000</a>.</p>
             </div>
           </article>
-
-          <a class="back" href="/proto"><i class="fas fa-arrow-left" aria-hidden="true"></i> Retour au début</a>
+          <div class="gouv-button-container">
+            <a class="gouv-button" href="./index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Retour au début</a>
+          </div>
         </div>
       </main>
     </div>
     <footer>
     </footer>
-    <div class="footer_gouv"><img src="/img/footer_gouv.jpg" alt=""></div>
-    <div class="footer_gouv2"><img src="/img/footer_gouv2.jpg" alt=""></div>
+    <!-- <div class="footer_gouv"><img src="./img/footer_gouv.jpg" alt=""></div>
+    <div class="footer_gouv2"><img src="./img/footer_gouv2.jpg" alt=""></div> -->
     <script src="js/interactions-appel.js"></script>
   </body>
 </html>

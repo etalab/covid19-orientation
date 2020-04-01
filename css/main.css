@@ -251,6 +251,41 @@ img,
 video {
   max-width: 100%;
 }
+
+.gouv-button {
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  background-color: #FFF;
+  color: var(--global-ui-darker);
+  padding: 0.5em 1em;
+  font-size: .7em;
+  letter-spacing: .1em;
+  border: 1px solid var(--global-ui-darker);
+  text-transform: uppercase;
+  transform: translate(-.1em, -.1em);
+  transition: transform .1s ease-out;
+}
+
+.gouv-button:hover {
+  cursor: pointer;
+  color: #FFF;
+  background-color: var(--global-ui-darker);
+  transform: translate(0px, 0px);
+}
+
+.gouv-button.selected {
+  color: #FFF;
+  background-color: var(--global-ui-darker);
+}
+
+.gouv-button-container {
+  display: inline-block;
+  background-color: #FFF;
+  border-bottom: 1px solid var(--global-ui-darker);
+  border-right: 1px solid var(--global-ui-darker);
+  margin: var(--size-medium);
+}
 /* ==========================================================================
    Browser Upgrade Prompt
    ========================================================================== */
@@ -863,7 +898,7 @@ div.call form input[type="checkbox"] {
 
 #parcours .card.start-message {
   margin: 0;
-  background-color: var(--global-ui);
+  background-color: var(--global-ui-darker);
 }
 
 #parcours .card.start-message .icon {
