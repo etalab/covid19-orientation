@@ -1,0 +1,27 @@
+//source : https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation-arbre-de-decision/blob/master/covid19-orientation-arbre-de-decision.txt
+
+SI moins de 15 ans => FIN1
+
+SI >= 1 facteurs de gravité majeurs => FIN5
+
+SI fièvre ET toux
+   SI 0 facteur pronostique => FIN6
+   SI >= 1 facteurs pronostiques
+      SI < 2 facteur de gravité mineur => FIN6
+      SI >= 2 facteurs de gravité mineurs => FIN4
+
+SI fièvre OU (pas de fièvre et (diarrhée OU (toux ET douleurs) OU (toux ET anosmie))
+   SI 0 facteur pronostique
+      SI 0 facteur de gravité mineur
+         SI moins de 50 ans => FIN2
+         SINON => FIN3
+      SI >= 1 facteur de gravité mineur => FIN3
+   SI >= 1 facteurs pronostiques
+      SI < 2 facteur de gravité mineur => FIN3
+      SI >= 2 facteurs de gravité mineurs => FIN4
+
+SI toux OU douleurs OU anosmie
+   SI 0 facteur pronostique => FIN2
+   SI >= 1 facteur pronostique => FIN7
+
+SI NI toux NI douleurs NI anosmie => FIN8

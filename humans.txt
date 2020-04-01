@@ -1,0 +1,19 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# ÉQUIPE
+
+    Julien Dubedout
+    Benoit Frattini
+    Nicolas Mathieu
+    David Vigier
+    Toute l'Agence du Numérique de la Sécurité civile
+
+# REMERCIEMENTS
+
+    Renaud Chaput
+    Soizic Pénicaud
+
+# COLOPHON TECHNOLOGIQUE
+
+    CSS3, HTML5, Javascript

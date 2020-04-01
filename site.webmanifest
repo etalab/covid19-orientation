@@ -1,0 +1,21 @@
+{
+  "name": "Prototype app 112",
+  "short_name": "Prototype 112",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png?v=GaeXm7Q9vz",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png?v=GaeXm7Q9vz",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ff5c00",
+  "background_color": "#ff5c00",
+  "start_url": "/?utm_source=homescreen",
+  "display": "standalone",
+  "orientation": "portrait-primary"
+}

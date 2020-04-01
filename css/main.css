@@ -1,0 +1,1252 @@
+/*! HTML5 Boilerplate v7.2.0 | MIT License | https://html5boilerplate.com/ */
+
+/* main.css 2.0.0 | MIT License | https://github.com/h5bp/main.css#readme */
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Typos gouvernement
+   ========================================================================== */
+
+@font-face {
+  font-family: "Marianne";
+  font-style: normal;
+  font-weight: bold;
+  src: local("Marianne Bold"), local("Marianne-Bold"), url(../fonts/Marianne-Bold.woff2) format("woff2"), url(../fonts/Marianne-Bold.woff) format("woff");
+}
+
+/* latin */
+@font-face {
+  font-family: "Marianne";
+  font-style: normal;
+  font-weight: normal;
+  src: url(../fonts/Marianne-Bold.woff2) format("woff2"), url(../fonts/Marianne-Bold.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Font Awesome 5 Pro";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("../fonts/fa-solid-900.eot");
+  src: url("../fonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../fonts/fa-solid-900.woff2") format("woff2"), url("../fonts/fa-solid-900.woff") format("woff"),
+    url("../fonts/fa-solid-900.ttf") format("truetype"), url("../fonts/fa-solid-900.svg#fontawesome") format("svg");
+}
+
+.fa,
+.fas {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 900;
+}
+
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+:root {
+  /*colors*/
+  --grey-lighter: #efeeec;
+  --grey-light: #cccccc;
+  --grey-medium: #999999;
+  --grey-dark: #777777;
+  --grey-darker: #333333;
+
+  --global-ui-alpha10: #0e35741a;
+
+  --global-ui-light-alpha: #eafaff83;
+  --global-ui-lighter: #f4fcff;
+  --global-ui-light: #f2faff;
+  --global-ui: #5770be;
+  --global-ui-dark: #484d7a;
+  --global-ui-darker: #000091;
+
+  --text-light: #6a6a6a;
+  --text-default: #383838;
+  --text-dark: var(--global-ui-darker);
+
+  --info-card-icon-light: #fff8d6;
+  --info-card-icon-medium: #ffab10;
+  --info-card-icon-dark: #592f00;
+
+  --alert-non-text: #e1000f;
+  --alert: #e1000f;
+  --alert-dark: #e1000f;
+
+  --validate: #dafff9;
+  --validate-dark: #466964;
+  --validate-non-text: #00ac8c;
+
+  /*sizes*/
+  --size-smaller: 0.2rem;
+  --size-small: 0.5rem;
+  --size-medium: 1rem;
+  --size-big: 1.5rem;
+  --size-bigger: 2rem;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+@keyframes pulse {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.anim-pulse {
+  animation: pulse 2.5s infinite;
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hidden-block {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html {
+  color: #222;
+  font-size: var(--size-medium);
+  line-height: 1.4;
+  scroll-behavior: smooth;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * Vendor-prefixed and regular ::selection selectors cannot be combined:
+ * https://stackoverflow.com/a/16982510/7133471
+ *
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid var(--grey-lighter);
+  margin: var(--size-medium) 0;
+  padding: 0;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-dark);
+  font-family: "Marianne", "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  border: 1px solid var(--text-default);
+  color: var(--text-default);
+  background-color: #ebfbff;
+  border-radius: 5px;
+  padding: var(--size-small);
+  transition: all 200ms;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px hsla(192, 43%, 36%, 0.3);
+  width: 100%;
+}
+
+button:hover {
+  background-color: #fff;
+  border-radius: 5px;
+  transition: all 200ms;
+  box-shadow: none;
+  position: relative;
+  top: 2px;
+}
+
+button:active,
+button:focus {
+  border: 1px solid var(--text-default);
+  color: #fff;
+  background-color: var(--text-default);
+  transition: all 200ms;
+  position: relative;
+  top: 2px;
+  box-shadow: none;
+}
+
+figure,
+video {
+  margin: 0;
+}
+
+img,
+video {
+  max-width: 100%;
+}
+/* ==========================================================================
+   Browser Upgrade Prompt
+   ========================================================================== */
+
+.browserupgrade {
+  margin: 0var (--size-bigger) 0;
+  background: var(--grey-light);
+  color: #000;
+  padding: 0var (--size-bigger) 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body {
+  background: var(--grey-lighter);
+  margin: 0;
+  font-family: "Marianne", sans-serif;
+  color: var(--text-default);
+}
+
+#prehome h1 {
+  font-size: 1.3em;
+  text-align: center;
+  border-radius: 5px;
+  background-color: var(--alert);
+  color: #fff;
+  padding: var(--size-medium);
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-default);
+}
+
+p a {
+  text-decoration: underline;
+  color: var(--text-default);
+}
+
+a.back {
+  display: inline-block;
+  margin: var(--size-medium) 0;
+  border-radius: 2px;
+  padding: var(--size-smaller);
+  color: var(--global-ui-dark);
+}
+
+a[href^="tel:"],
+a.app-call {
+  display: inline-flex;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 0 var(--size-big) 0 0.3rem;
+  background-color: var(--validate);
+  border-radius: 5px;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url(../img/picto_phone.svg);
+  background-position: top 50% right 0.3rem;
+  background-repeat: no-repeat;
+  background-size: 0.8rem;
+  margin: var(--size-smaller) 0 0 0;
+  color: var(--text-dark);
+}
+
+a[href^="tel:"].big-number,
+a.app-call.big-number {
+  font-size: var(--size-big);
+  display: flex;
+  padding: var(--size-small) 2.5rem var(--size-small) var(--size-small);
+  margin: 0 0 var(--size-medium) 0;
+  background-image: url(../img/picto_phone.svg);
+  background-position: top 50% right var(--size-medium);
+  background-size: var(--size-big);
+}
+
+a.app-call,
+a.app-call.big-number {
+  background-image: url(../img/picto_mobile-phone.svg);
+}
+
+.header_gouv {
+  text-align: center;
+  width: 100%;
+  background-color: #fff;
+}
+
+header {
+  width: 100%;
+}
+
+header ul {
+  background-color: var(--global-ui-darker);
+  height: 2.5em;
+  color: #fff;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+header ul li {
+  padding: 0 var(--size-small);
+}
+
+header ul li.appname {
+  flex: 2 0 auto;
+}
+
+header button.menu {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  box-shadow: none;
+  padding: 0;
+  position: static;
+  font-size: 1.5em;
+}
+
+header button.menu:hover {
+  position: static;
+  box-shadow: none;
+}
+
+header .call-status {
+  text-align: center;
+  margin: 0;
+  padding: var(--size-small);
+  animation: reveal 0.5s;
+  border-top: 1px dotted var(--global-ui);
+  background-color: var(--global-ui-dark);
+}
+
+header .call-status .text {
+  color: #fff;
+  text-align: center;
+  margin: 0;
+}
+
+#main-container {
+  max-width: 60em;
+  margin: 0 auto;
+}
+
+#appel #main-container {
+  background-color: #fff;
+}
+
+#appel main {
+  margin: var(--size-medium);
+  padding: var(--size-big) 0;
+}
+
+#home main {
+  min-height: 100vh;
+  padding: 3em var(--size-medium) var(--size-medium) var(--size-medium);
+  box-sizing: border-box;
+}
+
+#parcours {
+  background-repeat: no-repeat, no-repeat;
+  background-position: top center, top center;
+}
+
+.step h2 {
+  font-size: var(--size-big);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.step h2 i {
+  text-align: center;
+  padding: var(--size-medium) 0.4em var(--size-medium) 0;
+}
+
+/* ==========================================================================
+   Home layout
+   ========================================================================== */
+
+#home main,
+#secours main {
+  display: grid;
+  height: calc(100vh - 4em);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr auto;
+  gap: var(--size-medium);
+}
+
+#home .card {
+  min-height: 8rem;
+}
+
+#home .call .card {
+  min-height: initial;
+  margin: var(--size-medium) 0;
+}
+
+.home-entry {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+}
+
+.home-entry.card {
+  padding: var(--size-medium);
+  font-size: var(--size-medium);
+  transition: 200ms all;
+  position: relative;
+  color: var(--text-dark);
+}
+
+.home-entry.card:hover {
+  background-color: var(--text-dark);
+  color: #fff;
+  transition: 200ms all;
+}
+
+.home-entry.card .badge {
+  padding: var(--size-small);
+  border-radius: 5px;
+  background-color: var(--alert);
+  color: #fff;
+  position: absolute;
+  margin: 0;
+  font-size: 0.8rem;
+  top: 0.3em;
+  right: 0.3em;
+  min-width: var(--size-medium);
+  min-height: var(--size-medium);
+  border: 2px solid #fff;
+}
+
+span.badge {
+  padding: 0 var(--size-small);
+  border-radius: 5px;
+  background-color: var(--alert);
+  color: #fff;
+  margin: 0;
+  font-weight: bold;
+}
+
+div.call {
+  grid-column: 1 / span 2;
+}
+
+div.call form {
+  padding: var(--size-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--size-big);
+}
+
+div.call form input[type="checkbox"] {
+  height: var(--size-bigger);
+  width: var(--size-bigger);
+  transform: scale(1.5);
+}
+
+.home-entry.call {
+  text-align: left;
+  display: flex;
+  padding: var(--size-small) var(--size-medium);
+  background-color: var(--alert);
+  color: #fff;
+  justify-content: space-between;
+  flex-direction: row;
+  font-size: var(--size-big);
+  box-shadow: 3px 3px 0px var(--alert-dark);
+  border: 2px solid var(--alert-dark);
+  transition: 0ms;
+}
+
+.home-entry.call:hover,
+.home-entry.call:active {
+  background-color: rgb(235, 66, 0);
+  border-color: rgb(145, 41, 0);
+  box-shadow: none;
+  position: relative;
+  top: 3px;
+  left: 3px;
+  transition: 0ms all;
+}
+
+#text-call.home-entry.call {
+  background-color: var(--alert-non-text);
+}
+
+.home-entry p {
+  margin: var(--size-small) 0;
+}
+
+.home-entry i {
+  font-size: var(--size-bigger);
+}
+
+.home-entry.call i {
+  font-size: var(--size-big);
+  margin: 0 0 0 var(--size-medium);
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+.card {
+  background: #ffffff;
+  border: 1px solid var(--grey-lighter);
+  box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+}
+
+#parcours .card {
+  margin: 0;
+  padding: 0;
+}
+
+.card button {
+  border: 1px solid var(--text-default);
+  color: var(--text-default);
+  background-color: #ebfbff;
+  border-radius: 5px;
+  padding: var(--size-small);
+  transition: all 200ms;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px rgb(53, 117, 133, 0.3);
+  width: 100%;
+  margin: var(--size-small) 0 0 0;
+}
+
+.card button:hover {
+  background-color: #fff;
+  border-radius: 5px;
+  transition: all 200ms;
+  box-shadow: none;
+  position: relative;
+  top: 2px;
+}
+
+.card button:active,
+.card button:focus {
+  border: 1px solid var(--text-default);
+  color: #fff;
+  background-color: var(--text-default);
+  transition: all 200ms;
+  position: relative;
+  top: 2px;
+  box-shadow: none;
+}
+
+.card button.secondary {
+  border: 1px solid var(--text-light);
+  color: var(--text-default);
+  background-color: var(--global-ui-light-alpha);
+  box-shadow: none;
+  width: 100%;
+}
+
+.card button.secondary:hover {
+  background-color: #fff;
+  border-radius: 5px;
+  transition: all 200ms;
+  box-shadow: none;
+  position: static;
+}
+
+.card button.secondary:active,
+.card button.secondary:focus {
+  border: 1px solid var(--text-default);
+  color: #fff;
+  background-color: var(--text-default);
+  transition: all 200ms;
+  position: static;
+  box-shadow: none;
+}
+
+.card button.active {
+  background-color: var(--validate);
+  transition: all 200ms ease-in;
+  color: var(--text-default);
+  font-weight: bold;
+  box-shadow: none;
+  border: 1px solid var(--validate-non-text);
+}
+
+.card button.active:hover,
+.card button.active:active,
+.card button.active:focus {
+  position: static;
+}
+
+.card .mainbutton {
+  display: flex;
+  background-color: #fff;
+  font-size: 1var (--size-bigger);
+  padding: 0.7em;
+}
+
+.card .mainbutton span {
+  flex: 2 2 auto;
+  font-weight: bold;
+}
+
+.card .mainbutton i {
+  margin: auto;
+}
+
+.card button.mainbutton {
+  border: none;
+}
+
+.sub-card {
+  background-color: #fff;
+  padding: var(--size-small) 0;
+}
+
+.sub-card h3 {
+  font-size: var(--size-medium);
+  padding: var(--size-medium) var(--size-medium) 0 var(--size-medium);
+}
+
+.secondary label {
+  cursor: pointer;
+}
+
+.secondary input[type="file"] {
+  display: none;
+}
+
+.complement-infos {
+  padding: 0;
+}
+
+.complement-infos ul {
+  padding: var(--size-medium) 0;
+}
+
+.complement-infos p {
+  margin: var(--size-medium);
+  color: var(--global-ui-dark);
+}
+
+.complement-infos ul li {
+  display: flex;
+  padding: var(--size-small);
+  height: 100%;
+  flex-direction: column;
+}
+
+.complement-infos input {
+  color: var(--text-default);
+  border: 1px solid var(--global-ui);
+  background-color: var(--global-ui-lighter);
+  margin: var(--size-small) 0 0 0;
+  color: var(--text-dark);
+  border-radius: 5px;
+}
+
+.complement-infos input[type="text"],
+.complement-infos input[type="number"] {
+  padding: var(--size-small);
+}
+
+.complement-infos label {
+  margin: 0 var(--size-small) 0 0;
+}
+
+/* ==========================================================================
+   Cards lists
+   ========================================================================== */
+
+.card ul {
+  margin: 0;
+  padding: 0 var(--size-small);
+  list-style: none;
+}
+
+.card li {
+  line-height: 150%;
+  color: var(--text-default);
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.card li:last-child {
+  border-bottom: 1px solid transparent;
+}
+
+.card li a,
+.card li div,
+.secondary .item {
+  display: flex;
+  color: inherit;
+  padding: var(--size-small);
+  margin: var(--size-small) 0;
+  border-radius: 5px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.card li a:focus,
+.card li a:hover,
+.card li a:active,
+.card li .active {
+  background-color: var(--global-ui-light);
+  color: var(--text-dark);
+}
+
+.card input[type="checkbox"] {
+  flex: 0 0 auto;
+  margin-right: var(--size-small);
+}
+
+.card input[type="checkbox"] {
+  flex: 0 0 auto;
+  margin: 0 var(--size-small);
+  transform: scale(1.5);
+  height: var(--size-medium);
+  width: var(--size-medium);
+  opacity: 0.5;
+}
+
+.card input[type="checkbox"]:checked {
+  opacity: 1;
+}
+
+.card input[type="checkbox"]:checked + label,
+.card input[type="checkbox"] + label:focus {
+  font-weight: bold;
+  background-color: var(--global-ui-light);
+}
+
+.card div > input[type="checkbox"]:checked {
+  background-color: var(--text-default);
+}
+
+.card li a span,
+.card li label {
+  flex: 3 3 auto;
+}
+
+.card li i {
+  color: var(--alert-non-text);
+  text-align: center;
+  margin: auto;
+  width: var(--size-bigger);
+  margin: 0 var(--size-medium) 0 0;
+  font-size: var(--size-big);
+}
+
+.lsf-call .card li i {
+  font-size: 2.5em;
+  width: 1.2em;
+}
+
+.card ul.secondary li i {
+  color: var(--validate-non-text);
+  text-align: center;
+}
+
+.card .mainbutton,
+.card button.mainbutton {
+  color: var(--text-dark);
+  background-color: var(--validate);
+  box-shadow: 3px 3px 0px var(--validate-non-text);
+  border-radius: 0 0 5px 5px;
+  transition: all 200ms ease-in;
+}
+
+.card .mainbutton:focus,
+.card .mainbutton:hover,
+.card .mainbutton:active {
+  background-color: var(--global-ui-darker);
+  color: #fff;
+  box-shadow: none;
+  transition: all 200ms ease-in;
+}
+
+.card button.mainbutton:focus,
+.card button.mainbutton:hover,
+.card button.mainbutton:active,
+.card .mainbutton:focus,
+.card .mainbutton:hover,
+.card .mainbutton:active {
+  background-color: var(--global-ui-darker);
+  color: #fff;
+  box-shadow: none;
+  transition: all 200ms ease-in;
+}
+
+.card .mainbutton {
+  color: var(--text-dark);
+}
+
+/* ==========================================================================
+   Cards messages
+   ========================================================================== */
+
+#parcours .card.message {
+  background-color: var(--global-ui-light);
+  color: var(--text-dark);
+}
+
+#parcours .card.start-message {
+  margin: 0;
+  background-color: var(--global-ui);
+}
+
+#parcours .card.start-message .icon {
+  color: #fff;
+}
+
+#parcours .card.start-message img {
+  display: block;
+  margin: var(--size-small) 0;
+}
+
+.card.message .icon {
+  font-size: var(--size-bigger);
+  color: var(--text-dark);
+  text-align: center;
+  margin: var(--size-medium);
+  min-height: var(--size-medium);
+}
+
+.card.message .primary-message {
+  font-size: var(--size-medium);
+  font-weight: bold;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: var(--size-medium);
+  margin: var(--size-medium);
+  color: var(--text-dark);
+  line-height: 1.8;
+}
+
+.card.message .primary-message ul {
+  text-align: left;
+  padding: 0;
+}
+
+.card.message .primary-message p {
+  text-align: left;
+}
+
+.card.message .primary-message input[type="checkbox"] {
+  transform: scale(1);
+}
+
+.card.message .primary-message button {
+  margin: var(--size-medium) 0 0 0;
+}
+
+#message-fin-5 .card.message {
+  background-color: var(--global-ui-darker);
+}
+
+#message-fin-5 .card.message .primary-message {
+  color: var(--global-ui-darker);
+}
+
+#message-fin-5 .card.message i {
+  color: var(--validate-non-text);
+}
+
+#message-fin-5 .card.message .icon i,
+#message-fin-3 .card.message .icon i,
+#message-fin-4 .card.message .icon i,
+#message-fin-6 .card.message .icon i {
+  color: #fff;
+}
+
+#message-fin-5 .card.message .secondary-message,
+#message-fin-3 .card.message .secondary-message,
+#message-fin-4 .card.message .secondary-message,
+#message-fin-6 .card.message .secondary-message {
+  color: #fff;
+}
+
+#message-fin-3 .card.message,
+#message-fin-4 .card.message,
+#message-fin-6 .card.message {
+  background-color: var(--global-ui);
+}
+
+.card.message .secondary-message {
+  margin: var(--size-medium);
+  color: var(--text-default);
+}
+
+.card.message .mainbutton {
+  background-color: #fff;
+  box-shadow: none;
+}
+
+.card.message .mainbutton:focus,
+.card.message .mainbutton:hover,
+.card.message .mainbutton:active {
+  background-color: var(--validate);
+  color: var(--text-dark);
+  box-shadow: none;
+  transition: all 200ms ease-in;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer_gouv {
+  width: 100%;
+  text-align: center;
+  background-color: #f4f2ea;
+  border-top: 5px solid var(--global-ui-darker);
+}
+.footer_gouv2 {
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+  border-top: 5px solid var(--grey-light);
+}
+
+footer {
+  position: fixed;
+  background: #ffffff;
+  width: 100%;
+  bottom: 0;
+  box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.1);
+  z-index: 4;
+}
+
+footer ul {
+  color: var(--grey-medium);
+  height: 3em;
+  padding: var(--size-medium);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+}
+
+footer ul li {
+  width: 48%;
+}
+
+.lsf-call footer ul li,
+.text-call footer ul li {
+  width: 100%;
+}
+
+footer button {
+  height: 3em;
+  width: 100%;
+  border: 1px solid var(--grey-medium);
+  color: var(--grey-darker);
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+footer button:hover,
+footer button:focus,
+footer button:active {
+  top: 0;
+  left: 0;
+  background-color: #ebfbff;
+  color: var(--text-dark);
+}
+
+.footer-message {
+  display: flex;
+}
+
+.footer-message i {
+  margin: 0 var(--size-small) 0 0;
+}
+
+.raccrocher i {
+  color: var(--alert);
+  margin: 0 0 0 var(--size-small);
+}
+
+.volume i {
+  color: var(--grey-darker);
+  margin: 0 0 0 var(--size-small);
+}
+
+/* ==========================================================================
+   Prehome
+   ========================================================================== */
+
+#prehome {
+  font-size: 1var (--size-bigger);
+  padding: var(--size-medium);
+}
+
+#prehome a {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#prehome .tip {
+  background-color: #fff;
+  color: var(--text-dark);
+  padding: 0.8em;
+  border: 3px dotted var(--global-ui-dark);
+  font-weight: bold;
+}
+
+#prehome #main-container {
+  max-width: 30em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+#prehome footer {
+  position: static;
+}
+
+#prehome button {
+  margin: var(--size-small) auto;
+  line-height: 1.5;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  padding: var(--size-small) var(--size-bigger);
+  background-color: var(--alert);
+  color: #fff;
+  box-shadow: 3px 3px 0px var(--alert-dark);
+  border: 2px solid var(--alert-dark);
+  cursor: pointer;
+}
+
+.help-first-responders h3 {
+  margin: var(--size-medium) 0 0 0;
+  font: var(--size-medium);
+}
+.help-first-responders h4 {
+  margin: var(--size-medium) 0 0 0;
+  font: var(--size-medium);
+}
+.help-first-responders p button {
+  margin: var(--size-medium) 0 0 0;
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Hide visually and from screen readers
+ */
+
+.hidden {
+  display: none !important;
+}
+
+/*
+* Hide only visually, but have it available for screen readers:
+* https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+*
+* 1. For long content, line feeds are not interpreted as spaces and small width
+*    causes content to wrap 1 word per line:
+*    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+*/
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  /* 1 */
+}
+
+/*
+* Extends the .sr-only class to allow the element
+* to be focusable when navigated to via the keyboard:
+* https://www.drupal.org/node/897638
+*/
+
+.sr-only.focusable:active,
+.sr-only.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  white-space: inherit;
+  width: auto;
+}
+
+/*
+* Hide visually and from screen readers, but maintain layout
+*/
+
+.invisible {
+  visibility: hidden;
+}
+
+/*
+* Clearfix: contain floats
+*
+* For modern browsers
+* 1. The space content is one way to avoid an Opera bug when the
+*    `contenteditable` attribute is included anywhere else in the document.
+*    Otherwise it causes space to appear at the top and bottom of elements
+*    that receive the `clearfix` class.
+* 2. The use of `table` rather than `block` is only necessary if using
+*    `:before` to contain the top-margins of child elements.
+*/
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+/* ==========================================================================
+   Media queries
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+  #parcours {
+    background-position: top center, top center, 0px 0;
+  }
+  .card.map .reverse-geocoding {
+    flex-direction: row;
+  }
+  .complement-infos ul li {
+    flex-direction: row;
+    align-items: center;
+  }
+  .complement-infos label,
+  .complement-infos input {
+    width: 50%;
+  }
+  .message-box input[type="text"] {
+    height: 3rem;
+  }
+}
+
+@media only screen and (max-width: 30em) {
+  #fiches #main-container {
+    padding: var(--size-bigger) 0;
+  }
+  #fiches .card {
+    border: none;
+    border-radius: 0;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+  }
+  #fiches .intro,
+  #fiches a.back {
+    padding: 0 var(--size-medium);
+  }
+  #parcours {
+    background-position: top center, top center, 0px 0;
+  }
+  #modal-1 .modal__overlay {
+    padding: 0 0 3em;
+    align-items: flex-end;
+  }
+  footer ul {
+    height: 2rem;
+  }
+  footer button {
+    height: 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 20em) {
+  #parcours {
+    background-position: top center, top center, -6px 0;
+  }
+  .home-entry.call {
+    font-size: 1.2rem;
+  }
+}
