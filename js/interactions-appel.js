@@ -140,7 +140,7 @@ document.getElementById("form-imc").addEventListener("submit", function(event) {
     .getElementById("form-imc")
     .closest(".step")
     .classList.add("hidden-block");
-  document.getElementById("fievre-01").classList.remove("hidden-block");
+  document.getElementById("pronostic-01").classList.remove("hidden-block");
   event.preventDefault();
 }); //calcul IMC
 
@@ -220,7 +220,7 @@ function messageFinal() {
       return 7;
     }
   } else if (symptomes.toux == 0 && symptomes.malDeGorge == 0 && symptomes.anosmie == 0) {
-    debug("Absence de fièvre, toux, mal de gorge ou anosmie, fin 9");
+    debug("Absence de fièvre, toux, mal de gorge ou anosmie, fin 8");
     return 8;
   }
 

@@ -55,22 +55,105 @@ Réalisée avec le concours de l'Agence du Numérique de la Sécurité Civile
           <div class="gouv-button-container">
             <a class="gouv-button" href="./"><i class="fas fa-arrow-left" aria-hidden="true"></i> Retour au début</a>
           </div>
-          <!---Âge -->
-          <article class="step" id="age-01">
-            <h2><i class="fas fa-calendar-day"></i><span>Quel est votre âge ?</span></h2>
+
+          <!--SYMPTÔMES-->
+
+          <!--Fièvre-->
+          <article class="step" id="fievre-01">
+            <h2><i class="fas fa-temperature-up"></i> <span>Quelle a été votre température la plus élevée ces dernières
+                48h ?</span></h2>
             <div class="card">
               <ul>
                 <li>
-                  <a href="#message-fin-1" data-age="14"><span>Moins de 15 ans</span><i class="fas fa-arrow-right"></i></a>
+                  <a href="#toux-01" data-symptome="1" data-facteurgravitemineur="1" data-fievre="1"><span>Je ne sais
+                      pas</span><i class="fas fa-question-circle"></i></a>
                 </li>
                 <li>
-                  <a href="#facteurgravitemajeur-01" data-age="16"><span>Entre 15 et 49 ans</span><i class="fas fa-arrow-right"></i></a>
+                  <a href="#toux-01" data-symptome="1" data-facteurgravitemineur="1" data-fievre="1"><span>39°C ou
+                      plus</span><i class="fas fa-thermometer-full"></i></a>
                 </li>
                 <li>
-                  <a href="#facteurgravitemajeur-01" data-age="51"><span>Entre 50 et 69 ans</span><i class="fas fa-arrow-right"></i></a>
+                  <a href="#toux-01" data-symptome="1" data-fievre="1"><span>Entre 37,8°C et 38,9°C de température</span><i
+                      class="fas fa-thermometer-half"></i></a>
                 </li>
                 <li>
-                  <a href="#facteurgravitemajeur-01" data-age="71"><span>70 ans ou plus</span><i class="fas fa-arrow-right"></i></a>
+                  <a href="#toux-01" data-symptome="1" data-facteurgravitemineur="1" data-fievre="1"><span>Température
+                      basse, moins de 35,5°C</span><i class="fas fa-temperature-frigid"></i></a>
+                </li>
+                <li>
+                  <a href="#toux-01" data-symptome="0" data-fievre="0"><span>Je n'ai pas eu de fièvre (entre 35,5 et
+                      37,7°C)</span><i class="fas fa-thumbs-up"></i></a>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!--Toux-->
+          <article class="step hidden-block" id="toux-01">
+            <h2><i class="fas fa-head-side-cough"></i> <span>Avez-vous une toux ou une augmentation de votre toux habituelle ces
+                derniers jours ?</span></h2>
+            <div class="card">
+              <ul>
+                <li>
+                  <a href="#anosmie-01" data-symptome="1" data-toux="1"><span>Oui, une toux est apparue ou a augmenté ces
+                      derniers jours</span><i class="fas fa-check"></i></a>
+                </li>
+                <li>
+                  <a href="#anosmie-01" data-symptome="0" data-toux="0"><span>Non, je ne tousse pas</span><i
+                      class="fas fa-times"></i></a>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!--Perte du goût et de l'odorat-->
+          <article class="step hidden-block" id="anosmie-01">
+            <h2><i class="fas fa-soup"></i> <span>Avez-vous noté une forte diminution de votre goût ou de votre odorat ces
+                derniers jours ?</span></h2>
+            <div class="card">
+              <ul>
+                <li>
+                  <a href="#maldegorge-01" data-symptome="1" data-anosmie="1"><span>Oui, mon goût et mon odorat ont fortement
+                      diminué ces derniers jours</span><i class="fas fa-check"></i></a>
+                </li>
+                <li>
+                  <a href="#maldegorge-01" data-symptome="0" data-anosmie="0"><span>Non, mon goût et mon odorat n'ont pas
+                      diminué</span><i class="fas fa-times"></i></a>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!--Mal de gorge-->
+          <article class="step hidden-block" id="maldegorge-01">
+            <h2><i class="fas fa-scarf"></i> <span>Avez-vous un mal de gorge, des douleurs musculaires
+                ou des courbatures inhabituelles ces derniers jours ?</span></h2>
+            <div class="card">
+              <ul>
+                <li>
+                  <a href="#diarrhee-01" data-symptome="1" data-maldegorge="1"><span>Oui, j'ai mal à la gorge des douleurs musculaires
+                      ou des courbatures depuis quelques jours</span><i class="fas fa-check"></i></a>
+                </li>
+                <li>
+                  <a href="#diarrhee-01"><span>Non, je n'ai aucun de ces symptômes</span><i class="fas fa-times"></i></a>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!--Diarrhée-->
+          <article class="step hidden-block" id="diarrhee-01">
+            <h2><i class="fas fa-toilet"></i> <span>Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles
+                molles) ?</span></h2>
+            <div class="card">
+              <ul>
+                <li>
+                  <a href="#facteurgravitemajeur-01" data-symptome="1" data-diarrhee="1"><span>Oui, j'ai de la diarrhée</span><i
+                      class="fas fa-check"></i></a>
+                </li>
+                <li>
+                  <a href="#facteurgravitemajeur-01" data-symptome="0" data-diarrhee="0"><span>Non, je n'ai pas de diarrhée</span><i
+                      class="fas fa-times"></i></a>
                 </li>
               </ul>
             </div>
@@ -80,20 +163,47 @@ Réalisée avec le concours de l'Agence du Numérique de la Sécurité Civile
 
           <!---Tous -->
           <article class="step hidden-block" id="facteurgravitemajeur-01">
-            <h2><i class="fas fa-stethoscope"></i> <span>Avez-vous l'un de ces symptômes ? (cliquez sur le 1er qui vous correspond)</span></h2>
+            <h2><i class="fas fa-stethoscope"></i> <span>Avez-vous l'un de ces symptômes ? (cliquez sur le 1er qui vous
+                correspond)</span></h2>
             <div class="card">
               <ul>
                 <li>
-                  <a href="#message-fin" data-symptome="1" data-facteurgravitemajeur="1"><span>Je ne peux plus m'alimenter ou boire depuis plus de 24 h</span><i class="fas fa-glass"></i></a>
+                  <a href="#age-01" data-symptome="1" data-facteurgravitemajeur="1"><span>Je ne peux plus m'alimenter ou
+                      boire depuis plus de 24 h</span><i class="fas fa-glass"></i></a>
                 </li>
                 <li>
-                  <a href="#message-fin" data-symptome="1" data-facteurgravitemajeur="1"><span>Je manque de souffle de manière inhabituelle en parlant ou en faisant un petit effort dans les dernières 24 h</span><i class="fas fa-walking"></i></a>
+                  <a href="#age-01" data-symptome="1" data-facteurgravitemajeur="1"><span>Je manque de souffle de manière
+                      inhabituelle en parlant ou en faisant un petit effort dans les dernières 24 h</span><i
+                      class="fas fa-walking"></i></a>
                 </li>
                 <li>
-                  <a href="#imc-01" data-symptome="1" data-facteurgravitemineur="1"><span>Je suis plus fatigué que d'habitude au point de devoir me reposer plus de la moitié de la journée</span><i class="fas fa-snooze"></i></a>
+                  <a href="#age-01" data-symptome="1" data-facteurgravitemineur="1"><span>Je suis plus fatigué que d'habitude au
+                      point de devoir me reposer plus de la moitié de la journée</span><i class="fas fa-snooze"></i></a>
                 </li>
                 <li>
-                  <a href="#imc-01" data-symptome="0"><span>Je ne ressens aucun de ces symptômes</span><i class="fas fa-thumbs-up"></i></a>
+                  <a href="#age-01" data-symptome="0"><span>Je ne ressens aucun de ces symptômes</span><i
+                      class="fas fa-thumbs-up"></i></a>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!---Âge -->
+          <article class="step hidden-block" id="age-01">
+            <h2><i class="fas fa-calendar-day"></i><span>Quel est votre âge ?</span></h2>
+            <div class="card">
+              <ul>
+                <li>
+                  <a href="#imc-01" data-age="14"><span>Moins de 15 ans</span><i class="fas fa-arrow-right"></i></a>
+                </li>
+                <li>
+                  <a href="#imc-01" data-age="16"><span>Entre 15 et 49 ans</span><i class="fas fa-arrow-right"></i></a>
+                </li>
+                <li>
+                  <a href="#imc-01" data-age="51"><span>Entre 50 et 69 ans</span><i class="fas fa-arrow-right"></i></a>
+                </li>
+                <li>
+                  <a href="#imc-01" data-age="71"><span>70 ans ou plus</span><i class="fas fa-arrow-right"></i></a>
                 </li>
               </ul>
             </div>
@@ -109,137 +219,71 @@ Réalisée avec le concours de l'Agence du Numérique de la Sécurité Civile
                   <ul>
                     <li>
                       <label for="add-taille">Taille en mètres * :</label>
-                      <input type="text" required pattern="[0-9,.]+" id="add-taille" data-check-number data-check-number-min="0.5" data-check-number-max="3.0" data-check-number-error="Ce nombre ne semble pas être une taille en mètres valide." placeholder="ex : 1,65" inputmode="decimal">
+                      <input type="text" required pattern="[0-9,.]+" id="add-taille" data-check-number data-check-number-min="0.5"
+                        data-check-number-max="3.0"
+                        data-check-number-error="Ce nombre ne semble pas être une taille en mètres valide."
+                        placeholder="ex : 1,65" inputmode="decimal">
                     </li>
-                    <li><label for="add-poids">Poids en kilogrammes * :</label><input type="text" required pattern="[0-9,.]+" id="add-poids" data-check-number data-check-number-min="10" data-check-number-max="500" data-check-number-error="Ce nombre ne semble pas être un poids en kilogrammes valide." placeholder="ex : 70" inputmode="decimal"></li>
+                    <li><label for="add-poids">Poids en kilogrammes * :</label><input type="text" required pattern="[0-9,.]+"
+                        id="add-poids" data-check-number data-check-number-min="10" data-check-number-max="500"
+                        data-check-number-error="Ce nombre ne semble pas être un poids en kilogrammes valide."
+                        placeholder="ex : 70" inputmode="decimal"></li>
                   </ul>
                   <p>* Le remplissage de ces 2 champs est obligatoire.</p>
                 </div>
-                <button class="mainbutton" type="submit"><span>Valider ces informations et continuer</span><i class="fas fa-check" aria-hidden="true"></i></button>
+                <button class="mainbutton" type="submit"><span>Valider ces informations et continuer</span><i class="fas fa-check"
+                    aria-hidden="true"></i></button>
               </form>
             </div>
           </article>
 
-          <!--SYMPTÔMES-->
-
-          <!--Fièvre-->
-          <article class="step hidden-block" id="fievre-01">
-            <h2><i class="fas fa-temperature-up"></i> <span>Quelle a été votre température la plus élevée ces dernières 48h ?</span></h2>
-            <div class="card">
-              <ul>
-                <li>
-                  <a href="#maldegorge-01" data-symptome="1" data-facteurgravitemineur="1" data-fievre="1"><span>Je ne sais pas</span><i class="fas fa-question-circle"></i></a>
-                </li>
-                <li>
-                  <a href="#maldegorge-01" data-symptome="1" data-facteurgravitemineur="1" data-fievre="1"><span>39°C ou plus</span><i class="fas fa-thermometer-full"></i></a>
-                </li>
-                <li>
-                  <a href="#maldegorge-01" data-symptome="1" data-fievre="1"><span>Entre 37,8°C et 38,9°C de température</span><i class="fas fa-thermometer-half"></i></a>
-                </li>
-                <li>
-                  <a href="#maldegorge-01" data-symptome="1" data-facteurgravitemineur="1" data-fievre="1"><span>Température basse, moins de 35,5°C</span><i class="fas fa-temperature-frigid"></i></a>
-                </li>
-                <li>
-                  <a href="#maldegorge-01" data-symptome="0" data-fievre="0"><span>Je n'ai pas eu de fièvre (entre 35,5 et 37,7°C)</span><i class="fas fa-thumbs-up"></i></a>
-                </li>
-              </ul>
-            </div>
-          </article>
-
-          <!--Mal de gorge-->
-          <article class="step hidden-block" id="maldegorge-01">
-            <h2><i class="fas fa-scarf"></i> <span>Avez-vous un mal de gorge, des douleurs musculaires
-                ou des courbatures inhabituelles ces derniers jours ?</span></h2>
-            <div class="card">
-              <ul>
-                <li>
-                  <a href="#toux-01" data-symptome="1" data-maldegorge="1"><span>Oui, j'ai mal à la gorge des douleurs musculaires ou des courbatures depuis quelques jours</span><i class="fas fa-check"></i></a>
-                </li>
-                <li>
-                  <a href="#toux-01"><span>Non, je n'ai aucun de ces symptômes</span><i class="fas fa-times"></i></a>
-                </li>
-              </ul>
-            </div>
-          </article>
-
-          <!--Toux-->
-          <article class="step hidden-block" id="toux-01">
-            <h2><i class="fas fa-head-side-cough"></i> <span>Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?</span></h2>
-            <div class="card">
-              <ul>
-                <li>
-                  <a href="#diarrhee-01" data-symptome="1" data-toux="1"><span>Oui, une toux est apparue ou a augmenté ces derniers jours</span><i class="fas fa-check"></i></a>
-                </li>
-                <li>
-                  <a href="#diarrhee-01" data-symptome="0" data-toux="0"><span>Non, je ne tousse pas</span><i class="fas fa-times"></i></a>
-                </li>
-              </ul>
-            </div>
-          </article>
-
-          <!--Toux-->
-          <article class="step hidden-block" id="diarrhee-01">
-            <h2><i class="fas fa-toilet"></i> <span>Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?</span></h2>
-            <div class="card">
-              <ul>
-                <li>
-                  <a href="#anosmie-01" data-symptome="1" data-diarrhee="1"><span>Oui, j'ai de la diarrhée</span><i class="fas fa-check"></i></a>
-                </li>
-                <li>
-                  <a href="#anosmie-01" data-symptome="0" data-diarrhee="0"><span>Non, je n'ai pas de diarrhée</span><i class="fas fa-times"></i></a>
-                </li>
-              </ul>
-            </div>
-          </article>
-
-          <!--Perte du goût et de l'odorat-->
-          <article class="step hidden-block" id="anosmie-01">
-            <h2><i class="fas fa-soup"></i> <span>Avez-vous noté une forte diminution de votre goût ou de votre odorat ces derniers jours ?</span></h2>
-            <div class="card">
-              <ul>
-                <li>
-                  <a href="#pronostic-01" data-symptome="1" data-anosmie="1"><span>Oui, mon goût et mon odorat ont fortement diminué ces derniers jours</span><i class="fas fa-check"></i></a>
-                </li>
-                <li>
-                  <a href="#pronostic-01" data-symptome="0" data-anosmie="0"><span>Non, mon goût et mon odorat n'ont pas diminué</span><i class="fas fa-times"></i></a>
-                </li>
-              </ul>
-            </div>
-          </article>
-
           <article class="step hidden-block" id="pronostic-01">
-            <h2><i class="fas fa-user-md"></i> <span>Cliquez sur le 1<sup>er</sup> élément de cette liste qui correspond à votre situation :</span></h2>
+            <h2><i class="fas fa-user-md"></i> <span>Cliquez sur le 1<sup>er</sup> élément de cette liste qui correspond à votre
+                situation :</span></h2>
             <div class="card">
               <ul>
                 <li>
-                  <a id="circ-cardio" href="#message-fin" data-facteurpronostic="1"><span>J'ai de l’hypertension artérielle mal équilibrée, une maladie cardiaque ou vasculaire ou je prends un traitement à visée cardiologique</span><i class="fas fa-heartbeat"></i></a>
+                  <a id="circ-cardio" href="#message-fin" data-facteurpronostic="1"><span>J'ai de l’hypertension artérielle mal
+                      équilibrée, une maladie cardiaque ou vasculaire ou je prends un traitement à visée cardiologique</span><i
+                      class="fas fa-heartbeat"></i></a>
                 </li>
                 <li>
-                  <a id="circ-diabete" href="#message-fin" data-facteurpronostic="1"><span>Je suis diabétique</span><i class="fas fa-heartbeat"></i></a>
+                  <a id="circ-diabete" href="#message-fin" data-facteurpronostic="1"><span>Je suis diabétique</span><i
+                      class="fas fa-heartbeat"></i></a>
                 </li>
                 <li>
-                  <a id="circ-cancer" href="#message-fin" data-facteurpronostic="1"><span>J'ai un cancer ou j'ai déjà eu un cancer dans les 3 dernières années</span><i class="fas fa-procedures"></i></a>
+                  <a id="circ-cancer" href="#message-fin" data-facteurpronostic="1"><span>J'ai un cancer ou j'ai déjà eu un cancer
+                      dans les 3 dernières années</span><i class="fas fa-procedures"></i></a>
                 </li>
                 <li>
-                  <a id="circ-pneumo" href="#message-fin" data-facteurpronostic="1"><span>J'ai une maladie respiratoire ou je suis suivi par un pneumologue</span><i class="fas fa-lungs-virus"></i></a>
+                  <a id="circ-pneumo" href="#message-fin" data-facteurpronostic="1"><span>J'ai une maladie respiratoire ou je suis
+                      suivi par un pneumologue</span><i class="fas fa-lungs-virus"></i></a>
                 </li>
                 <li>
-                  <a id="circ-fievre" href="#message-fin" data-facteurpronostic="1"><span>J'ai une insuffisance rénale chronique dialysée</span><i class="fas fa-kidneys"></i></a>
+                  <a id="circ-fievre" href="#message-fin" data-facteurpronostic="1"><span>J'ai une insuffisance rénale chronique
+                      dialysée</span><i class="fas fa-kidneys"></i></a>
                 </li>
                 <li>
-                  <a id="circ-foie" href="#message-fin" data-facteurpronostic="1"><span>J'ai une maladie chronique du foie</span><i class="fas fa-procedures"></i></a>
+                  <a id="circ-foie" href="#message-fin" data-facteurpronostic="1"><span>J'ai une maladie chronique du
+                      foie</span><i class="fas fa-procedures"></i></a>
                 </li>
                 <li>
-                  <a id="circ-enceinte" href="#message-fin" data-facteurpronostic="1"><span>Je suis enceinte</span><i class="fas fa-baby"></i></a>
+                  <a id="circ-enceinte" href="#message-fin" data-facteurpronostic="1"><span>Je suis enceinte</span><i
+                      class="fas fa-baby"></i></a>
                 </li>
                 <li>
-                  <a id="circ-immu" href="#message-fin" data-facteurpronostic="1"><span>J'ai une maladie connue pour diminuer les défenses immunitaires</span><i class="fas fa-procedures"></i></a>
+                  <a id="circ-immu" href="#message-fin" data-facteurpronostic="1"><span>J'ai une maladie connue pour diminuer les
+                      défenses immunitaires</span><i class="fas fa-procedures"></i></a>
                 </li>
                 <li>
-                  <a id="circ-immu-suppr" href="#message-fin" data-facteurpronostic="1"><span>Je suis sous traitement immunosuppresseur. (C’est un traitement qui diminue vos défenses contre les infections. Voici quelques exemples : corticoïdes, méthotrexate, ciclosporine, tacrolimus, azathioprine, cyclophosphamide. Liste non exhaustive).</span><i class="fas fa-pills"></i></a>
+                  <a id="circ-immu-suppr" href="#message-fin" data-facteurpronostic="1"><span>Je suis sous traitement
+                      immunosuppresseur. (C’est un traitement qui diminue vos défenses contre les infections. Voici quelques
+                      exemples : corticoïdes, méthotrexate, ciclosporine, tacrolimus, azathioprine, cyclophosphamide. Liste non
+                      exhaustive).</span><i class="fas fa-pills"></i></a>
                 </li>
                 <li>
-                  <a id="circ-autre-00" href="#message-fin" data-facteurpronostic="0"><span>Aucune de ces situations médicales ne me correspond</span><i class="fas fa-thumbs-up"></i></a>
+                  <a id="circ-autre-00" href="#message-fin" data-facteurpronostic="0"><span>Aucune de ces situations médicales ne
+                      me correspond</span><i class="fas fa-thumbs-up"></i></a>
                 </li>
               </ul>
             </div>
