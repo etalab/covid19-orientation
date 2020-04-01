@@ -1,14 +1,14 @@
 {
-  "name": "Prototype app 112",
-  "short_name": "Prototype 112",
+  "name": "Questionnaire d’orientation COVID-19",
+  "short_name": "Questionnaire d’orientation COVID-19",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png?v=GaeXm7Q9vz",
+      "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/android-chrome-512x512.png?v=GaeXm7Q9vz",
+      "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
