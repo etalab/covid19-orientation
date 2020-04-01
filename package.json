@@ -12,7 +12,11 @@
     "ie 11"
   ],
   "scripts": {
+    "start": "serve .",
     "babel": "babel js/interactions-appel.js --presets @babel/preset-env -o js/interactions-appel-clean.js"
+  },
+  "dependencies": {
+    "serve": "^11.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
