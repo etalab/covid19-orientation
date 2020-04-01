@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "start": "serve .",
-    "babel": "babel js/interactions-appel.js --presets @babel/preset-env -o js/interactions-appel-clean.js"
+    "transpile": "babel js/interactions-appel.js --presets @babel/preset-env -o dist/js/interactions-appel.js"
   },
   "dependencies": {
     "serve": "^11.3.0"
