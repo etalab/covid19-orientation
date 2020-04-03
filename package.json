@@ -15,7 +15,7 @@
     "dev": "next",
     "build": "next build",
     "export": "next export",
-    "start": "serve .",
+    "start": "serve out",
     "lint": "xo"
   },
   "dependencies": {
