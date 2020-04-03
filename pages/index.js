@@ -124,6 +124,36 @@ function App() {
     })
   }
 
+  const reset = () => {
+    setToken(null)
+    setDisplayForm(false)
+    setEnd(null)
+    setStep(0)
+    setConsent(false)
+
+    // Counters
+    setSymptomsCount(0)
+    setMajorSeverityFactorsCount(0)
+    setMinorSeverityFactorsCount(0)
+    setPronosticFactors(0)
+
+    // Symptoms
+    setFeedingDay(false)
+    setFever(false)
+    setCough(false)
+    setAgueusiaAnosmia(false)
+    setSoreThroatAches(false)
+    setDiarrhea(false)
+
+    // Patient
+    setAge(null)
+    setWeight(null)
+    setHeight(null)
+    setPostalCode(null)
+
+    setRiskFactors(null)
+  }
+
   // Show/hide Ends
   useEffect(() => {
     if (age === 14) {
@@ -169,7 +199,7 @@ function App() {
 
         {consent && (
           <div className='gouv-button-container'>
-            <a className='gouv-button' href='/'><i className='fas fa-arrow-left' aria-hidden='true' /> Retour au début</a>
+            <a className='gouv-button' onClick={() => reset()}><i className='fas fa-arrow-left' aria-hidden='true' /> Retour au début</a>
           </div>
         )}
       </div>
