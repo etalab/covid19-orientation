@@ -35,7 +35,7 @@ function App() {
   const [token, setToken] = useState(null)
   const [displayForm, setDisplayForm] = useState(false)
   const [end, setEnd] = useState(null)
-  const [questionIdx, setQuestionIdx] = useState(0)
+  const [step, setStep] = useState(0)
   const [consent, setConsent] = useState(false)
 
   // Counters
@@ -67,7 +67,7 @@ function App() {
 
     setSymptom(isSymptom)
 
-    setQuestionIdx(idx => idx + 1)
+    setStep(step => step + 1)
   }, [setSymptomsCount, setMajorSeverityFactorsCount, setMinorSeverityFactorsCount])
 
   const handleConsent = useCallback(async () => {
@@ -79,11 +79,11 @@ function App() {
 
   const handleAge = useCallback(age => {
     if (age > 14) {
-      setQuestionIdx(idx => idx + 1)
+      setStep(1)
     }
 
     setAge(age)
-  }, [setQuestionIdx, setAge])
+  }, [setStep, setAge])
 
   const submit = () => {
     const duration = getDuration(token)
@@ -127,7 +127,7 @@ function App() {
     })
   }
 
-  // Show/hide end
+  // Show/hide Ends
   useEffect(() => {
     if (age === 14) {
       setEnd(1)
@@ -138,15 +138,15 @@ function App() {
     }
   }, [age, majorSeverityFactorsCount])
 
-  // Show/hide form
+  // Show/hide Form
   useEffect(() => {
     setDisplayForm(Boolean(consent && end !== 1))
   }, [consent, age, end])
 
   // Orderered questions
   const questions = [
-    {type: 'profile', question: () => <Age handleAge={handleAge} />},
-    {type: 'symptom', setter: setFeedingDay, symptom: symptomsQuestions.alimentation}
+    {step: 0, type: 'profile', question: () => <Age handleAge={handleAge} />},
+    {step: 1, type: 'symptom', setter: setFeedingDay, symptom: symptomsQuestions.alimentation}
   ]
 
   return (
@@ -165,10 +165,10 @@ function App() {
         {end && <End end={end} />}
 
         {displayForm && (
-          <Question question={questions[questionIdx]} handleResponse={handleResponse} />
+          <Question question={questions.find(q => q.step === step)} handleResponse={handleResponse} />
         )}
 
-        {questionIdx > 0 && (
+        {consent && (
           <div className='gouv-button-container'>
             <a className='gouv-button' href='/'><i className='fas fa-arrow-left' aria-hidden='true' /> Retour au début</a>
           </div>
