@@ -1,37 +1,43 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Symptom from '../components/symptom'
-
 function Question({question, handleResponse}) {
   if (question) {
-    if (question.type === 'symptom') {
-      const {setter, symptom} = question
-      return (
-        <Symptom
-          setSymptom={setter}
-          {...symptom}
-          toggleReponse={handleResponse}
-        />
-      )
+    if (question.component) {
+      return question.component()
     }
 
-    return question.question()
+    const {title, icon, responses} = question.question
+    return (
+      <article className='step'>
+        <h2><i className={`fas ${icon}`} /> <span>{title}</span></h2>
+        <div className='card'>
+          <ul>
+            {responses.map(response => (
+              <li key={response.label} onClick={() => handleResponse(response, question.setSymptom)}>
+                <a>
+                  <span>{response.label}</span><i className={`fas ${response.icon ?? 'fa-arrow-right'}`} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </article>
+    )
   }
 
   return null
 }
 
-Question.defaultProps = {
-  question: null
-}
-
 Question.propTypes = {
   question: PropTypes.shape({
-    type: PropTypes.oneOf(['symptom', 'patient']).isRequired,
-    setter: PropTypes.func,
-    symptom: PropTypes.object,
-    question: PropTypes.func
+    component: PropTypes.func,
+    question: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      icon: PropTypes.string.isRequired,
+      responses: PropTypes.array.isRequired
+    }),
+    setSymptom: PropTypes.func
   }),
   handleResponse: PropTypes.func.isRequired
 }

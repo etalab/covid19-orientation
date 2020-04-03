@@ -1,6 +1,6 @@
 {
   "souffle": {
-    "question": "Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?",
+    "title": "Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?",
     "icon": "fa-lungs",
     "responses": [
       {
@@ -16,7 +16,7 @@
     ]
   },
   "alimentation": {
-    "question": "Êtes-vous dans l'impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?",
+    "title": "Êtes-vous dans l'impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?",
     "icon": "fa-soup",
     "responses": [
       {
@@ -32,7 +32,7 @@
     ]
   },
   "fievre": {
-    "question": "Quelle a été votre température la plus élevée ces dernières 48h ?",
+    "title": "Quelle a été votre température la plus élevée ces dernières 48h ?",
     "icon": "fa-temperature-up",
     "responses": [
       {
@@ -68,7 +68,7 @@
     ]
   },
   "toux": {
-    "question": "Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?",
+    "title": "Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?",
     "icon": "fa-head-side-cough",
     "responses": [
       {
@@ -84,7 +84,7 @@
     ]
   },
   "anosmie": {
-    "question": "Avez-vous noté une forte diminution de votre goût ou de votre odorat ces derniers jours ?",
+    "title": "Avez-vous noté une forte diminution de votre goût ou de votre odorat ces derniers jours ?",
     "icon": "fa-soup",
     "responses": [
       {
@@ -100,7 +100,7 @@
     ]
   },
   "malDeGorge": {
-    "question": "Avez-vous un mal de gorge, des douleurs musculaires ou des courbatures inhabituelles ces derniers jours?",
+    "title": "Avez-vous un mal de gorge, des douleurs musculaires ou des courbatures inhabituelles ces derniers jours?",
     "icon": "fa-scarf",
     "responses": [
       {
@@ -116,7 +116,7 @@
     ]
   },
   "diarrhee": {
-    "question": "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?",
+    "title": "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?",
     "icon": "fa-toilet",
     "responses": [
       {

@@ -1,0 +1,24 @@
+{
+  "age": {
+    "title": "Quel est votre âge ?",
+    "icon": "fa-calendar-day",
+    "responses": [
+      {
+        "label": "Moins de 15 ans",
+        "value": 14
+      },
+      {
+        "label": "Entre 15 et 49 ans",
+        "value": 16
+      },
+      {
+        "label": "Entre 50 et 69 ans",
+        "value": 51
+      },
+      {
+        "label": "70 ans ou plus",
+        "value": 71
+      }
+    ]
+  }
+}

@@ -18,13 +18,13 @@
 import React, {useState, useCallback, useEffect} from 'react'
 
 import symptomsQuestions from '../symptoms-questions.json'
+import patientQuestions from '../patient-questions.json'
 
 import {getToken, submitForm, getDuration} from '../lib/api'
 import {anonymize} from '../lib/codes-postaux'
 
 import Page from '../layouts/main'
 
-import Age from '../components/patient/age'
 import PostalCode from '../components/patient/postal-code'
 
 import End from '../components/end'
@@ -65,14 +65,16 @@ function App() {
   const [riskFactors, setRiskFactors] = useState(null)
 
   const handleResponse = useCallback((response, setSymptom) => {
-    const {isSymptom, isMajorSeverityFactor, isMinorSeverityFactor} = response
+    const {isSymptom, isMajorSeverityFactor, isMinorSeverityFactor, value} = response
 
     // Counters
-    setSymptomsCount(isMajorSeverityFactor)
+    setSymptomsCount(isSymptom)
     setMajorSeverityFactorsCount(isMajorSeverityFactor)
     setMinorSeverityFactorsCount(isMinorSeverityFactor)
 
-    setSymptom(isSymptom)
+    if (value) {
+      setSymptom(value)
+    }
 
     setStep(step => step + 1)
   }, [setSymptomsCount, setMajorSeverityFactorsCount, setMinorSeverityFactorsCount])
@@ -83,14 +85,6 @@ function App() {
     setToken(token)
     setConsent(true)
   }, [])
-
-  const handleAge = useCallback(age => {
-    if (age > 14) {
-      setStep(1)
-    }
-
-    setAge(age)
-  }, [setStep, setAge])
 
   const submit = () => {
     const duration = getDuration(token)
@@ -170,12 +164,23 @@ function App() {
     setDisplayForm(Boolean(consent && end !== 1))
   }, [consent, age, end])
 
-  // Orderered questions
-  const questions = [
-    {step: 0, type: 'patient', question: () => <Age handleAge={handleAge} />},
-    {step: 1, type: 'symptom', setter: setFeedingDay, symptom: symptomsQuestions.alimentation},
-    {step: 13, type: 'patient', question: () => <RiskFactors handleRiskFactors={setRiskFactors} />},
-    {step: 22, type: 'patient', question: () => <PostalCode handlePostalCode={setPostalCode} />}
+  // Get step
+  useEffect(() => {
+    let step = 0
+
+    if (age) {
+      step = 1
+    }
+
+    setStep(step)
+  }, [age])
+
+  // Orderered steps
+  const steps = [
+    {step: 0, question: patientQuestions.age, setSymptom: setAge},
+    {step: 1, question: symptomsQuestions.alimentation, setSymptom: setFeedingDay},
+    {step: 13, component: () => <RiskFactors handleRiskFactors={setRiskFactors} />},
+    {step: 22, component: () => <PostalCode handlePostalCode={setPostalCode} />}
   ]
 
   return (
@@ -194,7 +199,10 @@ function App() {
         {end && <End end={end} />}
 
         {displayForm && (
-          <Question question={questions.find(q => q.step === step)} handleResponse={handleResponse} />
+          <Question
+            question={steps.find(q => q.step === step)}
+            handleResponse={handleResponse}
+          />
         )}
 
         {consent && (
