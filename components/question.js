@@ -4,13 +4,14 @@ import PropTypes from 'prop-types'
 import Symptom from '../components/symptom'
 
 const Question = ({question, handleResponse}) => {
+  console.log("Question -> question", question)
   if (question) {
-    if (question.type === 'symptome') {
-      const {setter, symptome} = question
+    if (question.type === 'symptom') {
+      const {setter, symptom} = question
       return (
         <Symptom
-          setSymptome={setter}
-          {...symptome}
+          setSymptom={setter}
+          {...symptom}
           toggleReponse={handleResponse}
         />
       )
@@ -26,7 +27,7 @@ Question.defaultProps = {
 
 Question.propTypes = {
   question: PropTypes.shape({
-    type: PropTypes.oneOf(['symptome', 'profile']).isRequired
+    type: PropTypes.oneOf(['symptom', 'profile']).isRequired
   }),
   handleResponse: PropTypes.func.isRequired
 }

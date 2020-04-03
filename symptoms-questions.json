@@ -6,12 +6,12 @@
       {
         "label": "Oui",
         "icon": "fa-check",
-        "isFacteurGraviteMajeur": true
+        "isMajorSeverityFactor": true
       },
       {
         "label": "Non",
         "icon": "fa-times",
-        "isFacteurGraviteMajeur": false
+        "isMajorSeverityFactor": false
       }
     ]
   },
@@ -22,12 +22,12 @@
       {
         "label": "Oui",
         "icon": "fa-check",
-        "isFacteurGraviteMajeur": true
+        "isMajorSeverityFactor": true
       },
       {
         "label": "Non",
         "icon": "fa-times",
-        "isFacteurGraviteMajeur": false
+        "isMajorSeverityFactor": false
       }
     ]
   },
@@ -38,31 +38,31 @@
       {
         "label": "Je ne sais pas",
         "icon": "fa-question-circle",
-        "isSymptome": true,
-        "isFacteurGraviteMineur": true
+        "isSymptom": true,
+        "isMinorSeverityFactor": true
       },
       {
         "label": "39°C ou plus",
         "icon": "fa-thermometer-full",
-        "isSymptome": true,
-        "isFacteurGraviteMineur": true
+        "isSymptom": true,
+        "isMinorSeverityFactor": true
       },
       {
         "label": "Entre 37, 8°C et 38, 9°C de température",
         "icon": "fa-thermometer-half",
-        "isSymptome": true
+        "isSymptom": true
       },
       {
         "label": "Température basse, moins de 35, 5°C",
         "icon": "fa-temperature-frigid",
-        "isSymptome": true,
-        "isFacteurGraviteMineur": true
+        "isSymptom": true,
+        "isMinorSeverityFactor": true
       },
       {
         "label": "Je n’ai pas eu de fièvre(entre 35, 5 et 37, 7°C)",
         "icon": "fa-thumbs-up",
-        "isSymptome": false,
-        "isFacteurGraviteMineur": false,
+        "isSymptom": false,
+        "isMinorSeverityFactor": false,
         "isFievre": false
       }
     ]
@@ -74,12 +74,12 @@
       {
         "label": "Oui, une toux est apparue ou a augmenté ces derniers jours",
         "icon": "fa-check",
-        "isSymptome": true
+        "isSymptom": true
       },
       {
         "label": "Non, je ne tousse pas",
         "icon": "fa-times",
-        "isSymptome": false
+        "isSymptom": false
       }
     ]
   },
@@ -90,12 +90,12 @@
       {
         "label": "Oui, mon goût et mon odorat ont fortement diminué ces derniers jours",
         "icon": "fa-check",
-        "isSymptome": true
+        "isSymptom": true
       },
       {
         "label": "Non, mon goût et mon odorat n’ont pas diminué",
         "icon": "fa-times",
-        "isSymptome": false
+        "isSymptom": false
       }
     ]
   },
@@ -106,12 +106,12 @@
       {
         "label": "Oui, j’ai mal à la gorge des douleurs musculaires ou des courbatures depuis quelques jours",
         "icon": "fa-check",
-        "isSymptome": true
+        "isSymptom": true
       },
       {
         "label": "Non, je n’ai aucun de ces symptômes",
         "icon": "fa-times",
-        "isSymptome": false
+        "isSymptom": false
       }
     ]
   },
@@ -122,12 +122,12 @@
       {
         "label": "Oui, j’ai de la diarrhée",
         "icon": "fa-check",
-        "isSymptome": true
+        "isSymptom": true
       },
       {
         "label": "Non, je n’ai pas de diarrhée",
         "icon": "fa-times",
-        "isSymptome": false
+        "isSymptom": false
       }
     ]
   }

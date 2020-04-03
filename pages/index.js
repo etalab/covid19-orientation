@@ -17,7 +17,7 @@
 
 import React, {useState, useCallback, useEffect} from 'react'
 
-import symptomesQuestions from '../symptomes-questions.json'
+import symptomsQuestions from '../symptoms-questions.json'
 
 import Page from '../layouts/main'
 
@@ -39,37 +39,36 @@ function App() {
   const [consent, setConsent] = useState(false)
 
   // Counters
-  const [symptomesCount, setSymptomesCount] = useCount(0)
-  const [facteurGraviteMajeurCount, setFacteurGraviteMajeurCount] = useCount(0)
-  const [facteurGraviteMineurCount, setFacteurGraviteMineurCount] = useCount(0)
-  const [facteurPronosticCount, setFacteurPronosticCount] = useCount(0)
+  const [symptomsCount, setSymptomsCount] = useCount(0)
+  const [majorSeverityFactorsCount, setMajorSeverityFactorsCount] = useCount(0)
+  const [minorSeverityFactorsCount, setMinorSeverityFactorsCount] = useCount(0)
+  const [pronosticFactors, setPronosticFactors] = useCount(0)
 
-  // Symptomes
-  const [alimentation, setAlimentation] = useState(false)
-  const [fievre, setFievre] = useState(false)
-  const [toux, setToux] = useState(false)
-  const [anosmie, setAnosmie] = useState(false)
-  const [malDeGorge, setMalDeGorge] = useState(false)
-  const [diarrhee, setDiarrhee] = useState(false)
+  // Symptoms
+  const [feedingDay, setFeedingDay] = useState(false)
+  const [fever, setFever] = useState(false)
+  const [cough, setCough] = useState(false)
+  const [agueusiaAnosmia, setAgueusiaAnosmia] = useState(false)
+  const [soreThroatAches, setSoreThroatAches] = useState(false)
+  const [diarrhea, setDiarrhea] = useState(false)
 
   // Profile
   const [age, setAge] = useState(null)
-  const [poids, setPoids] = useState(null)
-  const [taille, setTaille] = useState(null)
+  const [weight, setWeight] = useState(null)
+  const [height, setHeight] = useState(null)
 
-
-  const handleResponse = useCallback((response, setSymptome) => {
-    const {isSymptome, isFacteurGraviteMajeur, isFacteurGraviteMineur} = response
+  const handleResponse = useCallback((response, setSymptom) => {
+    const {isSymptom, isMajorSeverityFactor, isMinorSeverityFactor} = response
 
     // Counters
-    setSymptomesCount(isFacteurGraviteMajeur)
-    setFacteurGraviteMajeurCount(isFacteurGraviteMajeur)
-    setFacteurGraviteMineurCount(isFacteurGraviteMineur)
+    setSymptomsCount(isMajorSeverityFactor)
+    setMajorSeverityFactorsCount(isMajorSeverityFactor)
+    setMinorSeverityFactorsCount(isMinorSeverityFactor)
 
-    setSymptome(isSymptome)
+    setSymptom(isSymptom)
 
     setQuestionIdx(idx => idx + 1)
-  }, [setSymptomesCount, setFacteurGraviteMajeurCount, setFacteurGraviteMineurCount])
+  }, [setSymptomsCount, setMajorSeverityFactorsCount, setMinorSeverityFactorsCount])
 
   const handleConsent = useCallback(async () => {
     const token = await getToken()
@@ -99,8 +98,8 @@ function App() {
         age_less_70: Boolean(age < 70),
         age_more_70: Boolean(age > 70),
         postal_code: '75000',
-        height: taille,
-        weight: poids
+        height,
+        weight
       },
       risk_factors: {
         breathing_disease: true,
@@ -114,13 +113,13 @@ function App() {
         pregnant: '1'
       },
       symptoms: {
-        agueusia_anosmia: anosmie,
+        agueusia_anosmia: agueusiaAnosmia,
         breathlessness: true,
-        cough: toux,
-        diarrhea: diarrhee,
-        feeding_day: true,
-        fever: fievre,
-        sore_throat_aches: malDeGorge,
+        cough,
+        diarrhea,
+        feeding_day: feedingDay,
+        fever,
+        sore_throat_aches: soreThroatAches,
         temperature_cat: [35.5, 37.7],
         tiredness: true,
         tiredness_details: true
@@ -134,10 +133,10 @@ function App() {
       setEnd(1)
     }
 
-    if (facteurGraviteMajeurCount >= 1) {
+    if (majorSeverityFactorsCount >= 1) {
       setEnd(5)
     }
-  }, [age, facteurGraviteMajeurCount])
+  }, [age, majorSeverityFactorsCount])
 
   // Show/hide form
   useEffect(() => {
@@ -147,7 +146,7 @@ function App() {
   // Orderered questions
   const questions = [
     {type: 'profile', question: () => <Age handleAge={handleAge} />},
-    {type: 'symptome', setter: setAlimentation, symptome: symptomesQuestions.alimentation}
+    {type: 'symptom', setter: setFeedingDay, symptom: symptomsQuestions.alimentation}
   ]
 
   return (
