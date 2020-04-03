@@ -1,5 +1,5 @@
 {
-  "souffle": {
+  "breathlessness": {
     "title": "Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?",
     "icon": "fa-lungs",
     "responses": [
@@ -15,7 +15,7 @@
       }
     ]
   },
-  "alimentation": {
+  "feeding_day": {
     "title": "Êtes-vous dans l'impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?",
     "icon": "fa-soup",
     "responses": [
@@ -31,43 +31,75 @@
       }
     ]
   },
-  "fievre": {
+  "fever": {
+    "title": "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ?",
+    "icon": "fa-temperature-up",
+    "responses": [
+      {
+        "label": "Oui",
+        "icon": "fa-check",
+        "isSymptom": true
+      },
+      {
+        "label": "Non",
+        "icon": "fa-times"
+      },
+      {
+        "label": "Je ne sais pas",
+        "icon": "fa-question-circle",
+        "isSymptom": true
+      }
+    ]
+  },
+  "temperature": {
     "title": "Quelle a été votre température la plus élevée ces dernières 48h ?",
     "icon": "fa-temperature-up",
     "responses": [
       {
         "label": "Je ne sais pas",
         "icon": "fa-question-circle",
-        "isSymptom": true,
+        "value": "inconnue",
         "isMinorSeverityFactor": true
       },
       {
         "label": "39°C ou plus",
         "icon": "fa-thermometer-full",
-        "isSymptom": true,
+        "value": "> 39",
         "isMinorSeverityFactor": true
       },
       {
-        "label": "Entre 37, 8°C et 38, 9°C de température",
+        "label": "Entre 37,8°C et 38,9°C de température",
         "icon": "fa-thermometer-half",
-        "isSymptom": true
+        "value": "37.8-38.9"
       },
       {
-        "label": "Température basse, moins de 35, 5°C",
+        "label": "Température basse, moins de 35,5°C",
         "icon": "fa-temperature-frigid",
-        "isSymptom": true,
-        "isMinorSeverityFactor": true
+        "value": "< 35.5"
       },
       {
-        "label": "Je n’ai pas eu de fièvre(entre 35, 5 et 37, 7°C)",
+        "label": "Je n’ai pas eu de fièvre(entre 35,5 et 37,7°C)",
         "icon": "fa-thumbs-up",
-        "isSymptom": false,
-        "isMinorSeverityFactor": false,
-        "isFievre": false
+        "value": "35.5-37.7"
       }
     ]
   },
-  "toux": {
+  "tiredness": {
+    "title": "Avez-vous une fatigue inhabituelle ces derniers jours vous obligeant à vous reposer plus de la moitiée de la journée ?",
+    "icon": "fa-bed",
+    "responses": [
+      {
+        "label": "Oui",
+        "icon": "fa-check",
+        "isMinorSeverityFactor": true
+      },
+      {
+        "label": "Non",
+        "icon": "fa-times"
+      }
+    ]
+  },
+  "cough": {
     "title": "Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?",
     "icon": "fa-head-side-cough",
     "responses": [
@@ -78,13 +110,12 @@
       },
       {
         "label": "Non, je ne tousse pas",
-        "icon": "fa-times",
-        "isSymptom": false
+        "icon": "fa-times"
       }
     ]
   },
-  "anosmie": {
-    "title": "Avez-vous noté une forte diminution de votre goût ou de votre odorat ces derniers jours ?",
+  "agueusia_anosmia": {
+    "title": "Avez-vous noté une forte diminution de votre goût ou de votre odorat ces derniers jours ?",
     "icon": "fa-soup",
     "responses": [
       {
@@ -94,13 +125,12 @@
       },
       {
         "label": "Non, mon goût et mon odorat n’ont pas diminué",
-        "icon": "fa-times",
-        "isSymptom": false
+        "icon": "fa-times"
       }
     ]
   },
-  "malDeGorge": {
-    "title": "Avez-vous un mal de gorge, des douleurs musculaires ou des courbatures inhabituelles ces derniers jours?",
+  "sore_throat_aches": {
+    "title": "Avez-vous un mal de gorge, des douleurs musculaires ou des courbatures inhabituelles ces derniers jours ?",
     "icon": "fa-scarf",
     "responses": [
       {
@@ -110,12 +140,11 @@
       },
       {
         "label": "Non, je n’ai aucun de ces symptômes",
-        "icon": "fa-times",
-        "isSymptom": false
+        "icon": "fa-times"
       }
     ]
   },
-  "diarrhee": {
+  "diarrhea": {
     "title": "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?",
     "icon": "fa-toilet",
     "responses": [
@@ -126,8 +155,7 @@
       },
       {
         "label": "Non, je n’ai pas de diarrhée",
-        "icon": "fa-times",
-        "isSymptom": false
+        "icon": "fa-times"
       }
     ]
   }

@@ -28,12 +28,13 @@ function RiskFactors({handleRiskFactors}) {
 
   return (
     <article className='step' id='risk-factors'>
-      <h2><i className='fas fa-notes-medical' aria-hidden='true' /> <span>Avez vous des antécédents médicaux ?</span></h2>
+      <h2><i className='fas fa-user-md' aria-hidden='true' /> <span>Avez vous des antécédents médicaux ?</span></h2>
       <div className='card'>
         <form onSubmit={handleSubmit}>
           <div className='complement-infos'>
             <ul>
               <li>
+                <i className='fas fa-heartbeat' aria-hidden='true' />
                 <label>Avez-vous une hypertension artérielle mal équilibrée ? Ou une maladie cardiaque ou vasculaire ? Ou prenez-vous un traitement à visée cardiologique ?</label>
                 <input
                   name='heartDisease'
@@ -43,6 +44,7 @@ function RiskFactors({handleRiskFactors}) {
                 />
               </li>
               <li>
+                <i className='fas fa-heartbeat' aria-hidden='true' />
                 <label>Êtes-vous diabétique ?</label>
                 <input
                   name='diabetes'
@@ -52,6 +54,7 @@ function RiskFactors({handleRiskFactors}) {
                 />
               </li>
               <li>
+                <i className='fas fa-procedures' aria-hidden='true' />
                 <label>Avez-vous ou avez-vous eu un cancer dans les 3 dernières années ?</label>
                 <input
                   name='cancer'
@@ -61,6 +64,7 @@ function RiskFactors({handleRiskFactors}) {
                 />
               </li>
               <li>
+                <i className='fas fa-lungs-virus' aria-hidden='true' />
                 <label>Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?</label>
                 <input
                   name='breathingDisease'
@@ -70,6 +74,7 @@ function RiskFactors({handleRiskFactors}) {
                 />
               </li>
               <li>
+              <i className='fas fa-kidneys' aria-hidden='true' />
                 <label>Avez-vous une insuffisance rénale chronique dialysée ?</label>
                 <input
                   name='kidneyDisease'
@@ -79,6 +84,7 @@ function RiskFactors({handleRiskFactors}) {
                 />
               </li>
               <li>
+                <i className='fas fa-procedures' aria-hidden='true' />
                 <label>Avez-vous une maladie chronique du foie ?</label>
                 <input
                   name='liverDisease'
@@ -88,6 +94,7 @@ function RiskFactors({handleRiskFactors}) {
                 />
               </li>
               <li>
+                <i className='fas fa-baby' aria-hidden='true' />
                 <label>Êtes-vous enceinte ?</label>
                 <input
                   name='pregnant'
@@ -97,6 +104,7 @@ function RiskFactors({handleRiskFactors}) {
                 />
               </li>
               <li>
+                <i className='fas fa-procedures' aria-hidden='true' />
                 <label>Avez-vous une maladie connue pour diminuer vos défenses immunitaires ?</label>
                 <input
                   name='immunosuppressantDisease'
@@ -106,6 +114,7 @@ function RiskFactors({handleRiskFactors}) {
                 />
               </li>
               <li>
+                <i className='fas fa-pills' aria-hidden='true' />
                 <label>Prenez-vous un traitement immunosuppresseur ?</label>
                 <input
                   name='immunosuppressantDrug'

@@ -25,6 +25,7 @@ import {anonymize} from '../lib/codes-postaux'
 
 import Page from '../layouts/main'
 
+import Imc from '../components/patient/imc'
 import PostalCode from '../components/patient/postal-code'
 
 import End from '../components/end'
@@ -40,7 +41,7 @@ function App() {
   const [displayForm, setDisplayForm] = useState(false)
   const [end, setEnd] = useState(null)
   const [step, setStep] = useState(0)
-  const [consent, setConsent] = useState(false)
+  const [consent, setConsent] = useState(true)
 
   // Counters
   const [symptomsCount, setSymptomsCount] = useCount(0)
@@ -50,7 +51,10 @@ function App() {
 
   // Symptoms
   const [feedingDay, setFeedingDay] = useState(false)
+  const [breathlessness, setBreathlessness] = useState(false)
   const [fever, setFever] = useState(false)
+  const [temperature, setTemperature] = useState(null)
+  const [tiredness, setTiredness] = useState(null)
   const [cough, setCough] = useState(false)
   const [agueusiaAnosmia, setAgueusiaAnosmia] = useState(false)
   const [soreThroatAches, setSoreThroatAches] = useState(false)
@@ -72,9 +76,7 @@ function App() {
     setMajorSeverityFactorsCount(isMajorSeverityFactor)
     setMinorSeverityFactorsCount(isMinorSeverityFactor)
 
-    if (value) {
-      setSymptom(value)
-    }
+    setSymptom(value || isSymptom)
 
     setStep(step => step + 1)
   }, [setSymptomsCount, setMajorSeverityFactorsCount, setMinorSeverityFactorsCount])
@@ -105,15 +107,14 @@ function App() {
       risk_factors: riskFactors,
       symptoms: {
         agueusia_anosmia: agueusiaAnosmia,
-        breathlessness: true,
+        breathlessness,
         cough,
         diarrhea,
         feeding_day: feedingDay,
         fever,
         sore_throat_aches: soreThroatAches,
-        temperature_cat: [35.5, 37.7],
-        tiredness: true,
-        tiredness_details: true
+        temperature_cat: temperature,
+        tiredness
       }
     })
   }
@@ -178,9 +179,17 @@ function App() {
   // Orderered steps
   const steps = [
     {step: 0, question: patientQuestions.age, setSymptom: setAge},
-    {step: 1, question: symptomsQuestions.alimentation, setSymptom: setFeedingDay},
-    {step: 13, component: () => <RiskFactors handleRiskFactors={setRiskFactors} />},
-    {step: 22, component: () => <PostalCode handlePostalCode={setPostalCode} />}
+    {step: 1, question: symptomsQuestions.feeding_day, setSymptom: setFeedingDay},
+    {step: 2, question: symptomsQuestions.breathlessness, setSymptom: setBreathlessness},
+    {step: 3, question: symptomsQuestions.fever, setSymptom: setFever},
+    {step: 4, question: symptomsQuestions.temperature, setSymptom: setTemperature},
+    {step: 5, question: symptomsQuestions.tiredness, setSymptom: setTiredness},
+    {step: 6, question: symptomsQuestions.cough, setSymptom: setCough},
+    {step: 7, question: symptomsQuestions.agueusia_anosmia, setSymptom: setAgueusiaAnosmia},
+    {step: 8, question: symptomsQuestions.sore_throat_aches, setSymptom: setSoreThroatAches},
+    {step: 9, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
+    {step: 10, component: () => <RiskFactors handleRiskFactors={setRiskFactors} />},
+    {step: 11, component: () => <PostalCode handlePostalCode={setPostalCode} />}
   ]
 
   return (
