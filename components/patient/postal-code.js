@@ -10,7 +10,7 @@ function PostalCode({handlePostalCode}) {
   }, [input, handlePostalCode])
 
   useEffect(() => {
-    const regex = /\d{5}/
+    const regex = /^\d{5}$/
     setIsValid(input.match(regex))
   }, [input])
 
