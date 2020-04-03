@@ -19,6 +19,8 @@ import React, {useState, useCallback, useEffect} from 'react'
 
 import symptomsQuestions from '../symptoms-questions.json'
 
+import {getToken, submitForm, getDuration} from '../lib/api'
+
 import Page from '../layouts/main'
 
 import Age from '../components/profile/age'
@@ -28,7 +30,7 @@ import End from '../components/end'
 import useCount from '../components/hooks/count'
 import Consent from '../components/consent'
 import Question from '../components/question'
-import {getToken, submitForm, getDuration} from '../lib/api'
+import RiskFactors from '../components/risk-factors'
 
 function App() {
   // App
@@ -52,10 +54,12 @@ function App() {
   const [soreThroatAches, setSoreThroatAches] = useState(false)
   const [diarrhea, setDiarrhea] = useState(false)
 
-  // Profile
+  // Patient
   const [age, setAge] = useState(null)
   const [weight, setWeight] = useState(null)
   const [height, setHeight] = useState(null)
+
+  const [riskFactors, setRiskFactors] = useState(null)
 
   const handleResponse = useCallback((response, setSymptom) => {
     const {isSymptom, isMajorSeverityFactor, isMinorSeverityFactor} = response
@@ -101,17 +105,7 @@ function App() {
         height,
         weight
       },
-      risk_factors: {
-        breathing_disease: true,
-        cancer: true,
-        diabetes: true,
-        heart_disease: true,
-        immunosuppressant_disease: true,
-        immunosuppressant_drug: true,
-        kidney_disease: true,
-        liver_disease: true,
-        pregnant: '1'
-      },
+      risk_factors: riskFactors,
       symptoms: {
         agueusia_anosmia: agueusiaAnosmia,
         breathlessness: true,
@@ -146,7 +140,8 @@ function App() {
   // Orderered questions
   const questions = [
     {step: 0, type: 'profile', question: () => <Age handleAge={handleAge} />},
-    {step: 1, type: 'symptom', setter: setFeedingDay, symptom: symptomsQuestions.alimentation}
+    {step: 1, type: 'symptom', setter: setFeedingDay, symptom: symptomsQuestions.alimentation},
+    {step: 13, type: 'profile', question: () => <RiskFactors handleRiskFactors={setRiskFactors} />}
   ]
 
   return (
