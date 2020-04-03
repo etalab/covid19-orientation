@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 
 import Symptom from '../components/symptom'
 
-const Question = ({question, handleResponse}) => {
-  console.log("Question -> question", question)
+function Question({question, handleResponse}) {
   if (question) {
     if (question.type === 'symptom') {
       const {setter, symptom} = question
@@ -19,6 +18,8 @@ const Question = ({question, handleResponse}) => {
 
     return question.question()
   }
+
+  return null
 }
 
 Question.defaultProps = {
@@ -27,7 +28,10 @@ Question.defaultProps = {
 
 Question.propTypes = {
   question: PropTypes.shape({
-    type: PropTypes.oneOf(['symptom', 'profile']).isRequired
+    type: PropTypes.oneOf(['symptom', 'patient']).isRequired,
+    setter: PropTypes.func,
+    symptom: PropTypes.object,
+    question: PropTypes.func
   }),
   handleResponse: PropTypes.func.isRequired
 }

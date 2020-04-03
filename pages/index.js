@@ -23,7 +23,8 @@ import {getToken, submitForm, getDuration} from '../lib/api'
 
 import Page from '../layouts/main'
 
-import Age from '../components/profile/age'
+import Age from '../components/patient/age'
+import PostalCode from '../components/patient/postal-code'
 
 import End from '../components/end'
 
@@ -58,6 +59,7 @@ function App() {
   const [age, setAge] = useState(null)
   const [weight, setWeight] = useState(null)
   const [height, setHeight] = useState(null)
+  const [postalCode, setPostalCode] = useState(null)
 
   const [riskFactors, setRiskFactors] = useState(null)
 
@@ -139,9 +141,10 @@ function App() {
 
   // Orderered questions
   const questions = [
-    {step: 0, type: 'profile', question: () => <Age handleAge={handleAge} />},
+    {step: 0, type: 'patient', question: () => <Age handleAge={handleAge} />},
     {step: 1, type: 'symptom', setter: setFeedingDay, symptom: symptomsQuestions.alimentation},
-    {step: 13, type: 'profile', question: () => <RiskFactors handleRiskFactors={setRiskFactors} />}
+    {step: 13, type: 'patient', question: () => <RiskFactors handleRiskFactors={setRiskFactors} />},
+    {step: 22, type: 'patient', question: () => <PostalCode handlePostalCode={setPostalCode} />}
   ]
 
   return (

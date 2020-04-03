@@ -12,7 +12,7 @@ function IMC({handleImc}) {
 
   return (
     <article className='step' id='imc-01'>
-      <h2><i className='fas fa-weight' aria-hidden='true' /> <span>Indiquez votre poids et votre taille</span></h2>
+      <h2><i className='fas fa-mailbox' aria-hidden='true' /> <span>Indiquez votre poids et votre taille</span></h2>
       <div className='card'>
         <form id='form-imc' onSubmit={handleSubmit}>
           <div className='complement-infos'>
