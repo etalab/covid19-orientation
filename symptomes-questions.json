@@ -1,0 +1,134 @@
+{
+  "souffle": {
+    "question": "Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?",
+    "icon": "fa-lungs",
+    "responses": [
+      {
+        "label": "Oui",
+        "icon": "fa-check",
+        "isFacteurGraviteMajeur": true
+      },
+      {
+        "label": "Non",
+        "icon": "fa-times",
+        "isFacteurGraviteMajeur": false
+      }
+    ]
+  },
+  "alimentation": {
+    "question": "Êtes-vous dans l'impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?",
+    "icon": "fa-soup",
+    "responses": [
+      {
+        "label": "Oui",
+        "icon": "fa-check",
+        "isFacteurGraviteMajeur": true
+      },
+      {
+        "label": "Non",
+        "icon": "fa-times",
+        "isFacteurGraviteMajeur": false
+      }
+    ]
+  },
+  "fievre": {
+    "question": "Quelle a été votre température la plus élevée ces dernières 48h ?",
+    "icon": "fa-temperature-up",
+    "responses": [
+      {
+        "label": "Je ne sais pas",
+        "icon": "fa-question-circle",
+        "isSymptome": true,
+        "isFacteurGraviteMineur": true
+      },
+      {
+        "label": "39°C ou plus",
+        "icon": "fa-thermometer-full",
+        "isSymptome": true,
+        "isFacteurGraviteMineur": true
+      },
+      {
+        "label": "Entre 37, 8°C et 38, 9°C de température",
+        "icon": "fa-thermometer-half",
+        "isSymptome": true
+      },
+      {
+        "label": "Température basse, moins de 35, 5°C",
+        "icon": "fa-temperature-frigid",
+        "isSymptome": true,
+        "isFacteurGraviteMineur": true
+      },
+      {
+        "label": "Je n’ai pas eu de fièvre(entre 35, 5 et 37, 7°C)",
+        "icon": "fa-thumbs-up",
+        "isSymptome": false,
+        "isFacteurGraviteMineur": false,
+        "isFievre": false
+      }
+    ]
+  },
+  "toux": {
+    "question": "Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?",
+    "icon": "fa-head-side-cough",
+    "responses": [
+      {
+        "label": "Oui, une toux est apparue ou a augmenté ces derniers jours",
+        "icon": "fa-check",
+        "isSymptome": true
+      },
+      {
+        "label": "Non, je ne tousse pas",
+        "icon": "fa-times",
+        "isSymptome": false
+      }
+    ]
+  },
+  "anosmie": {
+    "question": "Avez-vous noté une forte diminution de votre goût ou de votre odorat ces derniers jours ?",
+    "icon": "fa-soup",
+    "responses": [
+      {
+        "label": "Oui, mon goût et mon odorat ont fortement diminué ces derniers jours",
+        "icon": "fa-check",
+        "isSymptome": true
+      },
+      {
+        "label": "Non, mon goût et mon odorat n’ont pas diminué",
+        "icon": "fa-times",
+        "isSymptome": false
+      }
+    ]
+  },
+  "malDeGorge": {
+    "question": "Avez-vous un mal de gorge, des douleurs musculaires ou des courbatures inhabituelles ces derniers jours?",
+    "icon": "fa-scarf",
+    "responses": [
+      {
+        "label": "Oui, j’ai mal à la gorge des douleurs musculaires ou des courbatures depuis quelques jours",
+        "icon": "fa-check",
+        "isSymptome": true
+      },
+      {
+        "label": "Non, je n’ai aucun de ces symptômes",
+        "icon": "fa-times",
+        "isSymptome": false
+      }
+    ]
+  },
+  "diarrhee": {
+    "question": "Avez-vous de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?",
+    "icon": "fa-toilet",
+    "responses": [
+      {
+        "label": "Oui, j’ai de la diarrhée",
+        "icon": "fa-check",
+        "isSymptome": true
+      },
+      {
+        "label": "Non, je n’ai pas de diarrhée",
+        "icon": "fa-times",
+        "isSymptome": false
+      }
+    ]
+  }
+}
