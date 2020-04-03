@@ -28,8 +28,11 @@ import End from '../components/end'
 import useCount from '../components/hooks/count'
 import Consent from '../components/consent'
 import Question from '../components/question'
+import {getToken, submitForm, getDuration} from '../lib/api'
 
 function App() {
+  // App
+  const [token, setToken] = useState(null)
   const [displayForm, setDisplayForm] = useState(false)
   const [end, setEnd] = useState(null)
   const [questionIdx, setQuestionIdx] = useState(0)
@@ -50,12 +53,10 @@ function App() {
   const [diarrhee, setDiarrhee] = useState(false)
 
   // Profile
-  const [age, setAge] = useState(0)
-  const [poids, setPoids] = useState(0)
-  const [taille, setTaille] = useState(0)
-  const [imc, setImc] = useState(0)
+  const [age, setAge] = useState(null)
+  const [poids, setPoids] = useState(null)
+  const [taille, setTaille] = useState(null)
 
-  const [conseils, setConseils] = useState(null)
 
   const handleResponse = useCallback((response, setSymptome) => {
     const {isSymptome, isFacteurGraviteMajeur, isFacteurGraviteMineur} = response
@@ -70,6 +71,13 @@ function App() {
     setQuestionIdx(idx => idx + 1)
   }, [setSymptomesCount, setFacteurGraviteMajeurCount, setFacteurGraviteMineurCount])
 
+  const handleConsent = useCallback(async () => {
+    const token = await getToken()
+
+    setToken(token)
+    setConsent(true)
+  }, [])
+
   const handleAge = useCallback(age => {
     if (age > 14) {
       setQuestionIdx(idx => idx + 1)
@@ -77,6 +85,48 @@ function App() {
 
     setAge(age)
   }, [setQuestionIdx, setAge])
+
+  const submit = () => {
+    const duration = getDuration(token)
+
+    submitForm({
+      metadata: {
+        duration
+      },
+      patient: {
+        age_less_15: Boolean(age < 15),
+        age_less_50: Boolean(age < 50),
+        age_less_70: Boolean(age < 70),
+        age_more_70: Boolean(age > 70),
+        postal_code: '75000',
+        height: taille,
+        weight: poids
+      },
+      risk_factors: {
+        breathing_disease: true,
+        cancer: true,
+        diabetes: true,
+        heart_disease: true,
+        immunosuppressant_disease: true,
+        immunosuppressant_drug: true,
+        kidney_disease: true,
+        liver_disease: true,
+        pregnant: '1'
+      },
+      symptoms: {
+        agueusia_anosmia: anosmie,
+        breathlessness: true,
+        cough: toux,
+        diarrhea: diarrhee,
+        feeding_day: true,
+        fever: fievre,
+        sore_throat_aches: malDeGorge,
+        temperature_cat: [35.5, 37.7],
+        tiredness: true,
+        tiredness_details: true
+      }
+    })
+  }
 
   // Show/hide end
   useEffect(() => {
@@ -111,7 +161,7 @@ function App() {
           </div>
         </article>
 
-        {!consent && <Consent handleConsent={setConsent} />}
+        {!consent && <Consent handleConsent={handleConsent} />}
 
         {end && <End end={end} />}
 
