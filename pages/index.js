@@ -20,6 +20,7 @@ import React, {useState, useCallback, useEffect} from 'react'
 import symptomsQuestions from '../symptoms-questions.json'
 
 import {getToken, submitForm, getDuration} from '../lib/api'
+import {anonymize} from '../lib/codes-postaux'
 
 import Page from '../layouts/main'
 
@@ -103,7 +104,7 @@ function App() {
         age_less_50: Boolean(age < 50),
         age_less_70: Boolean(age < 70),
         age_more_70: Boolean(age > 70),
-        postal_code: '75000',
+        postal_code: anonymize(postalCode),
         height,
         weight
       },
