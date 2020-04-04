@@ -56,6 +56,9 @@ function RiskFactors({handleRiskFactors}) {
   const [heartDisease, setHeartDisease] = useState(false)
   const [immunosuppressantDisease, setImmunosuppressantDisease] = useState(false)
   const [immunosuppressantDrug, setImmunosuppressantDrug] = useState(false)
+  const [heartDiseaseAlgo, setHeartDiseaseAlgo] = useState(false)
+  const [immunosuppressantDiseaseAlgo, setImmunosuppressantDiseaseAlgo] = useState(false)
+  const [immunosuppressantDrugAlgo, setImmunosuppressantDrugAlgo] = useState(false)
   const [kidneyDisease, setKidneyDisease] = useState(false)
   const [liverDisease, setLiverDisease] = useState(false)
   const [pregnant, setPregnant] = useState(false)
@@ -70,11 +73,16 @@ function RiskFactors({handleRiskFactors}) {
       heartDisease,
       immunosuppressantDisease,
       immunosuppressantDrug,
+      heartDiseaseAlgo,
+      immunosuppressantDiseaseAlgo,
+      immunosuppressantDrugAlgo,
       kidneyDisease,
       liverDisease,
       pregnant: pregnant ? '1' : '0'
     })
   }
+
+  const deriveAlgoValue = value => !(value === "0") // false si 0, true sinon
 
   return (
     <article className='step' id='risk-factors'>
@@ -92,7 +100,10 @@ function RiskFactors({handleRiskFactors}) {
                   icon='fa-heartbeat'
                   name='heartDisease'
                   value={heartDisease}
-                  onChange={value => setHeartDisease(value)}
+                  onChange={value => {
+                    setHeartDisease(value)
+                    setHeartDiseaseAlgo(deriveAlgoValue(value))
+                  }}
                   choices={[
                     {
                       title: 'Oui',
@@ -159,22 +170,33 @@ function RiskFactors({handleRiskFactors}) {
                   onChange={() => setLiverDisease(!liverDisease)}
                 />
               </li>
-              <li>
-                <i className='fas fa-baby' aria-hidden='true' />
-                <label>Êtes-vous enceinte ?</label>
-                <input
+              <li style={{display: 'block'}}>
+                <RadioChoices
+                  icon='fa-baby'
                   name='pregnant'
-                  type='checkbox'
-                  checked={pregnant}
-                  onChange={() => setPregnant(!pregnant)}
-                />
+                  value={pregnant}
+                  onChange={value => setPregnant(value)}
+                  choices={[
+                    {
+                      title: 'Oui',
+                      value: '1'
+                    },
+                    {title: 'Non', value: '0'},
+                    {title: 'Non applicable', value: '888'}
+                  ]}
+                >
+                  Êtes-vous enceinte ?
+                </RadioChoices>
               </li>
               <li style={{display: 'block'}}>
                 <RadioChoices
                   icon='fa-procedures'
                   name='immunosuppressantDisease'
                   value={immunosuppressantDisease}
-                  onChange={value => setImmunosuppressantDisease(value)}
+                  onChange={value => {
+                    setImmunosuppressantDisease(value)
+                    setImmunosuppressantDiseaseAlgo(deriveAlgoValue(value))}
+                  }}
                   choices={[
                     {
                       title: 'Oui',
@@ -193,7 +215,10 @@ function RiskFactors({handleRiskFactors}) {
                   icon='fa-procedures'
                   name='immunosuppressantDrug'
                   value={immunosuppressantDrug}
-                  onChange={value => setImmunosuppressantDrug(value)}
+                  onChange={value => {
+                    setImmunosuppressantDrug(value)
+                    setImmunosuppressantDrugAlgo(deriveAlgoValue(value))
+                  }}
                   choices={[
                     {
                       title: 'Oui',
