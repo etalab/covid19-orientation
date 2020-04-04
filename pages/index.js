@@ -34,6 +34,7 @@ import useCount from '../components/hooks/count'
 import Consent from '../components/consent'
 import Question from '../components/question'
 import RiskFactors from '../components/risk-factors'
+import RiskFactorsRadios from '../components/risk-factors-radios'
 
 function App() {
   // App
@@ -68,6 +69,7 @@ function App() {
   const [postalCode, setPostalCode] = useState(null)
 
   const [riskFactors, setRiskFactors] = useState(null)
+  const [riskFactorsRadios, setRiskFactorsRadios] = useState(null)
 
   const handleResponse = useCallback((response, setSymptom) => {
     const {isSymptom, isMajorSeverityFactor, isMinorSeverityFactor, isPronosticFactors, value} = response
@@ -94,6 +96,11 @@ function App() {
     // Increase pronosticFactorsCount by 1 for each true risk factor
     Object.keys(riskFactors).map(risk => setPronosticFactorsCount(Boolean(riskFactors[risk])))
     setRiskFactors(riskFactors)
+  }
+
+  const handleRiskFactorsRadios = riskFactors => {
+    // Increase pronosticFactorsCount by 1 for each true risk factor
+    // TODO
   }
 
   const submit = () => {
@@ -157,6 +164,7 @@ function App() {
     setPostalCode(null)
 
     setRiskFactors(null)
+    setRiskFactorsRadios(null)
   }
 
   // Get end
@@ -261,7 +269,8 @@ function App() {
     {step: 8, question: symptomsQuestions.sore_throat_aches, setSymptom: setSoreThroatAches},
     {step: 9, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
     {step: 10, component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />},
-    {step: 11, component: () => <PostalCode handlePostalCode={setPostalCode} />}
+    {step: 11, component: () => <RiskFactorsRadios handleRiskFactors={handleRiskFactorsRadios} />},
+    {step: 12, component: () => <PostalCode handlePostalCode={setPostalCode} />}
   ]
 
   return (
