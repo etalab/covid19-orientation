@@ -92,15 +92,33 @@ function App() {
     setConsent(true)
   }, [])
 
+  // boolean risks : count of truthy riskFactors
+  const getPronosticFactorsCount = riskFactors => Object.keys(riskFactors).filter(risk => Boolean(riskFactors[risk])).length
+
+  // radio risks : count of truthy *algo or pregnant=1
+  const getPronosticFactorsCountRadios = riskFactorsRadios => {
+    // Increase pronosticFactorsCount by 1 for each true risk factor
+    let count = 0;
+    if (!riskFactorsRadios) {
+      return 0
+    }
+    if (riskFactorsRadios.heartDiseaseAlgo) count++
+    if (riskFactorsRadios.immunosuppressantDiseaseAlgo) count++
+    if (riskFactorsRadios.immunosuppressantDrugAlgo) count++
+    if (riskFactorsRadios.pregnant==="1") count++
+    return count
+  }
+
   const handleRiskFactors = riskFactors => {
     // Increase pronosticFactorsCount by 1 for each true risk factor
-    Object.keys(riskFactors).map(risk => setPronosticFactorsCount(Boolean(riskFactors[risk])))
+    setPronosticFactorsCount(getPronosticFactorsCount(riskFactors) + getPronosticFactorsCountRadios(riskFactorsRadios))
     setRiskFactors(riskFactors)
   }
 
-  const handleRiskFactorsRadios = riskFactors => {
+  const handleRiskFactorsRadios = riskFactorsRadios => {
     // Increase pronosticFactorsCount by 1 for each true risk factor
-    // TODO
+    setPronosticFactorsCount(getPronosticFactorsCount(riskFactors) + getPronosticFactorsCountRadios(riskFactorsRadios))
+    setRiskFactorsRadios(riskFactorsRadios)
   }
 
   const submit = () => {
@@ -249,12 +267,16 @@ function App() {
       nextStep = 11
     }
 
+    if (riskFactorsRadios) {
+      nextStep = 12
+    }
+
     if (postalCode) {
       setIsFinish(true)
     }
 
     setStep(nextStep)
-  }, [step, age, fever, height, weight, riskFactors, postalCode])
+  }, [step, age, fever, height, weight, riskFactors, riskFactorsRadios, postalCode])
 
   // Orderered steps
   const steps = [

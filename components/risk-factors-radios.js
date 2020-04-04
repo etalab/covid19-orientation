@@ -72,7 +72,13 @@ function RiskFactors({handleRiskFactors}) {
     })
   }
 
-  const deriveAlgoValue = value => !(value === "0") // false si 0, true sinon
+  // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-%C3%A0-obligatoirement-sauvegarder-pour-partage
+  const deriveAlgoValue = (key, value) => {
+    if (key==='heartDisease' && value !== "0") return true;
+    if (key==='immunosuppressantDisease' && value === "1") return true;
+    if (key==='immunosuppressantDrug' && value === "1") return true;
+    return false;
+  }
 
   return (
     <article className='step' id='risk-factors'>
@@ -110,7 +116,7 @@ function RiskFactors({handleRiskFactors}) {
                   value={heartDisease}
                   onChange={value => {
                     setHeartDisease(value)
-                    setHeartDiseaseAlgo(deriveAlgoValue(value))
+                    setHeartDiseaseAlgo(deriveAlgoValue('heartDisease', value))
                   }}
                   choices={[
                     {
@@ -135,7 +141,7 @@ function RiskFactors({handleRiskFactors}) {
                   value={immunosuppressantDisease}
                   onChange={value => {
                     setImmunosuppressantDisease(value)
-                    setImmunosuppressantDiseaseAlgo(deriveAlgoValue(value))
+                    setImmunosuppressantDiseaseAlgo(deriveAlgoValue('immunosuppressantDisease', value))
                   }}
                   choices={[
                     {
@@ -157,7 +163,7 @@ function RiskFactors({handleRiskFactors}) {
                   value={immunosuppressantDrug}
                   onChange={value => {
                     setImmunosuppressantDrug(value)
-                    setImmunosuppressantDrugAlgo(deriveAlgoValue(value))
+                    setImmunosuppressantDrugAlgo(deriveAlgoValue('immunosuppressantDrug', value))
                   }}
                   choices={[
                     {
