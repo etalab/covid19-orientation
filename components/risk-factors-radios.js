@@ -62,12 +62,12 @@ function RiskFactors({handleRiskFactors}) {
     event.preventDefault()
 
     handleRiskFactors({
-      heartDisease,
-      immunosuppressantDisease,
-      immunosuppressantDrug,
-      heartDiseaseAlgo,
-      immunosuppressantDiseaseAlgo,
-      immunosuppressantDrugAlgo,
+      heart_disease: heartDisease,
+      immunosuppressant_disease: immunosuppressantDisease,
+      immunosuppressant_drug: immunosuppressantDrug,
+      heart_disease_algo: heartDiseaseAlgo,
+      immunosuppressant_disease_algo: immunosuppressantDiseaseAlgo,
+      immunosuppressant_drug_algo: immunosuppressantDrugAlgo,
       pregnant
     })
   }

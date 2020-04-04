@@ -164,9 +164,9 @@ function App() {
     if (!riskFactorsRadios) {
       return 0
     }
-    if (riskFactorsRadios.heartDiseaseAlgo) count++
-    if (riskFactorsRadios.immunosuppressantDiseaseAlgo) count++
-    if (riskFactorsRadios.immunosuppressantDrugAlgo) count++
+    if (riskFactorsRadios.heart_disease_algo) count++
+    if (riskFactorsRadios.immunosuppressant_disease_algo) count++
+    if (riskFactorsRadios.immunosuppressant_drug_algo) count++
     if (riskFactorsRadios.pregnant==="1") count++
     return count
   }
