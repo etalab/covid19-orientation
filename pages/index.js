@@ -34,6 +34,69 @@ import useCount from '../components/hooks/count'
 import Consent from '../components/consent'
 import Question from '../components/question'
 import RiskFactors from '../components/risk-factors'
+import RiskFactorsRadios from '../components/risk-factors-radios'
+
+
+// compute end based on some parameters
+// Replica of arbre_décisions.txt
+const chooseEnd = ({
+  ageRange,
+  minorSeverityFactorsCount,
+  majorSeverityFactorsCount,
+  fever,
+  cough,
+  diarrhea,
+  soreThroatAches,
+  agueusiaAnosmia,
+  pronosticFactorsCount,
+}) => {
+  let end;
+  if (ageRange === "inf_15") {
+      end = 1
+    } else if (majorSeverityFactorsCount >= 1) {
+      end = 5
+    } else if (fever && cough) {
+      if (pronosticFactorsCount === 0) {
+        end = 6
+      }
+      if (pronosticFactorsCount >= 1) {
+        if (minorSeverityFactorsCount < 2) {
+          end = 6
+        }
+        if (minorSeverityFactorsCount >= 2) {
+          end = 4
+        }
+      }
+    } else if (fever || (!fever && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
+      if (pronosticFactorsCount === 0) {
+        if (minorSeverityFactorsCount === 0) {
+          if (ageRange === "inf_15" || ageRange === "from_15_to_49") {
+            end = 2
+          } else {
+            end = 3
+          }
+        } else if (minorSeverityFactorsCount >= 1) {
+          end = 3
+        }
+      }
+      if (pronosticFactorsCount >= 1) {
+        if (minorSeverityFactorsCount < 2) {
+          end = 3
+        } else if (minorSeverityFactorsCount >= 2) {
+          end = 4
+        }
+      }
+    } else if (cough || soreThroatAches || agueusiaAnosmia) {
+      if (pronosticFactorsCount === 0) {
+        end = 2
+      } else if (pronosticFactorsCount >= 1) {
+        end = 7
+      }
+    } else if (!cough && !soreThroatAches && !agueusiaAnosmia) {
+      end = 8
+    }
+  return end;
+}
 
 function App() {
   // App
@@ -62,12 +125,13 @@ function App() {
   const [diarrhea, setDiarrhea] = useState(false)
 
   // Patient
-  const [age, setAge] = useState(null)
+  const [ageRange, setAgeRange] = useState(null)
   const [weight, setWeight] = useState(null)
   const [height, setHeight] = useState(null)
   const [postalCode, setPostalCode] = useState(null)
 
   const [riskFactors, setRiskFactors] = useState(null)
+  const [riskFactorsRadios, setRiskFactorsRadios] = useState(null)
 
   const handleResponse = useCallback((response, setSymptom) => {
     const {isSymptom, isMajorSeverityFactor, isMinorSeverityFactor, isPronosticFactors, value} = response
@@ -90,10 +154,33 @@ function App() {
     setConsent(true)
   }, [])
 
+  // boolean risks : count of truthy riskFactors
+  const getPronosticFactorsCount = riskFactors => Object.keys(riskFactors).filter(risk => Boolean(riskFactors[risk])).length
+
+  // radio risks : count of truthy *algo or pregnant=1
+  const getPronosticFactorsCountRadios = riskFactorsRadios => {
+    // Increase pronosticFactorsCount by 1 for each true risk factor
+    let count = 0;
+    if (!riskFactorsRadios) {
+      return 0
+    }
+    if (riskFactorsRadios.heart_disease_algo) count++
+    if (riskFactorsRadios.immunosuppressant_disease_algo) count++
+    if (riskFactorsRadios.immunosuppressant_drug_algo) count++
+    if (riskFactorsRadios.pregnant === 1) count++
+    return count
+  }
+
   const handleRiskFactors = riskFactors => {
     // Increase pronosticFactorsCount by 1 for each true risk factor
-    Object.keys(riskFactors).map(risk => setPronosticFactorsCount(Boolean(riskFactors[risk])))
+    setPronosticFactorsCount(getPronosticFactorsCount(riskFactors) + getPronosticFactorsCountRadios(riskFactorsRadios))
     setRiskFactors(riskFactors)
+  }
+
+  const handleRiskFactorsRadios = riskFactorsRadios => {
+    // Increase pronosticFactorsCount by 1 for each true risk factor
+    setPronosticFactorsCount(getPronosticFactorsCount(riskFactors) + getPronosticFactorsCountRadios(riskFactorsRadios))
+    setRiskFactorsRadios(riskFactorsRadios)
   }
 
   const submit = () => {
@@ -104,15 +191,15 @@ function App() {
         duration
       },
       patient: {
-        age_less_15: Boolean(age < 15),
-        age_less_50: Boolean(age < 50),
-        age_less_70: Boolean(age < 70),
-        age_more_70: Boolean(age > 70),
+        age_range: ageRange,
         postal_code: anonymize(postalCode),
         height,
         weight
       },
-      risk_factors: riskFactors,
+      risk_factors: {
+        ...riskFactors,
+        ...riskFactorsRadios
+      },
       symptoms: {
         agueusia_anosmia: agueusiaAnosmia,
         breathlessness,
@@ -151,81 +238,43 @@ function App() {
     setDiarrhea(false)
 
     // Patient
-    setAge(null)
+    setAgeRange(null)
     setWeight(null)
     setHeight(null)
     setPostalCode(null)
 
     setRiskFactors(null)
+    setRiskFactorsRadios(null)
   }
 
   // Get end
   useEffect(() => {
     // Replica of arbre_décisions.txt
-    let end
-
-    if (age && age < 15) {
-      end = 1
-    } else if (majorSeverityFactorsCount >= 1) {
-      end = 5
-    } else if (fever && cough) {
-      if (pronosticFactorsCount === 0) {
-        end = 6
-      }
-
-      if (pronosticFactorsCount >= 1) {
-        if (minorSeverityFactorsCount < 2) {
-          end = 6
-        }
-
-        if (minorSeverityFactorsCount >= 2) {
-          end = 4
-        }
-      }
-    } else if (fever || (!fever && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
-      if (pronosticFactorsCount === 0) {
-        if (minorSeverityFactorsCount === 0) {
-          if (age < 50) {
-            end = 2
-          } else {
-            end = 3
-          }
-        } else if (minorSeverityFactorsCount >= 1) {
-          end = 3
-        }
-      }
-
-      if (pronosticFactorsCount >= 1) {
-        if (minorSeverityFactorsCount < 2) {
-          end = 3
-        } else if (minorSeverityFactorsCount >= 2) {
-          end = 4
-        }
-      }
-    } else if (cough || soreThroatAches || agueusiaAnosmia) {
-      if (pronosticFactorsCount === 0) {
-        end = 2
-      } else if (pronosticFactorsCount >= 1) {
-        end = 7
-      }
-    } else if (!cough && !soreThroatAches && !agueusiaAnosmia) {
-      end = 8
-    }
-
+    const end = chooseEnd({
+      ageRange,
+      minorSeverityFactorsCount,
+      majorSeverityFactorsCount,
+      fever,
+      cough,
+      diarrhea,
+      soreThroatAches,
+      agueusiaAnosmia,
+      pronosticFactorsCount,
+    })
     setEnd(end)
-  }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, age, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
+  }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, ageRange, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
 
   // Show/hide Form
   useEffect(() => {
     setDisplayForm(Boolean(consent && end !== 1))
-  }, [consent, age, end])
+  }, [consent, ageRange, end])
 
   // Get step
   useEffect(() => {
     let nextStep = step
 
-    if (age) {
-      setIsFinish(age < 15)
+    if (ageRange && ageRange === "inf_15") {
+      setIsFinish(true);
     }
 
     if (fever && fever === 'inconnue') {
@@ -241,16 +290,21 @@ function App() {
       nextStep = 11
     }
 
+    if (riskFactorsRadios) {
+      nextStep = 12
+    }
+
     if (postalCode) {
-      setIsFinish(true)
+      setIsFinish(true);
+      submit();
     }
 
     setStep(nextStep)
-  }, [step, age, fever, height, weight, riskFactors, postalCode])
+  }, [step, ageRange, fever, height, weight, riskFactors, riskFactorsRadios, postalCode])
 
   // Orderered steps
   const steps = [
-    {step: 0, question: patientQuestions.age, setSymptom: setAge},
+    {step: 0, question: patientQuestions.ageRange, setSymptom: setAgeRange},
     {step: 1, question: symptomsQuestions.feeding_day, setSymptom: setFeedingDay},
     {step: 2, question: symptomsQuestions.breathlessness, setSymptom: setBreathlessness},
     {step: 3, question: symptomsQuestions.fever, setSymptom: setFever},
@@ -261,7 +315,8 @@ function App() {
     {step: 8, question: symptomsQuestions.sore_throat_aches, setSymptom: setSoreThroatAches},
     {step: 9, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
     {step: 10, component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />},
-    {step: 11, component: () => <PostalCode handlePostalCode={setPostalCode} />}
+    {step: 11, component: () => <RiskFactorsRadios handleRiskFactors={handleRiskFactorsRadios} />},
+    {step: 12, component: () => <PostalCode handlePostalCode={setPostalCode} />}
   ]
 
   return (

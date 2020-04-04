@@ -5,46 +5,28 @@ function RiskFactors({handleRiskFactors}) {
   const [breathingDisease, setBreathingDisease] = useState(false)
   const [cancer, setCancer] = useState(false)
   const [diabetes, setDiabetes] = useState(false)
-  const [heartDisease, setHeartDisease] = useState(false)
-  const [immunosuppressantDisease, setImmunosuppressantDisease] = useState(false)
-  const [immunosuppressantDrug, setImmunosuppressantDrug] = useState(false)
   const [kidneyDisease, setKidneyDisease] = useState(false)
   const [liverDisease, setLiverDisease] = useState(false)
-  const [pregnant, setPregnant] = useState(false)
 
   const handleSubmit = event => {
     event.preventDefault()
 
     handleRiskFactors({
-      breathingDisease,
+      breathing_desease: breathingDisease,
       cancer,
       diabetes,
-      heartDisease,
-      immunosuppressantDisease,
-      immunosuppressantDrug,
-      kidneyDisease,
-      liverDisease,
-      pregnant: pregnant ? '1' : '0'
+      kidney_disease: kidneyDisease,
+      liver_disease: liverDisease
     })
   }
 
   return (
     <article className='step' id='risk-factors'>
-      <h2><i className='fas fa-user-md' aria-hidden='true' /> <span>Cochez les éléments de cette liste qui correspond à votre situation :</span></h2>
+      <h2><i className='fas fa-user-md' aria-hidden='true' /><span>Cochez les éléments de cette liste qui correspond à votre situation :</span></h2>
       <div className='card'>
         <form onSubmit={handleSubmit}>
           <div className='complement-infos'>
             <ul>
-              <li>
-                <i className='fas fa-heartbeat' aria-hidden='true' />
-                <label>Avez-vous une hypertension artérielle mal équilibrée ? Ou une maladie cardiaque ou vasculaire ? Ou prenez-vous un traitement à visée cardiologique ?</label>
-                <input
-                  name='heartDisease'
-                  type='checkbox'
-                  checked={heartDisease}
-                  onChange={() => setHeartDisease(!heartDisease)}
-                />
-              </li>
               <li>
                 <i className='fas fa-heartbeat' aria-hidden='true' />
                 <label>Êtes-vous diabétique ?</label>
@@ -93,36 +75,6 @@ function RiskFactors({handleRiskFactors}) {
                   type='checkbox'
                   checked={liverDisease}
                   onChange={() => setLiverDisease(!liverDisease)}
-                />
-              </li>
-              <li>
-                <i className='fas fa-baby' aria-hidden='true' />
-                <label>Êtes-vous enceinte ?</label>
-                <input
-                  name='pregnant'
-                  type='checkbox'
-                  checked={pregnant}
-                  onChange={() => setPregnant(!pregnant)}
-                />
-              </li>
-              <li>
-                <i className='fas fa-procedures' aria-hidden='true' />
-                <label>Avez-vous une maladie connue pour diminuer vos défenses immunitaires ?</label>
-                <input
-                  name='immunosuppressantDisease'
-                  type='checkbox'
-                  checked={immunosuppressantDisease}
-                  onChange={() => setImmunosuppressantDisease(!immunosuppressantDisease)}
-                />
-              </li>
-              <li>
-                <i className='fas fa-pills' aria-hidden='true' />
-                <label>Prenez-vous un traitement immunosuppresseur ?</label>
-                <input
-                  name='immunosuppressantDrug'
-                  type='checkbox'
-                  checked={immunosuppressantDrug}
-                  onChange={() => setImmunosuppressantDrug(!immunosuppressantDrug)}
                 />
               </li>
             </ul>
