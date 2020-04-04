@@ -273,8 +273,8 @@ function App() {
   useEffect(() => {
     let nextStep = step
 
-    if (ageRange) {
-      setIsFinish(ageRange === "inf_15")
+    if (ageRange && ageRange === "inf_15") {
+      setIsFinish(true);
     }
 
     if (fever && fever === 'inconnue') {
@@ -295,7 +295,8 @@ function App() {
     }
 
     if (postalCode) {
-      setIsFinish(true)
+      setIsFinish(true);
+      submit();
     }
 
     setStep(nextStep)
