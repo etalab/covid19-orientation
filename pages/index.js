@@ -63,7 +63,7 @@ function App() {
   const [diarrhea, setDiarrhea] = useState(false)
 
   // Patient
-  const [age, setAge] = useState(null)
+  const [ageRange, setAgeRange] = useState(null)
   const [weight, setWeight] = useState(null)
   const [height, setHeight] = useState(null)
   const [postalCode, setPostalCode] = useState(null)
@@ -129,15 +129,15 @@ function App() {
         duration
       },
       patient: {
-        age_less_15: Boolean(age < 15),
-        age_less_50: Boolean(age < 50),
-        age_less_70: Boolean(age < 70),
-        age_more_70: Boolean(age > 70),
+        age_range: ageRange,
         postal_code: anonymize(postalCode),
         height,
         weight
       },
-      risk_factors: riskFactors,
+      risk_factors: {
+        ...riskFactors,
+        ...riskFactorsRadios
+      },
       symptoms: {
         agueusia_anosmia: agueusiaAnosmia,
         breathlessness,
@@ -176,7 +176,7 @@ function App() {
     setDiarrhea(false)
 
     // Patient
-    setAge(null)
+    setAgeRange(null)
     setWeight(null)
     setHeight(null)
     setPostalCode(null)
@@ -190,7 +190,7 @@ function App() {
     // Replica of arbre_décisions.txt
     let end
 
-    if (age && age < 15) {
+    if (ageRange === "inf_15") {
       end = 1
     } else if (majorSeverityFactorsCount >= 1) {
       end = 5
@@ -211,7 +211,7 @@ function App() {
     } else if (fever || (!fever && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
       if (pronosticFactorsCount === 0) {
         if (minorSeverityFactorsCount === 0) {
-          if (age < 50) {
+          if (ageRange === "inf_15" || ageRange === "from_15_to_49") {
             end = 2
           } else {
             end = 3
@@ -239,19 +239,19 @@ function App() {
     }
 
     setEnd(end)
-  }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, age, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
+  }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, ageRange, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
 
   // Show/hide Form
   useEffect(() => {
     setDisplayForm(Boolean(consent && end !== 1))
-  }, [consent, age, end])
+  }, [consent, ageRange, end])
 
   // Get step
   useEffect(() => {
     let nextStep = step
 
-    if (age) {
-      setIsFinish(age < 15)
+    if (ageRange) {
+      setIsFinish(ageRange === "inf_15")
     }
 
     if (fever && fever === 'inconnue') {
@@ -276,11 +276,11 @@ function App() {
     }
 
     setStep(nextStep)
-  }, [step, age, fever, height, weight, riskFactors, riskFactorsRadios, postalCode])
+  }, [step, ageRange, fever, height, weight, riskFactors, riskFactorsRadios, postalCode])
 
   // Orderered steps
   const steps = [
-    {step: 0, question: patientQuestions.age, setSymptom: setAge},
+    {step: 0, question: patientQuestions.ageRange, setSymptom: setAgeRange},
     {step: 1, question: symptomsQuestions.feeding_day, setSymptom: setFeedingDay},
     {step: 2, question: symptomsQuestions.breathlessness, setSymptom: setBreathlessness},
     {step: 3, question: symptomsQuestions.fever, setSymptom: setFever},

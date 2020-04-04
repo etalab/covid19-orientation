@@ -1,23 +1,23 @@
 {
-  "age": {
+  "ageRange": {
     "title": "Quel est votre âge ?",
     "icon": "fa-calendar-day",
     "responses": [
       {
         "label": "Moins de 15 ans",
-        "value": 14
+        "value": "inf_15"
       },
       {
         "label": "Entre 15 et 49 ans",
-        "value": 16
+        "value": "from_15_to_49"
       },
       {
         "label": "Entre 50 et 69 ans",
-        "value": 51
+        "value": "from_50_to_69"
       },
       {
         "label": "70 ans ou plus",
-        "value": 71,
+        "value": "sup_70",
         "isPronosticFactors": true
       }
     ]
