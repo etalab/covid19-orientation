@@ -12,7 +12,9 @@ function RiskFactors({handleRiskFactors}) {
   const [liverDisease, setLiverDisease] = useState(false)
   const [pregnant, setPregnant] = useState(false)
 
-  const handleSubmit = () => {
+  const handleSubmit = event => {
+    event.preventDefault()
+
     handleRiskFactors({
       breathingDisease,
       cancer,
@@ -126,7 +128,7 @@ function RiskFactors({handleRiskFactors}) {
             </ul>
           </div>
 
-          <button className='mainbutton' type='submit'>
+          <button className='mainbutton'>
             <span>Valider ces informations et continuer</span><i className='fas fa-check' aria-hidden='true' />
           </button>
         </form>

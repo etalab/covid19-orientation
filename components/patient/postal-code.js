@@ -5,9 +5,10 @@ function PostalCode({handlePostalCode}) {
   const [input, setInput] = useState('')
   const [isValid, setIsValid] = useState(false)
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = event => {
+    event.preventDefault()
     handlePostalCode(input)
-  }, [input, handlePostalCode])
+  }
 
   useEffect(() => {
     const regex = /^\d{5}$/
