@@ -17,7 +17,8 @@
       },
       {
         "label": "70 ans ou plus",
-        "value": 71
+        "value": 71,
+        "isPronosticFactors": true
       }
     ]
   }

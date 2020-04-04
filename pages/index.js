@@ -47,7 +47,7 @@ function App() {
   const [symptomsCount, setSymptomsCount] = useCount(0)
   const [majorSeverityFactorsCount, setMajorSeverityFactorsCount] = useCount(0)
   const [minorSeverityFactorsCount, setMinorSeverityFactorsCount] = useCount(0)
-  const [pronosticFactors, setPronosticFactors] = useCount(0)
+  const [pronosticFactorsCount, setPronosticFactorsCount] = useCount(0)
 
   // Symptoms
   const [feedingDay, setFeedingDay] = useState(false)
@@ -69,17 +69,18 @@ function App() {
   const [riskFactors, setRiskFactors] = useState(null)
 
   const handleResponse = useCallback((response, setSymptom) => {
-    const {isSymptom, isMajorSeverityFactor, isMinorSeverityFactor, value} = response
+    const {isSymptom, isMajorSeverityFactor, isMinorSeverityFactor, isPronosticFactors, value} = response
 
     // Counters
     setSymptomsCount(isSymptom)
+    setPronosticFactorsCount(isPronosticFactors)
     setMajorSeverityFactorsCount(isMajorSeverityFactor)
     setMinorSeverityFactorsCount(isMinorSeverityFactor)
 
     setSymptom(value || isSymptom)
 
     setStep(step => step + 1)
-  }, [setSymptomsCount, setMajorSeverityFactorsCount, setMinorSeverityFactorsCount])
+  }, [setSymptomsCount, setPronosticFactorsCount, setMajorSeverityFactorsCount, setMinorSeverityFactorsCount])
 
   const handleConsent = useCallback(async () => {
     const token = await getToken()
@@ -87,6 +88,12 @@ function App() {
     setToken(token)
     setConsent(true)
   }, [])
+
+  const handleRiskFactors = riskFactors => {
+    // Increase pronosticFactorsCount by 1 for each true risk factor
+    Object.keys(riskFactors).map(risk => setPronosticFactorsCount(Boolean(riskFactors[risk])))
+    setRiskFactors(riskFactors)
+  }
 
   const submit = () => {
     const duration = getDuration(token)
@@ -128,9 +135,9 @@ function App() {
 
     // Counters
     setSymptomsCount(0)
+    setPronosticFactorsCount(0)
     setMajorSeverityFactorsCount(0)
     setMinorSeverityFactorsCount(0)
-    setPronosticFactors(0)
 
     // Symptoms
     setFeedingDay(false)
@@ -188,7 +195,7 @@ function App() {
     {step: 7, question: symptomsQuestions.agueusia_anosmia, setSymptom: setAgueusiaAnosmia},
     {step: 8, question: symptomsQuestions.sore_throat_aches, setSymptom: setSoreThroatAches},
     {step: 9, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
-    {step: 10, component: () => <RiskFactors handleRiskFactors={setRiskFactors} />},
+    {step: 10, component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />},
     {step: 11, component: () => <PostalCode handlePostalCode={setPostalCode} />}
   ]
 
