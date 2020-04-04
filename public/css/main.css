@@ -815,6 +815,20 @@ div.call form input[type="checkbox"] {
   opacity: 0.5;
 }
 
+.card input[type="radio"] {
+  flex: 0 0 auto;
+  margin: 0 var(--size-small);
+  transform: scale(1.5);
+  height: var(--size-medium);
+  width: var(--size-medium);
+  opacity: 0.5;
+  margin-right: var(--size-small);
+}
+
+.card input[type="radio"]:checked {
+  opacity: 1;
+}
+
 .card input[type="checkbox"]:checked {
   opacity: 1;
 }

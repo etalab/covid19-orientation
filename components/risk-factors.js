@@ -1,6 +1,54 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 
+function RadioChoices({icon, choices, name, value, onChange, children}) {
+  return (
+    <>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          paddingBottom: 0,
+          marginBottom: 0
+        }}
+      >
+        <div style={{flex: '0 1 40px'}}>
+          <i className={`fas ${icon}`} aria-hidden='true' />
+        </div>
+        <div
+          style={{
+            flex: '1 1 auto',
+            paddingBottom: 0,
+            marginBottom: 0
+          }}
+        >
+          <label>{children}</label>
+        </div>
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row'
+        }}
+      >
+        <div style={{flex: '0 1 60px'}} />
+        {choices.map(choice => (
+          <label key={choice.title} style={{margin: 0, padding: 0}}>
+            <input
+              name={name}
+              type='radio'
+              value={choice.value}
+              checked={value === choice.value}
+              onChange={() => onChange(choice.value)}
+            />{' '}
+            {choice.title}
+          </label>
+        ))}
+      </div>
+    </>
+  )
+}
+
 function RiskFactors({handleRiskFactors}) {
   const [breathingDisease, setBreathingDisease] = useState(false)
   const [cancer, setCancer] = useState(false)
@@ -30,20 +78,36 @@ function RiskFactors({handleRiskFactors}) {
 
   return (
     <article className='step' id='risk-factors'>
-      <h2><i className='fas fa-user-md' aria-hidden='true' /> <span>Cochez les éléments de cette liste qui correspond à votre situation :</span></h2>
+      <h2><i className='fas fa-user-md' aria-hidden='true' /><span>Cochez les éléments de cette liste qui correspond à votre situation :</span></h2>
       <div className='card'>
         <form onSubmit={handleSubmit}>
           <div className='complement-infos'>
             <ul>
-              <li>
-                <i className='fas fa-heartbeat' aria-hidden='true' />
-                <label>Avez-vous une hypertension artérielle mal équilibrée ? Ou une maladie cardiaque ou vasculaire ? Ou prenez-vous un traitement à visée cardiologique ?</label>
-                <input
+              <li
+                style={{
+                  display: 'block'
+                }}
+              >
+                <RadioChoices
+                  icon='fa-heartbeat'
                   name='heartDisease'
-                  type='checkbox'
-                  checked={heartDisease}
-                  onChange={() => setHeartDisease(!heartDisease)}
-                />
+                  value={heartDisease}
+                  onChange={value => setHeartDisease(value)}
+                  choices={[
+                    {
+                      title: 'Oui',
+                      value: '1'
+                    },
+                    {title: 'Non', value: '0'},
+                    {title: 'Je ne sais pas', value: '999'}
+                  ]}
+                >
+                  Avez-vous une hypertension artérielle mal équilibrée ?
+                  <br />
+                  Ou une maladie cardiaque ou vasculaire ?
+                  <br />
+                  Ou prenez-vous un traitement à visée cardiologique ?
+                </RadioChoices>
               </li>
               <li>
                 <i className='fas fa-heartbeat' aria-hidden='true' />
@@ -105,25 +169,42 @@ function RiskFactors({handleRiskFactors}) {
                   onChange={() => setPregnant(!pregnant)}
                 />
               </li>
-              <li>
-                <i className='fas fa-procedures' aria-hidden='true' />
-                <label>Avez-vous une maladie connue pour diminuer vos défenses immunitaires ?</label>
-                <input
+              <li style={{display: 'block'}}>
+                <RadioChoices
+                  icon='fa-procedures'
                   name='immunosuppressantDisease'
-                  type='checkbox'
-                  checked={immunosuppressantDisease}
-                  onChange={() => setImmunosuppressantDisease(!immunosuppressantDisease)}
-                />
+                  value={immunosuppressantDisease}
+                  onChange={value => setImmunosuppressantDisease(value)}
+                  choices={[
+                    {
+                      title: 'Oui',
+                      value: '1'
+                    },
+                    {title: 'Non', value: '0'},
+                    {title: 'Je ne sais pas', value: '999'}
+                  ]}
+                >
+                  Avez-vous une maladie connue pour diminuer vos défenses
+                  immunitaires ?
+                </RadioChoices>
               </li>
-              <li>
-                <i className='fas fa-pills' aria-hidden='true' />
-                <label>Prenez-vous un traitement immunosuppresseur ?</label>
-                <input
+              <li style={{display: 'block'}}>
+                <RadioChoices
+                  icon='fa-procedures'
                   name='immunosuppressantDrug'
-                  type='checkbox'
-                  checked={immunosuppressantDrug}
-                  onChange={() => setImmunosuppressantDrug(!immunosuppressantDrug)}
-                />
+                  value={immunosuppressantDrug}
+                  onChange={value => setImmunosuppressantDrug(value)}
+                  choices={[
+                    {
+                      title: 'Oui',
+                      value: '1'
+                    },
+                    {title: 'Non', value: '0'},
+                    {title: 'Je ne sais pas', value: '999'}
+                  ]}
+                >
+                  Prenez-vous un traitement immunosuppresseur ?
+                </RadioChoices>
               </li>
             </ul>
           </div>
