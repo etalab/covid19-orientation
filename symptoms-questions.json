@@ -45,7 +45,7 @@
       {
         "label": "Je ne sais pas",
         "icon": "fa-question-circle",
-        "isSymptom": true
+        "value": "inconnue"
       }
     ]
   },

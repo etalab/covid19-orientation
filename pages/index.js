@@ -38,6 +38,7 @@ import RiskFactors from '../components/risk-factors'
 function App() {
   // App
   const [token, setToken] = useState(null)
+  const [consent, setConsent] = useState(false)
   const [displayForm, setDisplayForm] = useState(false)
   const [end, setEnd] = useState(null)
   const [step, setStep] = useState(0)
@@ -78,6 +79,8 @@ function App() {
     setMinorSeverityFactorsCount(isMinorSeverityFactor)
 
     setSymptom(value || isSymptom)
+
+    setStep(step => step + 1)
   }, [setSymptomsCount, setPronosticFactorsCount, setMajorSeverityFactorsCount, setMinorSeverityFactorsCount])
 
   const handleConsent = useCallback(async () => {
@@ -125,21 +128,23 @@ function App() {
   }
 
   const reset = () => {
-    setToken(null)
-    setDisplayForm(false)
+    // App
     setEnd(null)
     setStep(0)
     setIsFinish(false)
 
     // Counters
     setSymptomsCount(0)
-    setPronosticFactorsCount(0)
     setMajorSeverityFactorsCount(0)
     setMinorSeverityFactorsCount(0)
+    setPronosticFactorsCount(0)
 
     // Symptoms
     setFeedingDay(false)
+    setBreathlessness(false)
     setFever(false)
+    setTemperature(null)
+    setTiredness(null)
     setCough(false)
     setAgueusiaAnosmia(false)
     setSoreThroatAches(false)
@@ -154,22 +159,61 @@ function App() {
     setRiskFactors(null)
   }
 
+  // Get end
   useEffect(() => {
-    if (postalCode) {
-      setIsFinish(true)
-    }
-  }, [postalCode])
+    // Replica of arbre_décisions.txt
+    let end
 
-  // Show/hide Ends
-  useEffect(() => {
-    if (age === 14) {
-      setEnd(1)
+    if (age && age < 15) {
+      end = 1
+    } else if (majorSeverityFactorsCount >= 1) {
+      end = 5
+    } else if (fever && cough) {
+      if (pronosticFactorsCount === 0) {
+        end = 6
+      }
+
+      if (pronosticFactorsCount >= 1) {
+        if (minorSeverityFactorsCount < 2) {
+          end = 6
+        }
+
+        if (minorSeverityFactorsCount >= 2) {
+          end = 4
+        }
+      }
+    } else if (fever || (!fever && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
+      if (pronosticFactorsCount === 0) {
+        if (minorSeverityFactorsCount === 0) {
+          if (age < 50) {
+            end = 2
+          } else {
+            end = 3
+          }
+        } else if (minorSeverityFactorsCount >= 1) {
+          end = 3
+        }
+      }
+
+      if (pronosticFactorsCount >= 1) {
+        if (minorSeverityFactorsCount < 2) {
+          end = 3
+        } else if (minorSeverityFactorsCount >= 2) {
+          end = 4
+        }
+      }
+    } else if (cough || soreThroatAches || agueusiaAnosmia) {
+      if (pronosticFactorsCount === 0) {
+        end = 2
+      } else if (pronosticFactorsCount >= 1) {
+        end = 7
+      }
+    } else if (!cough && !soreThroatAches && !agueusiaAnosmia) {
+      end = 8
     }
 
-    if (majorSeverityFactorsCount >= 1) {
-      setEnd(5)
-    }
-  }, [age, majorSeverityFactorsCount])
+    setEnd(end)
+  }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, age, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
 
   // Show/hide Form
   useEffect(() => {
@@ -178,15 +222,31 @@ function App() {
 
   // Get step
   useEffect(() => {
-    let step = 0
+    let nextStep = step
 
     if (age) {
       setIsFinish(age < 15)
-      step = 1
     }
 
-    setStep(step)
-  }, [age])
+    if (fever && fever === 'inconnue') {
+      setFever(true)
+      nextStep = 5
+    }
+
+    if (height && weight) {
+      nextStep = 10
+    }
+
+    if (riskFactors) {
+      nextStep = 11
+    }
+
+    if (postalCode) {
+      setIsFinish(true)
+    }
+
+    setStep(nextStep)
+  }, [step, age, fever, height, weight, riskFactors, postalCode])
 
   // Orderered steps
   const steps = [
@@ -219,14 +279,14 @@ function App() {
 
         {end && <End end={end} isFinish={isFinish} />}
 
-        {displayForm && (
+        {displayForm && !isFinish && (
           <Question
             question={steps.find(q => q.step === step)}
             handleResponse={handleResponse}
           />
         )}
 
-        {consent && (
+        {(step > 0 || isFinish) && (
           <div className='gouv-button-container'>
             <a className='gouv-button' onClick={() => reset()}><i className='fas fa-arrow-left' aria-hidden='true' /> Retour au début</a>
           </div>
