@@ -36,6 +36,68 @@ import Question from '../components/question'
 import RiskFactors from '../components/risk-factors'
 import RiskFactorsRadios from '../components/risk-factors-radios'
 
+
+// compute end based on some parameters
+// Replica of arbre_décisions.txt
+const chooseEnd = ({
+  ageRange,
+  minorSeverityFactorsCount,
+  majorSeverityFactorsCount,
+  fever,
+  cough,
+  diarrhea,
+  soreThroatAches,
+  agueusiaAnosmia,
+  pronosticFactorsCount,
+}) => {
+  let end;
+  if (ageRange === "inf_15") {
+      end = 1
+    } else if (majorSeverityFactorsCount >= 1) {
+      end = 5
+    } else if (fever && cough) {
+      if (pronosticFactorsCount === 0) {
+        end = 6
+      }
+      if (pronosticFactorsCount >= 1) {
+        if (minorSeverityFactorsCount < 2) {
+          end = 6
+        }
+        if (minorSeverityFactorsCount >= 2) {
+          end = 4
+        }
+      }
+    } else if (fever || (!fever && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
+      if (pronosticFactorsCount === 0) {
+        if (minorSeverityFactorsCount === 0) {
+          if (ageRange === "inf_15" || ageRange === "from_15_to_49") {
+            end = 2
+          } else {
+            end = 3
+          }
+        } else if (minorSeverityFactorsCount >= 1) {
+          end = 3
+        }
+      }
+      if (pronosticFactorsCount >= 1) {
+        if (minorSeverityFactorsCount < 2) {
+          end = 3
+        } else if (minorSeverityFactorsCount >= 2) {
+          end = 4
+        }
+      }
+    } else if (cough || soreThroatAches || agueusiaAnosmia) {
+      if (pronosticFactorsCount === 0) {
+        end = 2
+      } else if (pronosticFactorsCount >= 1) {
+        end = 7
+      }
+    } else if (!cough && !soreThroatAches && !agueusiaAnosmia) {
+      end = 8
+    }
+  return end;
+}
+
 function App() {
   // App
   const [token, setToken] = useState(null)
@@ -188,56 +250,17 @@ function App() {
   // Get end
   useEffect(() => {
     // Replica of arbre_décisions.txt
-    let end
-
-    if (ageRange === "inf_15") {
-      end = 1
-    } else if (majorSeverityFactorsCount >= 1) {
-      end = 5
-    } else if (fever && cough) {
-      if (pronosticFactorsCount === 0) {
-        end = 6
-      }
-
-      if (pronosticFactorsCount >= 1) {
-        if (minorSeverityFactorsCount < 2) {
-          end = 6
-        }
-
-        if (minorSeverityFactorsCount >= 2) {
-          end = 4
-        }
-      }
-    } else if (fever || (!fever && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
-      if (pronosticFactorsCount === 0) {
-        if (minorSeverityFactorsCount === 0) {
-          if (ageRange === "inf_15" || ageRange === "from_15_to_49") {
-            end = 2
-          } else {
-            end = 3
-          }
-        } else if (minorSeverityFactorsCount >= 1) {
-          end = 3
-        }
-      }
-
-      if (pronosticFactorsCount >= 1) {
-        if (minorSeverityFactorsCount < 2) {
-          end = 3
-        } else if (minorSeverityFactorsCount >= 2) {
-          end = 4
-        }
-      }
-    } else if (cough || soreThroatAches || agueusiaAnosmia) {
-      if (pronosticFactorsCount === 0) {
-        end = 2
-      } else if (pronosticFactorsCount >= 1) {
-        end = 7
-      }
-    } else if (!cough && !soreThroatAches && !agueusiaAnosmia) {
-      end = 8
-    }
-
+    const end = chooseEnd({
+      ageRange,
+      minorSeverityFactorsCount,
+      majorSeverityFactorsCount,
+      fever,
+      cough,
+      diarrhea,
+      soreThroatAches,
+      agueusiaAnosmia,
+      pronosticFactorsCount,
+    })
     setEnd(end)
   }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, ageRange, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
 
