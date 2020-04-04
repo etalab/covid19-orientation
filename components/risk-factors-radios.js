@@ -74,9 +74,9 @@ function RiskFactors({handleRiskFactors}) {
 
   // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-%C3%A0-obligatoirement-sauvegarder-pour-partage
   const deriveAlgoValue = (key, value) => {
-    if (key==='heartDisease' && value !== "0") return true;
-    if (key==='immunosuppressantDisease' && value === "1") return true;
-    if (key==='immunosuppressantDrug' && value === "1") return true;
+    if (key==='heartDisease' && value !== 0) return true;
+    if (key==='immunosuppressantDisease' && value === 1) return true;
+    if (key==='immunosuppressantDrug' && value === 1) return true;
     return false;
   }
 
@@ -96,10 +96,10 @@ function RiskFactors({handleRiskFactors}) {
                   choices={[
                     {
                       title: 'Oui',
-                      value: '1'
+                      value: 1
                     },
-                    {title: 'Non', value: '0'},
-                    {title: 'Non applicable', value: '888'}
+                    {title: 'Non', value: 0},
+                    {title: 'Non applicable', value: 888}
                   ]}
                 >
                   Êtes-vous enceinte ?
@@ -121,10 +121,10 @@ function RiskFactors({handleRiskFactors}) {
                   choices={[
                     {
                       title: 'Oui',
-                      value: '1'
+                      value: 1
                     },
-                    {title: 'Non', value: '0'},
-                    {title: 'Je ne sais pas', value: '999'}
+                    {title: 'Non', value: 0},
+                    {title: 'Je ne sais pas', value: 999}
                   ]}
                 >
                   Avez-vous une hypertension artérielle mal équilibrée ?
@@ -146,10 +146,10 @@ function RiskFactors({handleRiskFactors}) {
                   choices={[
                     {
                       title: 'Oui',
-                      value: '1'
+                      value: 1
                     },
-                    {title: 'Non', value: '0'},
-                    {title: 'Je ne sais pas', value: '999'}
+                    {title: 'Non', value: 0},
+                    {title: 'Je ne sais pas', value: 999}
                   ]}
                 >
                   Avez-vous une maladie connue pour diminuer vos défenses
@@ -168,10 +168,10 @@ function RiskFactors({handleRiskFactors}) {
                   choices={[
                     {
                       title: 'Oui',
-                      value: '1'
+                      value: 1
                     },
-                    {title: 'Non', value: '0'},
-                    {title: 'Je ne sais pas', value: '999'}
+                    {title: 'Non', value: 0},
+                    {title: 'Je ne sais pas', value: 999}
                   ]}
                 >
                   Prenez-vous un traitement immunosuppresseur ?
