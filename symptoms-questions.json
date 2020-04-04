@@ -10,8 +10,7 @@
       },
       {
         "label": "Non",
-        "icon": "fa-times",
-        "isMajorSeverityFactor": false
+        "icon": "fa-times"
       }
     ]
   },
@@ -26,8 +25,7 @@
       },
       {
         "label": "Non",
-        "icon": "fa-times",
-        "isMajorSeverityFactor": false
+        "icon": "fa-times"
       }
     ]
   },
@@ -75,7 +73,8 @@
       {
         "label": "Température basse, moins de 35,5°C",
         "icon": "fa-temperature-frigid",
-        "value": "< 35.5"
+        "value": "< 35.5",
+        "isMinorSeverityFactor": true
       },
       {
         "label": "Je n’ai pas eu de fièvre(entre 35,5 et 37,7°C)",
