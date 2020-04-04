@@ -41,7 +41,7 @@ function App() {
   const [displayForm, setDisplayForm] = useState(false)
   const [end, setEnd] = useState(null)
   const [step, setStep] = useState(0)
-  const [consent, setConsent] = useState(true)
+  const [isFinish, setIsFinish] = useState(false)
 
   // Counters
   const [symptomsCount, setSymptomsCount] = useCount(0)
@@ -78,8 +78,6 @@ function App() {
     setMinorSeverityFactorsCount(isMinorSeverityFactor)
 
     setSymptom(value || isSymptom)
-
-    setStep(step => step + 1)
   }, [setSymptomsCount, setPronosticFactorsCount, setMajorSeverityFactorsCount, setMinorSeverityFactorsCount])
 
   const handleConsent = useCallback(async () => {
@@ -131,7 +129,7 @@ function App() {
     setDisplayForm(false)
     setEnd(null)
     setStep(0)
-    setConsent(false)
+    setIsFinish(false)
 
     // Counters
     setSymptomsCount(0)
@@ -156,6 +154,12 @@ function App() {
     setRiskFactors(null)
   }
 
+  useEffect(() => {
+    if (postalCode) {
+      setIsFinish(true)
+    }
+  }, [postalCode])
+
   // Show/hide Ends
   useEffect(() => {
     if (age === 14) {
@@ -177,6 +181,7 @@ function App() {
     let step = 0
 
     if (age) {
+      setIsFinish(age < 15)
       step = 1
     }
 
@@ -212,7 +217,7 @@ function App() {
 
         {!consent && <Consent handleConsent={handleConsent} />}
 
-        {end && <End end={end} />}
+        {end && <End end={end} isFinish={isFinish} />}
 
         {displayForm && (
           <Question
