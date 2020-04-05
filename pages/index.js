@@ -102,6 +102,9 @@ const chooseEnd = ({
   return end;
 }
 
+// rounded IMC at 1 decimal
+const computeIMC = (weight, height) => (Math.round(parseInt(weight, 10) / ((parseInt(height, 10) / 100) ** 2) * 10) / 10)
+
 function App() {
   // App
   const [token, setToken] = useState(null)
@@ -189,6 +192,7 @@ function App() {
 
   const submit = () => {
     const duration = getDuration(token)
+    const imc = computeIMC(weight, height);
 
     submitForm({
       metadata: {
@@ -196,6 +200,7 @@ function App() {
       },
       respondent: {
         age_range: ageRange,
+        imc,
         postal_code: anonymize(postalCode)
       },
       risk_factors: {
@@ -217,7 +222,6 @@ function App() {
   }
 
   const reset = () => {
-
 
     resetSymptomsCount();
     resetMajorSeverityFactorsCount();
