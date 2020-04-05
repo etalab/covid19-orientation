@@ -39,6 +39,7 @@ import RiskFactorsRadios from '../components/risk-factors-radios'
 
 // compute end based on some parameters
 // Replica of arbre_décisions.txt
+// https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org
 const chooseEnd = ({
   ageRange,
   minorSeverityFactorsCount,
@@ -50,7 +51,7 @@ const chooseEnd = ({
   agueusiaAnosmia,
   pronosticFactorsCount,
 }) => {
-  let end;
+  let end = 8;
   // dont try to compute end when no age defined
   if (!ageRange) {
     return 8;
@@ -101,6 +102,18 @@ const chooseEnd = ({
     }
   return end;
 }
+
+// https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-qui-correspondent-%C3%A0-lorientation-affich%C3%A9e
+const orientations = [
+  "orientation_moins_de_15_ans",
+  "orientation_domicile_surveillance_1",
+  "orientation_consultation_surveillance_1",
+  "orientation_consultation_surveillance_2",
+  "orientation_SAMU",
+  "orientation_consultation_surveillance_3",
+  "orientation_consultation_surveillance_4",
+  "orientation_surveillance"
+]
 
 function App() {
   // App
@@ -188,11 +201,22 @@ function App() {
   }
 
   const submit = () => {
-    const duration = getDuration(token)
+
+    const newEnd = chooseEnd({
+      ageRange,
+      minorSeverityFactorsCount,
+      majorSeverityFactorsCount,
+      fever,
+      cough,
+      diarrhea,
+      soreThroatAches,
+      agueusiaAnosmia,
+      pronosticFactorsCount,
+    })
 
     submitForm({
       metadata: {
-        duration
+        orientation: orientations[newEnd - 1]
       },
       respondent: {
         age_range: ageRange,
