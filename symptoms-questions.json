@@ -77,7 +77,7 @@
         "isMinorSeverityFactor": true
       },
       {
-        "label": "Je n’ai pas eu de fièvre(entre 35,5 et 37,7°C)",
+        "label": "Je n’ai pas eu de fièvre (entre 35,5 et 37,7°C)",
         "icon": "fa-thumbs-up",
         "value": "35.5-37.7"
       }
