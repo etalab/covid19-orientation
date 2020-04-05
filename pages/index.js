@@ -112,10 +112,10 @@ function App() {
   const [isFinish, setIsFinish] = useState(false)
 
   // Counters
-  const [symptomsCount, setSymptomsCount] = useCount(0)
-  const [majorSeverityFactorsCount, setMajorSeverityFactorsCount] = useCount(0)
-  const [minorSeverityFactorsCount, setMinorSeverityFactorsCount] = useCount(0)
-  const [pronosticFactorsCount, setPronosticFactorsCount] = useCount(0)
+  const [symptomsCount, setSymptomsCount, resetSymptomsCount] = useCount(0)
+  const [majorSeverityFactorsCount, setMajorSeverityFactorsCount, resetMajorSeverityFactorsCount] = useCount(0)
+  const [minorSeverityFactorsCount, setMinorSeverityFactorsCount, resetMinorSeverityFactorsCount] = useCount(0)
+  const [pronosticFactorsCount, setPronosticFactorsCount, resetPronosticFactorsCount] = useCount(0)
 
   // Symptoms
   const [feedingDay, setFeedingDay] = useState(false)
@@ -219,6 +219,13 @@ function App() {
   }
 
   const reset = () => {
+
+
+    resetSymptomsCount();
+    resetMajorSeverityFactorsCount();
+    resetMinorSeverityFactorsCount();
+    resetPronosticFactorsCount();
+
     // App
     setEnd(null)
     setStep(0)
