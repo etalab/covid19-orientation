@@ -103,6 +103,10 @@ const chooseEnd = ({
   return end;
 }
 
+
+// rounded IMC at 1 decimal
+const computeIMC = (weight, height) => (Math.round(parseInt(weight, 10) / ((parseInt(height, 10) / 100) ** 2) * 10) / 10)
+
 // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-qui-correspondent-%C3%A0-lorientation-affich%C3%A9e
 const orientations = [
   "orientation_moins_de_15_ans",
@@ -114,6 +118,7 @@ const orientations = [
   "orientation_consultation_surveillance_4",
   "orientation_surveillance"
 ]
+
 
 function App() {
   // App
@@ -209,6 +214,8 @@ function App() {
 
   const submit = () => {
 
+    const imc = computeIMC(weight, height);
+
     const newEnd = chooseEnd({
       ageRange,
       minorSeverityFactorsCount,
@@ -229,6 +236,7 @@ function App() {
       },
       respondent: {
         age_range: ageRange,
+        imc,
         postal_code: anonymize(postalCode)
       },
       risk_factors: {
@@ -251,7 +259,6 @@ function App() {
   }
 
   const reset = () => {
-
 
     resetSymptomsCount();
     resetMajorSeverityFactorsCount();
