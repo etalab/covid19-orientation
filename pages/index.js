@@ -123,6 +123,7 @@ function App() {
   const [fever, setFever] = useState(false)
   const [temperature, setTemperature] = useState(null)
   const [tiredness, setTiredness] = useState(null)
+  const [tirednessDetails, setTirednessDetails] = useState(null)
   const [cough, setCough] = useState(false)
   const [agueusiaAnosmia, setAgueusiaAnosmia] = useState(false)
   const [soreThroatAches, setSoreThroatAches] = useState(false)
@@ -146,7 +147,8 @@ function App() {
     setMajorSeverityFactorsCount(isMajorSeverityFactor)
     setMinorSeverityFactorsCount(isMinorSeverityFactor)
 
-    setSymptom(value || isSymptom)
+    // the value can be false
+    setSymptom(value !== undefined ? value : isSymptom)
 
     setStep(step => step + 1)
   }, [setSymptomsCount, setPronosticFactorsCount, setMajorSeverityFactorsCount, setMinorSeverityFactorsCount])
@@ -202,16 +204,18 @@ function App() {
         ...riskFactors,
         ...riskFactorsRadios
       },
+      // set false if undefined
       symptoms: {
-        agueusia_anosmia: agueusiaAnosmia,
-        breathlessness,
-        cough,
-        diarrhea,
-        feeding_day: feedingDay,
-        fever,
-        sore_throat_aches: soreThroatAches,
-        temperature_cat: temperature,
-        tiredness
+        agueusia_anosmia: agueusiaAnosmia || false,
+        breathlessness: breathlessness || false,
+        cough: cough || false,
+        diarrhea: diarrhea || false,
+        feeding_day: feedingDay || false,
+        fever: fever || false,
+        sore_throat_aches: soreThroatAches || false,
+        temperature_cat: temperature || false,
+        tiredness: tiredness || false,
+        tiredness_details: tirednessDetails || false
       }
     })
   }
@@ -241,6 +245,7 @@ function App() {
     setFever(false)
     setTemperature(null)
     setTiredness(null)
+    setTirednessDetails(null)
     setCough(false)
     setAgueusiaAnosmia(false)
     setSoreThroatAches(false)
@@ -292,15 +297,15 @@ function App() {
     }
 
     if (height && weight) {
-      nextStep = 10
-    }
-
-    if (riskFactors) {
       nextStep = 11
     }
 
-    if (riskFactorsRadios) {
+    if (riskFactors) {
       nextStep = 12
+    }
+
+    if (riskFactorsRadios) {
+      nextStep = 13
     }
 
     if (postalCode) {
@@ -319,13 +324,14 @@ function App() {
     {step: 3, question: symptomsQuestions.fever, setSymptom: setFever},
     {step: 4, question: symptomsQuestions.temperature, setSymptom: setTemperature},
     {step: 5, question: symptomsQuestions.tiredness, setSymptom: setTiredness},
-    {step: 6, question: symptomsQuestions.cough, setSymptom: setCough},
-    {step: 7, question: symptomsQuestions.agueusia_anosmia, setSymptom: setAgueusiaAnosmia},
-    {step: 8, question: symptomsQuestions.sore_throat_aches, setSymptom: setSoreThroatAches},
-    {step: 9, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
-    {step: 10, component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />},
-    {step: 11, component: () => <RiskFactorsRadios handleRiskFactors={handleRiskFactorsRadios} />},
-    {step: 12, component: () => <PostalCode handlePostalCode={setPostalCode} />}
+    {step: 6, question: symptomsQuestions.tiredness_details, setSymptom: setTirednessDetails},
+    {step: 7, question: symptomsQuestions.cough, setSymptom: setCough},
+    {step: 8, question: symptomsQuestions.agueusia_anosmia, setSymptom: setAgueusiaAnosmia},
+    {step: 9, question: symptomsQuestions.sore_throat_aches, setSymptom: setSoreThroatAches},
+    {step: 10, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
+    {step: 11, component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />},
+    {step: 12, component: () => <RiskFactorsRadios handleRiskFactors={handleRiskFactorsRadios} />},
+    {step: 13, component: () => <PostalCode handlePostalCode={setPostalCode} />}
   ]
 
   return (

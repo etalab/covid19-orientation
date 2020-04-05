@@ -84,17 +84,36 @@
     ]
   },
   "tiredness": {
-    "title": "Avez-vous une fatigue inhabituelle ces derniers jours vous obligeant à vous reposer plus de la moitiée de la journée ?",
+    "title": "Avez-vous une fatigue inhabituelle ces derniers jours ?",
     "icon": "fa-bed",
     "responses": [
       {
         "label": "Oui",
         "icon": "fa-check",
-        "isMinorSeverityFactor": true
+        "isMinorSeverityFactor": true,
+        "value": true
       },
       {
         "label": "Non",
-        "icon": "fa-times"
+        "icon": "fa-times",
+        "value": false
+      }
+    ]
+  },
+  "tiredness_details": {
+    "title": "Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ?",
+    "icon": "fa-bed",
+    "responses": [
+      {
+        "label": "Oui",
+        "icon": "fa-check",
+        "isMajorSeverityFactor": true,
+        "value": true
+      },
+      {
+        "label": "Non",
+        "icon": "fa-times",
+        "value": false
       }
     ]
   },
