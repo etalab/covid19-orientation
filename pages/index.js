@@ -214,6 +214,8 @@ function App() {
     setRiskFactorsRadios(riskFactorsRadios)
   }
 
+
+
   const submit = () => {
 
     const imc = computeIMC(weight, height);
@@ -230,6 +232,13 @@ function App() {
       pronosticFactorsCount,
     })
 
+    const {
+      heart_disease_algo,
+      immunosuppressant_disease_algo,
+      immunosuppressant_drug_algo,
+      ...riskFactorsRadiosValues
+    } = riskFactorsRadios
+
     submitForm({
       metadata: {
         orientation: orientations[newEnd - 1],
@@ -243,7 +252,7 @@ function App() {
       },
       risk_factors: {
         ...riskFactors,
-        ...riskFactorsRadios
+        ...riskFactorsRadiosValues
       },
       // set false if undefined
       symptoms: {
@@ -253,11 +262,16 @@ function App() {
         diarrhea: diarrhea || false,
         feeding_day: feedingDay || false,
         fever: fever || false,
-        fever_algo: feverAlgo,
         sore_throat_aches: soreThroatAches || false,
         temperature_cat: temperature || false,
         tiredness: tiredness || false,
         tiredness_details: tirednessDetails || false
+      },
+      calculations: {
+        heart_disease_algo,
+        immunosuppressant_disease_algo,
+        immunosuppressant_drug_algo,
+        fever_algo: feverAlgo,
       }
     })
   }
