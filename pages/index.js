@@ -261,7 +261,7 @@ function App() {
         cough: cough || false,
         diarrhea: diarrhea || false,
         feeding_day: feedingDay || false,
-        fever: fever || false,
+        fever,
         sore_throat_aches: soreThroatAches || false,
         temperature_cat: temperature || false,
         tiredness: tiredness || false,
