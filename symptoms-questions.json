@@ -56,13 +56,13 @@
       {
         "label": "Je ne sais pas",
         "icon": "fa-question-circle",
-        "value": "inconnue",
+        "value": "NSP",
         "isMinorSeverityFactor": true
       },
       {
         "label": "39°C ou plus",
         "icon": "fa-thermometer-full",
-        "value": "> 39",
+        "value": "sup_39",
         "isMinorSeverityFactor": true
       },
       {
@@ -73,11 +73,11 @@
       {
         "label": "Température basse, moins de 35,5°C",
         "icon": "fa-temperature-frigid",
-        "value": "< 35.5",
+        "value": "inf_35.5",
         "isMinorSeverityFactor": true
       },
       {
-        "label": "Je n’ai pas eu de fièvre(entre 35,5 et 37,7°C)",
+        "label": "Je n’ai pas eu de fièvre (entre 35,5 et 37,7°C)",
         "icon": "fa-thumbs-up",
         "value": "35.5-37.7"
       }
