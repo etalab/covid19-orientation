@@ -333,9 +333,10 @@ function App() {
       setIsFinish(true);
     }
 
-    // if (fever) {
-    //   nextStep = 5
-    // }
+    // when no fever, skip temperature
+    if (fever !== 1 && step === 4) {
+      nextStep = 5
+    }
 
     // when not tired, skip to cough
     if (tiredness === false) {
