@@ -31,7 +31,7 @@ function RiskFactors({handleRiskFactors}) {
             <ul>
               <li>
                 <i className='fas fa-heartbeat' aria-hidden='true' />
-                <label for='diabetes'>Êtes-vous diabétique ?</label>
+                <label for='diabetes'>Êtes-vous diabétique ?</label>
                 <input
                   id='diabetes'
                   name='diabetes'
@@ -42,7 +42,7 @@ function RiskFactors({handleRiskFactors}) {
               </li>
               <li>
                 <i className='fas fa-procedures' aria-hidden='true' />
-                <label for='cancer'>Avez-vous ou avez-vous eu un cancer dans les 3 dernières années ?</label>
+                <label for='cancer'>Avez-vous ou avez-vous eu un cancer dans les 3 dernières années ?</label>
                 <input
                   id='cancer'
                   name='cancer'
@@ -53,7 +53,7 @@ function RiskFactors({handleRiskFactors}) {
               </li>
               <li>
                 <i className='fas fa-lungs-virus' aria-hidden='true' />
-                <label for='breathingDisease'>Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?</label>
+                <label for='breathingDisease'>Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?</label>
                 <input
                   id='breathingDisease'
                   name='breathingDisease'
@@ -64,7 +64,7 @@ function RiskFactors({handleRiskFactors}) {
               </li>
               <li>
                 <i className='fas fa-kidneys' aria-hidden='true' />
-                <label for='kidneyDisease'>Avez-vous une insuffisance rénale chronique dialysée ?</label>
+                <label for='kidneyDisease'>Avez-vous une insuffisance rénale chronique dialysée ?</label>
                 <input
                   id='kidneyDisease'
                   name='kidneyDisease'
@@ -75,7 +75,7 @@ function RiskFactors({handleRiskFactors}) {
               </li>
               <li>
                 <i className='fas fa-procedures' aria-hidden='true' />
-                <label for='liverDisease'>Avez-vous une maladie chronique du foie ?</label>
+                <label for='liverDisease'>Avez-vous une maladie chronique du foie ?</label>
                 <input
                   id='liverDisease'
                   name='liverDisease'

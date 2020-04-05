@@ -1,6 +1,6 @@
 {
   "breathlessness": {
-    "title": "Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?",
+    "title": "Dans les dernières 24 heures, avez-vous noté un manque de souffle INHABITUEL lorsque vous parlez ou faites un petit effort ?",
     "icon": "fa-lungs",
     "responses": [
       {
@@ -15,7 +15,7 @@
     ]
   },
   "feeding_day": {
-    "title": "Êtes-vous dans l'impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?",
+    "title": "Êtes-vous dans l'impossibilité de vous alimenter ou boire DEPUIS 24 HEURES OU PLUS ?",
     "icon": "fa-soup",
     "responses": [
       {
@@ -30,7 +30,7 @@
     ]
   },
   "fever": {
-    "title": "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ?",
+    "title": "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ?",
     "icon": "fa-temperature-up",
     "responses": [
       {
@@ -86,7 +86,7 @@
     ]
   },
   "tiredness": {
-    "title": "Avez-vous une fatigue inhabituelle ces derniers jours ?",
+    "title": "Avez-vous une fatigue inhabituelle ces derniers jours ?",
     "icon": "fa-bed",
     "responses": [
       {
@@ -102,7 +102,7 @@
     ]
   },
   "tiredness_details": {
-    "title": "Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ?",
+    "title": "Cette fatigue vous oblige-t-elle à vous reposer plus de la moitié de la journée ?",
     "icon": "fa-bed",
     "responses": [
       {
@@ -134,7 +134,7 @@
     ]
   },
   "agueusia_anosmia": {
-    "title": "Avez-vous noté une forte diminution de votre goût ou de votre odorat ces derniers jours ?",
+    "title": "Avez-vous noté une forte diminution de votre goût ou de votre odorat ces derniers jours ?",
     "icon": "fa-soup",
     "responses": [
       {
@@ -149,7 +149,7 @@
     ]
   },
   "sore_throat_aches": {
-    "title": "Avez-vous un mal de gorge ou des douleurs musculaires ou des courbatures inhabituelles ces derniers jours ?",
+    "title": "Avez-vous un mal de gorge ou des douleurs musculaires ou des courbatures inhabituelles ces derniers jours ?",
     "icon": "fa-scarf",
     "responses": [
       {
