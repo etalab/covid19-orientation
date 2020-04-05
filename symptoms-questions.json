@@ -36,16 +36,18 @@
       {
         "label": "Oui",
         "icon": "fa-check",
-        "isSymptom": true
+        "isSymptom": true,
+        "value": 1
       },
       {
         "label": "Non",
-        "icon": "fa-times"
+        "icon": "fa-times",
+        "value": 0
       },
       {
         "label": "Je ne sais pas",
         "icon": "fa-question-circle",
-        "value": "inconnue"
+        "value": 999
       }
     ]
   },
