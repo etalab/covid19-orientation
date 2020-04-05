@@ -86,7 +86,7 @@
     ]
   },
   "tiredness": {
-    "title": "Avez-vous une fatigue inhabituelle ces derniers jours vous obligeant à vous reposer plus de la moitiée de la journée ?",
+    "title": "Avez-vous une fatigue inhabituelle ces derniers jours vous obligeant à vous reposer plus de la moitié de la journée ?",
     "icon": "fa-bed",
     "responses": [
       {
