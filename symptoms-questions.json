@@ -90,7 +90,6 @@
       {
         "label": "Oui",
         "icon": "fa-check",
-        "isMinorSeverityFactor": true,
         "value": true
       },
       {
@@ -107,7 +106,7 @@
       {
         "label": "Oui",
         "icon": "fa-check",
-        "isMajorSeverityFactor": true,
+        "isMinorSeverityFactor": true,
         "value": true
       },
       {

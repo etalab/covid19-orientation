@@ -296,6 +296,11 @@ function App() {
       nextStep = 5
     }
 
+    // when not tired, skip to cough
+    if (tiredness === false) {
+      nextStep = 7
+    }
+
     if (height && weight) {
       nextStep = 11
     }
@@ -314,7 +319,7 @@ function App() {
     }
 
     setStep(nextStep)
-  }, [step, ageRange, fever, height, weight, riskFactors, riskFactorsRadios, postalCode])
+  }, [step, ageRange, fever, height, weight, riskFactors, riskFactorsRadios, postalCode, tiredness])
 
   // Orderered steps
   const steps = [
