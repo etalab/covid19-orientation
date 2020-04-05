@@ -134,6 +134,7 @@ function App() {
   const [feedingDay, setFeedingDay] = useState(false)
   const [breathlessness, setBreathlessness] = useState(false)
   const [fever, setFever] = useState(false)
+  const [feverAlgo, setFeverAlgo] = useState(false)
   const [temperature, setTemperature] = useState(null)
   const [tiredness, setTiredness] = useState(null)
   const [cough, setCough] = useState(false)
@@ -149,6 +150,12 @@ function App() {
 
   const [riskFactors, setRiskFactors] = useState(null)
   const [riskFactorsRadios, setRiskFactorsRadios] = useState(null)
+
+  const getFeverAlgo = temperature => {
+    if (fever === 999) return true
+    if (fever === 1 && (temperature ===  "inf_35.5" || temperature === "sup_39")) return true
+    return false
+  }
 
   const handleResponse = useCallback((response, setSymptom) => {
     const {isSymptom, isMajorSeverityFactor, isMinorSeverityFactor, isPronosticFactors, value} = response
@@ -216,7 +223,9 @@ function App() {
 
     submitForm({
       metadata: {
-        orientation: orientations[newEnd - 1]
+        orientation: orientations[newEnd - 1],
+        "algo_version":"2020-03-30",
+        "form_version":"2020-03-30"
       },
       respondent: {
         age_range: ageRange,
@@ -233,6 +242,7 @@ function App() {
         diarrhea,
         feeding_day: feedingDay,
         fever,
+        fever_algo: feverAlgo,
         sore_throat_aches: soreThroatAches,
         temperature_cat: temperature,
         tiredness
@@ -263,6 +273,7 @@ function App() {
     setFeedingDay(false)
     setBreathlessness(false)
     setFever(false)
+    setFeverAlgo(false)
     setTemperature(null)
     setTiredness(null)
     setCough(false)
@@ -310,10 +321,9 @@ function App() {
       setIsFinish(true);
     }
 
-    if (fever && fever === 'inconnue') {
-      setFever(true)
-      nextStep = 5
-    }
+    // if (fever) {
+    //   nextStep = 5
+    // }
 
     if (height && weight) {
       nextStep = 10
@@ -341,7 +351,10 @@ function App() {
     {step: 1, question: symptomsQuestions.feeding_day, setSymptom: setFeedingDay},
     {step: 2, question: symptomsQuestions.breathlessness, setSymptom: setBreathlessness},
     {step: 3, question: symptomsQuestions.fever, setSymptom: setFever},
-    {step: 4, question: symptomsQuestions.temperature, setSymptom: setTemperature},
+    {step: 4, question: symptomsQuestions.temperature, setSymptom: temperature => {
+      setTemperature(temperature)
+      setFeverAlgo(getFeverAlgo(temperature))
+    }},
     {step: 5, question: symptomsQuestions.tiredness, setSymptom: setTiredness},
     {step: 6, question: symptomsQuestions.cough, setSymptom: setCough},
     {step: 7, question: symptomsQuestions.agueusia_anosmia, setSymptom: setAgueusiaAnosmia},
