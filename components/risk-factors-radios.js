@@ -116,7 +116,7 @@ function RiskFactors({handleRiskFactors}) {
                     {title: 'Non applicable', value: 888}
                   ]}
                 >
-                  Êtes-vous enceinte ?
+                  Êtes-vous enceinte ?
                 </RadioChoices>
               </li>
               <li
@@ -141,11 +141,11 @@ function RiskFactors({handleRiskFactors}) {
                     {title: 'Je ne sais pas', value: 999}
                   ]}
                 >
-                  Avez-vous une hypertension artérielle mal équilibrée ?
+                  Avez-vous une hypertension artérielle mal équilibrée ?
                   <br />
-                  Ou une maladie cardiaque ou vasculaire ?
+                  Ou une maladie cardiaque ou vasculaire ?
                   <br />
-                  Ou prenez-vous un traitement à visée cardiologique ?
+                  Ou prenez-vous un traitement à visée cardiologique ?
                 </RadioChoices>
               </li>
               <li style={{display: 'block'}}>
@@ -167,7 +167,7 @@ function RiskFactors({handleRiskFactors}) {
                   ]}
                 >
                   Avez-vous une maladie connue pour diminuer vos défenses
-                  immunitaires ?
+                  immunitaires ?
                 </RadioChoices>
               </li>
               <li style={{display: 'block'}}>
@@ -188,7 +188,7 @@ function RiskFactors({handleRiskFactors}) {
                     {title: 'Je ne sais pas', value: 999}
                   ]}
                 >
-                  Prenez-vous un traitement immunosuppresseur ? C’est un traitement qui diminue vos défenses contre les infections. Voici quelques exemples : corticoïdes, méthotrexate, ciclosporine, tacrolimus, azathioprine, cyclophosphamide (liste non exhaustive).
+                  Prenez-vous un traitement immunosuppresseur ? C’est un traitement qui diminue vos défenses contre les infections. Voici quelques exemples : corticoïdes, méthotrexate, ciclosporine, tacrolimus, azathioprine, cyclophosphamide (liste non exhaustive).
                 </RadioChoices>
               </li>
             </ul>

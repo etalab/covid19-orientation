@@ -17,7 +17,7 @@ function PostalCode({handlePostalCode}) {
 
   return (
     <article className='step'>
-      <h2><i className='fas fa-mailbox' aria-hidden='true' /> <span>Quel est votre code postal ?</span></h2>
+      <h2><i className='fas fa-mailbox' aria-hidden='true' /> <span>Quel est votre code postal ?</span></h2>
       <div className='card'>
         <form onSubmit={handleSubmit}>
           <div className='complement-infos'>
