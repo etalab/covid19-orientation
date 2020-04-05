@@ -192,7 +192,8 @@ function App() {
 
     submitForm({
       metadata: {
-        duration
+        "algo_version":"2020-03-30",
+        "form_version":"2020-03-30"
       },
       respondent: {
         age_range: ageRange,
