@@ -338,7 +338,7 @@ function App() {
     // }
 
     // when not tired, skip to cough
-    if (tiredness === false) {
+    if (step==6 && tiredness === false) {
       nextStep = 7
     }
 
