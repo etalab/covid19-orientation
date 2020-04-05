@@ -29,8 +29,9 @@ function RiskFactors({handleRiskFactors}) {
             <ul>
               <li>
                 <i className='fas fa-heartbeat' aria-hidden='true' />
-                <label>Êtes-vous diabétique ?</label>
+                <label for='diabetes'>Êtes-vous diabétique ?</label>
                 <input
+                  id='diabetes'
                   name='diabetes'
                   type='checkbox'
                   checked={diabetes}
@@ -39,8 +40,9 @@ function RiskFactors({handleRiskFactors}) {
               </li>
               <li>
                 <i className='fas fa-procedures' aria-hidden='true' />
-                <label>Avez-vous ou avez-vous eu un cancer dans les 3 dernières années ?</label>
+                <label for='cancer'>Avez-vous ou avez-vous eu un cancer dans les 3 dernières années ?</label>
                 <input
+                  id='cancer'
                   name='cancer'
                   type='checkbox'
                   checked={cancer}
@@ -49,8 +51,9 @@ function RiskFactors({handleRiskFactors}) {
               </li>
               <li>
                 <i className='fas fa-lungs-virus' aria-hidden='true' />
-                <label>Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?</label>
+                <label for='breathingDisease'>Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?</label>
                 <input
+                  id='breathingDisease'
                   name='breathingDisease'
                   type='checkbox'
                   checked={breathingDisease}
@@ -59,8 +62,9 @@ function RiskFactors({handleRiskFactors}) {
               </li>
               <li>
                 <i className='fas fa-kidneys' aria-hidden='true' />
-                <label>Avez-vous une insuffisance rénale chronique dialysée ?</label>
+                <label for='kidneyDisease'>Avez-vous une insuffisance rénale chronique dialysée ?</label>
                 <input
+                  id='kidneyDisease'
                   name='kidneyDisease'
                   type='checkbox'
                   checked={kidneyDisease}
@@ -69,8 +73,9 @@ function RiskFactors({handleRiskFactors}) {
               </li>
               <li>
                 <i className='fas fa-procedures' aria-hidden='true' />
-                <label>Avez-vous une maladie chronique du foie ?</label>
+                <label for='liverDisease'>Avez-vous une maladie chronique du foie ?</label>
                 <input
+                  id='liverDisease'
                   name='liverDisease'
                   type='checkbox'
                   checked={liverDisease}
@@ -79,7 +84,6 @@ function RiskFactors({handleRiskFactors}) {
               </li>
             </ul>
           </div>
-
           <button className='mainbutton'>
             <span>Valider ces informations et continuer</span><i className='fas fa-check' aria-hidden='true' />
           </button>
