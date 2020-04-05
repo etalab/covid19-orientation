@@ -18,15 +18,15 @@
 import React, {useState, useCallback, useEffect} from 'react'
 
 import symptomsQuestions from '../symptoms-questions.json'
-import patientQuestions from '../patient-questions.json'
+import respondentQuestions from '../respondent-questions.json'
 
 import {getToken, submitForm, getDuration} from '../lib/api'
 import {anonymize} from '../lib/codes-postaux'
 
 import Page from '../layouts/main'
 
-import Imc from '../components/patient/imc'
-import PostalCode from '../components/patient/postal-code'
+import Imc from '../components/respondent/imc'
+import PostalCode from '../components/respondent/postal-code'
 
 import End from '../components/end'
 
@@ -128,7 +128,7 @@ function App() {
   const [soreThroatAches, setSoreThroatAches] = useState(false)
   const [diarrhea, setDiarrhea] = useState(false)
 
-  // Patient
+  // Respondent
   const [ageRange, setAgeRange] = useState(null)
   const [weight, setWeight] = useState(null)
   const [height, setHeight] = useState(null)
@@ -194,7 +194,7 @@ function App() {
       metadata: {
         duration
       },
-      patient: {
+      respondent: {
         age_range: ageRange,
         postal_code: anonymize(postalCode),
         height,
@@ -241,7 +241,7 @@ function App() {
     setSoreThroatAches(false)
     setDiarrhea(false)
 
-    // Patient
+    // Respondent
     setAgeRange(null)
     setWeight(null)
     setHeight(null)
@@ -308,7 +308,7 @@ function App() {
 
   // Orderered steps
   const steps = [
-    {step: 0, question: patientQuestions.ageRange, setSymptom: setAgeRange},
+    {step: 0, question: respondentQuestions.ageRange, setSymptom: setAgeRange},
     {step: 1, question: symptomsQuestions.feeding_day, setSymptom: setFeedingDay},
     {step: 2, question: symptomsQuestions.breathlessness, setSymptom: setBreathlessness},
     {step: 3, question: symptomsQuestions.fever, setSymptom: setFever},
