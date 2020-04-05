@@ -5,9 +5,10 @@ import reactHtmlParser from 'react-html-parser'
 import fins from '../fins.json'
 
 function End({end, isFinish}) {
-  const {icon, primary, secondary, isUrgent} = fins[end]
+  const {icon, primary, secondary, urgent} = fins[end]
 
-  if (isFinish || isUrgent) {
+  if (isFinish || urgent) {
+    const text = isFinish ? secondary : urgent;
     return (
       <>
         <article className='step message-fin'>
@@ -15,7 +16,7 @@ function End({end, isFinish}) {
           <div className='card message'>
             <p className='icon'><i className={`fas ${icon} ${end === 5 ? '' : 'anim-pulse'}`} /></p>
             <p className='primary-message'>{reactHtmlParser(primary)}</p>
-            {secondary && <p className='secondary-message'>{reactHtmlParser(secondary)}</p>}
+            {text && <p className='secondary-message'>{reactHtmlParser(text)}</p>}
           </div>
         </article>
 
