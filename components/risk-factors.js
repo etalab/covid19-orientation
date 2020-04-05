@@ -22,7 +22,7 @@ function RiskFactors({handleRiskFactors}) {
 
   return (
     <article className='step' id='risk-factors'>
-      <h2><i className='fas fa-user-md' aria-hidden='true' /><span>Cochez les éléments de cette liste qui correspond à votre situation :</span></h2>
+      <h2><i className='fas fa-user-md' aria-hidden='true' /><span>Cochez les éléments de cette liste qui correspondent à votre situation :</span></h2>
       <div className='card'>
         <form onSubmit={handleSubmit}>
           <div className='complement-infos'>
