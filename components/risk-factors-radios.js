@@ -49,6 +49,22 @@ function RadioChoices({icon, choices, name, value, onChange, children}) {
   )
 }
 
+const MandatoryFieldsMessage = () => {
+  return (
+    <div className="card message" style={{ backgroundColor: 'var(--warning-bg)' }}>
+      <div className="primary-message">Tous les champs sont obligatoires</div>
+    </div>
+  )
+}
+
+// https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-%C3%A0-obligatoirement-sauvegarder-pour-partage
+const deriveAlgoValue = (key, value) => {
+  if (key==='heartDisease' && value !== 0) return true;
+  if (key==='immunosuppressantDisease' && value === 1) return true;
+  if (key==='immunosuppressantDrug' && value === 1) return true;
+  return false;
+}
+
 function RiskFactors({handleRiskFactors}) {
   const [heartDisease, setHeartDisease] = useState(false)
   const [immunosuppressantDisease, setImmunosuppressantDisease] = useState(false)
@@ -57,27 +73,25 @@ function RiskFactors({handleRiskFactors}) {
   const [immunosuppressantDiseaseAlgo, setImmunosuppressantDiseaseAlgo] = useState(false)
   const [immunosuppressantDrugAlgo, setImmunosuppressantDrugAlgo] = useState(false)
   const [pregnant, setPregnant] = useState(false)
+  const [isValid, setIsValid] = useState(null);
 
   const handleSubmit = event => {
     event.preventDefault()
-
-    handleRiskFactors({
-      heart_disease: heartDisease,
-      immunosuppressant_disease: immunosuppressantDisease,
-      immunosuppressant_drug: immunosuppressantDrug,
-      heart_disease_algo: heartDiseaseAlgo,
-      immunosuppressant_disease_algo: immunosuppressantDiseaseAlgo,
-      immunosuppressant_drug_algo: immunosuppressantDrugAlgo,
-      pregnant
-    })
-  }
-
-  // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-%C3%A0-obligatoirement-sauvegarder-pour-partage
-  const deriveAlgoValue = (key, value) => {
-    if (key==='heartDisease' && value !== 0) return true;
-    if (key==='immunosuppressantDisease' && value === 1) return true;
-    if (key==='immunosuppressantDrug' && value === 1) return true;
-    return false;
+    const isValid = (heartDisease !== false && immunosuppressantDisease !== false && immunosuppressantDrug !== false && pregnant !== false)
+    if (isValid) {
+      setIsValid(true)
+      handleRiskFactors({
+        heart_disease: heartDisease,
+        immunosuppressant_disease: immunosuppressantDisease,
+        immunosuppressant_drug: immunosuppressantDrug,
+        heart_disease_algo: heartDiseaseAlgo,
+        immunosuppressant_disease_algo: immunosuppressantDiseaseAlgo,
+        immunosuppressant_drug_algo: immunosuppressantDrugAlgo,
+        pregnant
+      })
+    } else {
+      setIsValid(false)
+    }
   }
 
   return (
@@ -179,8 +193,8 @@ function RiskFactors({handleRiskFactors}) {
               </li>
             </ul>
           </div>
-
-          <button className='mainbutton'>
+          { isValid===false && <MandatoryFieldsMessage/> }
+          <button className='mainbutton' >
             <span>Valider ces informations et continuer</span><i className='fas fa-check' aria-hidden='true' />
           </button>
         </form>

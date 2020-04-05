@@ -78,6 +78,8 @@
   --validate-dark: #466964;
   --validate-non-text: #00ac8c;
 
+  --warning-bg: #ffdbe1;
+
   /*sizes*/
   --size-smaller: 0.2rem;
   --size-small: 0.5rem;
