@@ -50,7 +50,7 @@
     ]
   },
   "temperature": {
-    "title": "Quelle a été votre température la plus élevée ces dernières 48h ?",
+    "title": "Quelle a été votre température la plus élevée ces dernières 48 heures ?",
     "icon": "fa-temperature-up",
     "responses": [
       {
@@ -108,7 +108,7 @@
         "isSymptom": true
       },
       {
-        "label": "Non, je ne tousse pas",
+        "label": "Non, aucune toux n'est apparue ou ma toux n'a pas augmenté",
         "icon": "fa-times"
       }
     ]
@@ -129,11 +129,11 @@
     ]
   },
   "sore_throat_aches": {
-    "title": "Avez-vous un mal de gorge, des douleurs musculaires ou des courbatures inhabituelles ces derniers jours ?",
+    "title": "Avez-vous un mal de gorge ou des douleurs musculaires ou des courbatures inhabituelles ces derniers jours ?",
     "icon": "fa-scarf",
     "responses": [
       {
-        "label": "Oui, j’ai mal à la gorge des douleurs musculaires ou des courbatures depuis quelques jours",
+        "label": "Oui, j’ai mal à la gorge, des douleurs musculaires ou des courbatures depuis quelques jours",
         "icon": "fa-check",
         "isSymptom": true
       },
