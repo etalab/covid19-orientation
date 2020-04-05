@@ -196,9 +196,7 @@ function App() {
       },
       respondent: {
         age_range: ageRange,
-        postal_code: anonymize(postalCode),
-        height,
-        weight
+        postal_code: anonymize(postalCode)
       },
       risk_factors: {
         ...riskFactors,
