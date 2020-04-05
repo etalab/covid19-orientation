@@ -22,7 +22,7 @@ Première version :
 Seconde version :
 
 - Bastien Guerry
-- Famibelle-Pronzola
+- Cédric Famibelle-Pronzola
 - Guillaume Ory
 - Jérôme Desboeufs
 - Julien Bouquillon
