@@ -51,6 +51,10 @@ const chooseEnd = ({
   pronosticFactorsCount,
 }) => {
   let end;
+  // dont try to compute end when no age defined
+  if (!ageRange) {
+    return 8;
+  }
   if (ageRange === "inf_15") {
       end = 1
     } else if (majorSeverityFactorsCount >= 1) {
@@ -250,7 +254,7 @@ function App() {
   // Get end
   useEffect(() => {
     // Replica of arbre_décisions.txt
-    const end = chooseEnd({
+    const newEnd = chooseEnd({
       ageRange,
       minorSeverityFactorsCount,
       majorSeverityFactorsCount,
@@ -261,7 +265,7 @@ function App() {
       agueusiaAnosmia,
       pronosticFactorsCount,
     })
-    setEnd(end)
+    setEnd(newEnd)
   }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, ageRange, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
 
   // Show/hide Form
