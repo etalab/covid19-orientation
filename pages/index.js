@@ -39,6 +39,7 @@ import RiskFactorsRadios from '../components/risk-factors-radios'
 
 // compute end based on some parameters
 // Replica of arbre_décisions.txt
+// https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org
 const chooseEnd = ({
   ageRange,
   minorSeverityFactorsCount,
@@ -50,7 +51,7 @@ const chooseEnd = ({
   agueusiaAnosmia,
   pronosticFactorsCount,
 }) => {
-  let end;
+  let end = 8;
   // dont try to compute end when no age defined
   if (!ageRange) {
     return 8;
@@ -102,8 +103,22 @@ const chooseEnd = ({
   return end;
 }
 
+
 // rounded IMC at 1 decimal
 const computeIMC = (weight, height) => (Math.round(parseInt(weight, 10) / ((parseInt(height, 10) / 100) ** 2) * 10) / 10)
+
+// https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-qui-correspondent-%C3%A0-lorientation-affich%C3%A9e
+const orientations = [
+  "orientation_moins_de_15_ans",
+  "orientation_domicile_surveillance_1",
+  "orientation_consultation_surveillance_1",
+  "orientation_consultation_surveillance_2",
+  "orientation_SAMU",
+  "orientation_consultation_surveillance_3",
+  "orientation_consultation_surveillance_4",
+  "orientation_surveillance"
+]
+
 
 function App() {
   // App
@@ -124,6 +139,7 @@ function App() {
   const [feedingDay, setFeedingDay] = useState(false)
   const [breathlessness, setBreathlessness] = useState(false)
   const [fever, setFever] = useState(false)
+  const [feverAlgo, setFeverAlgo] = useState(false)
   const [temperature, setTemperature] = useState(null)
   const [tiredness, setTiredness] = useState(null)
   const [cough, setCough] = useState(false)
@@ -139,6 +155,12 @@ function App() {
 
   const [riskFactors, setRiskFactors] = useState(null)
   const [riskFactorsRadios, setRiskFactorsRadios] = useState(null)
+
+  const getFeverAlgo = temperature => {
+    if (fever === 999) return true
+    if (fever === 1 && (temperature ===  "inf_35.5" || temperature === "sup_39")) return true
+    return false
+  }
 
   const handleResponse = useCallback((response, setSymptom) => {
     const {isSymptom, isMajorSeverityFactor, isMinorSeverityFactor, isPronosticFactors, value} = response
@@ -191,12 +213,26 @@ function App() {
   }
 
   const submit = () => {
-    const duration = getDuration(token)
+
     const imc = computeIMC(weight, height);
+
+    const newEnd = chooseEnd({
+      ageRange,
+      minorSeverityFactorsCount,
+      majorSeverityFactorsCount,
+      fever,
+      cough,
+      diarrhea,
+      soreThroatAches,
+      agueusiaAnosmia,
+      pronosticFactorsCount,
+    })
 
     submitForm({
       metadata: {
-        duration
+        orientation: orientations[newEnd - 1],
+        "algo_version":"2020-03-30",
+        "form_version":"2020-03-30"
       },
       respondent: {
         age_range: ageRange,
@@ -214,6 +250,7 @@ function App() {
         diarrhea,
         feeding_day: feedingDay,
         fever,
+        fever_algo: feverAlgo,
         sore_throat_aches: soreThroatAches,
         temperature_cat: temperature,
         tiredness
@@ -243,6 +280,7 @@ function App() {
     setFeedingDay(false)
     setBreathlessness(false)
     setFever(false)
+    setFeverAlgo(false)
     setTemperature(null)
     setTiredness(null)
     setCough(false)
@@ -290,10 +328,9 @@ function App() {
       setIsFinish(true);
     }
 
-    if (fever && fever === 'inconnue') {
-      setFever(true)
-      nextStep = 5
-    }
+    // if (fever) {
+    //   nextStep = 5
+    // }
 
     if (height && weight) {
       nextStep = 10
@@ -321,7 +358,10 @@ function App() {
     {step: 1, question: symptomsQuestions.feeding_day, setSymptom: setFeedingDay},
     {step: 2, question: symptomsQuestions.breathlessness, setSymptom: setBreathlessness},
     {step: 3, question: symptomsQuestions.fever, setSymptom: setFever},
-    {step: 4, question: symptomsQuestions.temperature, setSymptom: setTemperature},
+    {step: 4, question: symptomsQuestions.temperature, setSymptom: temperature => {
+      setTemperature(temperature)
+      setFeverAlgo(getFeverAlgo(temperature))
+    }},
     {step: 5, question: symptomsQuestions.tiredness, setSymptom: setTiredness},
     {step: 6, question: symptomsQuestions.cough, setSymptom: setCough},
     {step: 7, question: symptomsQuestions.agueusia_anosmia, setSymptom: setAgueusiaAnosmia},
