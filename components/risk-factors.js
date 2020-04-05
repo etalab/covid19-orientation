@@ -8,6 +8,8 @@ function RiskFactors({handleRiskFactors}) {
   const [kidneyDisease, setKidneyDisease] = useState(false)
   const [liverDisease, setLiverDisease] = useState(false)
 
+  const selectionCount = [breathingDisease, cancer, diabetes, kidneyDisease, liverDisease].filter(Boolean).length;
+
   const handleSubmit = event => {
     event.preventDefault()
 
@@ -85,7 +87,12 @@ function RiskFactors({handleRiskFactors}) {
             </ul>
           </div>
           <button className='mainbutton'>
-            <span>Valider ces informations et continuer</span><i className='fas fa-check' aria-hidden='true' />
+            <span>
+              {selectionCount === 0 && `Aucun de ces éléments ne correspond à ma situation`}
+              {selectionCount === 1 && `Valider le choix de cet élément`}
+              {selectionCount > 1 && `Valider le choix de ces ${selectionCount} éléments`}
+            </span>
+            <i className='fas fa-check' aria-hidden='true' />
           </button>
         </form>
       </div>
