@@ -16,6 +16,7 @@
 // Soizic Pénicaud
 
 import React, {useState, useCallback, useEffect} from 'react'
+import {useRouter} from 'next/router'
 
 import symptomsQuestions from '../symptoms-questions.json'
 import respondentQuestions from '../respondent-questions.json'
@@ -121,7 +122,10 @@ const orientations = [
 
 
 function App() {
+  const router = useRouter()
+
   // App
+  const [isIframe, setIsIframe] = useState(false)
   const [token, setToken] = useState(null)
   const [consent, setConsent] = useState(false)
   const [displayForm, setDisplayForm] = useState(false)
@@ -376,6 +380,12 @@ function App() {
 
     setStep(nextStep)
   }, [step, ageRange, fever, height, weight, riskFactors, riskFactorsRadios, postalCode, tiredness])
+
+  useEffect(() => {
+    const {iframe} = router.query
+
+    setIsIframe(Boolean(iframe === '1'))
+  }, [router])
 
   // Orderered steps
   const steps = [
