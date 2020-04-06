@@ -409,7 +409,7 @@ function App() {
   ]
 
   return (
-    <Page>
+    <Page iframe={isIframe}>
       <div id='parcours'>
         <article className='step' id='message-attente'>
           <div className='card message start-message'>
