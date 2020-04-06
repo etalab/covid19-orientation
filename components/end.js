@@ -17,7 +17,7 @@ function End({end, isFinish, showUrgentMessage, hideUrgentMessage}) {
             <p className='icon'><i className={`fas ${icon} ${end === 5 ? '' : 'anim-pulse'}`} /></p>
             <p className='primary-message'>{reactHtmlParser(primary)}</p>
             {text && <p className='secondary-message'>{reactHtmlParser(text)}</p>}
-            {urgent && (
+            {urgent && !isFinish && (
               <div className='centered'>
                 <div className='gouv-button-container'>
                   <a className='gouv-button' onClick={hideUrgentMessage}><i className='fas fa-check' aria-hidden='true' />Continuer le formulaire</a>
