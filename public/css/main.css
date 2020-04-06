@@ -444,7 +444,6 @@ header .call-status .text {
 
 #appel main {
   margin: var(--size-medium);
-  padding: var(--size-big) 0;
 }
 
 #home main {
@@ -463,6 +462,7 @@ header .call-status .text {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  margin: var(--size-smaller) 0;
 }
 
 .step h2 i {
@@ -741,7 +741,7 @@ div.call form input[type="checkbox"] {
 
 .complement-infos ul li {
   display: flex;
-  padding: var(--size-small);
+  padding: var(--size-smaller);
   height: 100%;
   flex-direction: column;
 }
@@ -770,7 +770,7 @@ div.call form input[type="checkbox"] {
 
 .card ul {
   margin: 0;
-  padding: 0 var(--size-small);
+  padding: 0 var(--size-smaller);
   list-style: none;
 }
 
@@ -789,8 +789,8 @@ div.call form input[type="checkbox"] {
 .secondary .item {
   display: flex;
   color: inherit;
-  padding: var(--size-small);
-  margin: var(--size-small) 0;
+  padding: var(--size-smaller);
+  margin: var(--size-smaller) 0;
   border-radius: 5px;
   justify-content: space-between;
   align-items: center;
@@ -857,7 +857,7 @@ div.call form input[type="checkbox"] {
   text-align: center;
   margin: auto;
   width: var(--size-bigger);
-  margin: 0 var(--size-medium) 0 0;
+  margin: 0 var(--size-small) 0 0;
   font-size: var(--size-big);
 }
 

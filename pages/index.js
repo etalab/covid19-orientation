@@ -16,9 +16,11 @@
 // Soizic Pénicaud
 
 import React, {useState, useCallback, useEffect} from 'react'
+import {useRouter} from 'next/router'
 
 import symptomsQuestions from '../symptoms-questions.json'
 import respondentQuestions from '../respondent-questions.json'
+import ends from '../fins.json'
 
 import {getToken, submitForm, getDuration} from '../lib/api'
 import {anonymize} from '../lib/codes-postaux'
@@ -36,8 +38,7 @@ import Question from '../components/question'
 import RiskFactors from '../components/risk-factors'
 import RiskFactorsRadios from '../components/risk-factors-radios'
 
-
-// compute end based on some parameters
+// Compute end based on some parameters
 // Replica of arbre_décisions.txt
 // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org
 const chooseEnd = ({
@@ -49,84 +50,91 @@ const chooseEnd = ({
   diarrhea,
   soreThroatAches,
   agueusiaAnosmia,
-  pronosticFactorsCount,
+  pronosticFactorsCount
 }) => {
-  let end = 8;
-  // dont try to compute end when no age defined
+  let end = 8
+  // Dont try to compute end when no age defined
   if (!ageRange) {
-    return 8;
+    return 8
   }
-  if (ageRange === "inf_15") {
-      end = 1
-    } else if (majorSeverityFactorsCount >= 1) {
-      end = 5
-    } else if (fever && cough) {
-      if (pronosticFactorsCount === 0) {
+
+  if (ageRange === 'inf_15') {
+    end = 1
+  } else if (majorSeverityFactorsCount >= 1) {
+    end = 5
+  } else if (fever && cough) {
+    if (pronosticFactorsCount === 0) {
+      end = 6
+    }
+
+    if (pronosticFactorsCount >= 1) {
+      if (minorSeverityFactorsCount < 2) {
         end = 6
       }
-      if (pronosticFactorsCount >= 1) {
-        if (minorSeverityFactorsCount < 2) {
-          end = 6
-        }
-        if (minorSeverityFactorsCount >= 2) {
-          end = 4
-        }
+
+      if (minorSeverityFactorsCount >= 2) {
+        end = 4
       }
-    } else if (fever || (!fever && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
-      if (pronosticFactorsCount === 0) {
-        if (minorSeverityFactorsCount === 0) {
-          if (ageRange === "inf_15" || ageRange === "from_15_to_49") {
-            end = 2
-          } else {
-            end = 3
-          }
-        } else if (minorSeverityFactorsCount >= 1) {
-          end = 3
-        }
-      }
-      if (pronosticFactorsCount >= 1) {
-        if (minorSeverityFactorsCount < 2) {
-          end = 3
-        } else if (minorSeverityFactorsCount >= 2) {
-          end = 4
-        }
-      }
-    } else if (cough || soreThroatAches || agueusiaAnosmia) {
-      if (pronosticFactorsCount === 0) {
-        end = 2
-      } else if (pronosticFactorsCount >= 1) {
-        end = 7
-      }
-    } else if (!cough && !soreThroatAches && !agueusiaAnosmia) {
-      end = 8
     }
-  return end;
+  } else if (fever || (!fever && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
+    if (pronosticFactorsCount === 0) {
+      if (minorSeverityFactorsCount === 0) {
+        if (ageRange === 'inf_15' || ageRange === 'from_15_to_49') {
+          end = 2
+        } else {
+          end = 3
+        }
+      } else if (minorSeverityFactorsCount >= 1) {
+        end = 3
+      }
+    }
+
+    if (pronosticFactorsCount >= 1) {
+      if (minorSeverityFactorsCount < 2) {
+        end = 3
+      } else if (minorSeverityFactorsCount >= 2) {
+        end = 4
+      }
+    }
+  } else if (cough || soreThroatAches || agueusiaAnosmia) {
+    if (pronosticFactorsCount === 0) {
+      end = 2
+    } else if (pronosticFactorsCount >= 1) {
+      end = 7
+    }
+  } else if (!cough && !soreThroatAches && !agueusiaAnosmia) {
+    end = 8
+  }
+
+  return end
 }
 
-
-// rounded IMC at 1 decimal
+// Rounded IMC at 1 decimal
 const computeIMC = (weight, height) => (Math.round(parseInt(weight, 10) / ((parseInt(height, 10) / 100) ** 2) * 10) / 10)
 
 // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-qui-correspondent-%C3%A0-lorientation-affich%C3%A9e
 const orientations = [
-  "orientation_moins_de_15_ans",
-  "orientation_domicile_surveillance_1",
-  "orientation_consultation_surveillance_1",
-  "orientation_consultation_surveillance_2",
-  "orientation_SAMU",
-  "orientation_consultation_surveillance_3",
-  "orientation_consultation_surveillance_4",
-  "orientation_surveillance"
+  'orientation_moins_de_15_ans',
+  'orientation_domicile_surveillance_1',
+  'orientation_consultation_surveillance_1',
+  'orientation_consultation_surveillance_2',
+  'orientation_SAMU',
+  'orientation_consultation_surveillance_3',
+  'orientation_consultation_surveillance_4',
+  'orientation_surveillance'
 ]
 
-
 function App() {
+  const router = useRouter()
+
   // App
+  const [isIframe, setIsIframe] = useState(false)
   const [token, setToken] = useState(null)
   const [consent, setConsent] = useState(false)
   const [displayForm, setDisplayForm] = useState(false)
   const [end, setEnd] = useState(null)
   const [step, setStep] = useState(0)
+  const [showUrgentMessage, setShowUrgenteMessage] = useState(false)
   const [isFinish, setIsFinish] = useState(false)
 
   // Counters
@@ -158,8 +166,14 @@ function App() {
   const [riskFactorsRadios, setRiskFactorsRadios] = useState(null)
 
   const getFeverAlgo = temperature => {
-    if (fever === 999) return true
-    if (fever === 1 && (temperature ===  "inf_35.5" || temperature === "sup_39")) return true
+    if (fever === 999) {
+      return true
+    }
+
+    if (fever === 1 && (temperature === 'inf_35.5' || temperature === 'sup_39')) {
+      return true
+    }
+
     return false
   }
 
@@ -172,7 +186,7 @@ function App() {
     setMajorSeverityFactorsCount(isMajorSeverityFactor)
     setMinorSeverityFactorsCount(isMinorSeverityFactor)
 
-    // the value can be false
+    // The value can be false
     setSymptom(value !== undefined ? value : isSymptom)
 
     setStep(step => step + 1)
@@ -185,20 +199,33 @@ function App() {
     setConsent(true)
   }, [])
 
-  // boolean risks : count of truthy riskFactors
+  // Boolean risks : count of truthy riskFactors
   const getPronosticFactorsCount = riskFactors => Object.keys(riskFactors).filter(risk => Boolean(riskFactors[risk])).length
 
-  // radio risks : count of truthy *algo or pregnant=1
+  // Radio risks : count of truthy *algo or pregnant=1
   const getPronosticFactorsCountRadios = riskFactorsRadios => {
     // Increase pronosticFactorsCount by 1 for each true risk factor
-    let count = 0;
+    let count = 0
     if (!riskFactorsRadios) {
       return 0
     }
-    if (riskFactorsRadios.heart_disease_algo) count++
-    if (riskFactorsRadios.immunosuppressant_disease_algo) count++
-    if (riskFactorsRadios.immunosuppressant_drug_algo) count++
-    if (riskFactorsRadios.pregnant === 1) count++
+
+    if (riskFactorsRadios.heart_disease_algo) {
+      count++
+    }
+
+    if (riskFactorsRadios.immunosuppressant_disease_algo) {
+      count++
+    }
+
+    if (riskFactorsRadios.immunosuppressant_drug_algo) {
+      count++
+    }
+
+    if (riskFactorsRadios.pregnant === 1) {
+      count++
+    }
+
     return count
   }
 
@@ -214,11 +241,8 @@ function App() {
     setRiskFactorsRadios(riskFactorsRadios)
   }
 
-
-
   const submit = () => {
-
-    const imc = computeIMC(weight, height);
+    const imc = computeIMC(weight, height)
 
     const newEnd = chooseEnd({
       ageRange,
@@ -229,7 +253,7 @@ function App() {
       diarrhea,
       soreThroatAches,
       agueusiaAnosmia,
-      pronosticFactorsCount,
+      pronosticFactorsCount
     })
 
     const {
@@ -242,8 +266,8 @@ function App() {
     submitForm({
       metadata: {
         orientation: orientations[newEnd - 1],
-        "algo_version":"2020-03-30",
-        "form_version":"2020-03-30"
+        algo_version: '2020-03-30',
+        form_version: '2020-03-30'
       },
       respondent: {
         age_range: ageRange,
@@ -254,7 +278,7 @@ function App() {
         ...riskFactors,
         ...riskFactorsRadiosValues
       },
-      // set false if undefined
+      // Set false if undefined
       symptoms: {
         agueusia_anosmia: agueusiaAnosmia || false,
         breathlessness: breathlessness || false,
@@ -271,21 +295,21 @@ function App() {
         heart_disease_algo,
         immunosuppressant_disease_algo,
         immunosuppressant_drug_algo,
-        fever_algo: feverAlgo,
+        fever_algo: feverAlgo
       }
     })
   }
 
   const reset = () => {
-
-    resetSymptomsCount();
-    resetMajorSeverityFactorsCount();
-    resetMinorSeverityFactorsCount();
-    resetPronosticFactorsCount();
+    resetSymptomsCount()
+    resetMajorSeverityFactorsCount()
+    resetMinorSeverityFactorsCount()
+    resetPronosticFactorsCount()
 
     // App
     setEnd(null)
     setStep(0)
+    setShowUrgenteMessage(false)
     setIsFinish(false)
 
     // Counters
@@ -329,31 +353,41 @@ function App() {
       diarrhea,
       soreThroatAches,
       agueusiaAnosmia,
-      pronosticFactorsCount,
+      pronosticFactorsCount
     })
     setEnd(newEnd)
   }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, ageRange, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
 
+  // Check if end is a emergency
+  useEffect(() => {
+    if (end) {
+      const {urgent} = ends[end]
+      if (urgent) {
+        setShowUrgenteMessage(true)
+      }
+    }
+  }, [end])
+
   // Show/hide Form
   useEffect(() => {
-    setDisplayForm(Boolean(consent && end !== 1))
-  }, [consent, ageRange, end])
+    setDisplayForm(Boolean(consent && end !== 1 && !showUrgentMessage))
+  }, [consent, ageRange, end, showUrgentMessage])
 
   // Get step
   useEffect(() => {
     let nextStep = step
 
-    if (ageRange && ageRange === "inf_15") {
-      setIsFinish(true);
+    if (ageRange && ageRange === 'inf_15') {
+      setIsFinish(true)
     }
 
-    // when no fever, skip temperature
+    // When no fever, skip temperature
     if (fever !== 1 && step === 4) {
       nextStep = 5
     }
 
-    // when not tired, skip to cough
-    if (step==6 && tiredness === false) {
+    // When not tired, skip to cough
+    if (step === 6 && tiredness === false) {
       nextStep = 7
     }
 
@@ -370,12 +404,18 @@ function App() {
     }
 
     if (postalCode) {
-      setIsFinish(true);
-      submit();
+      setIsFinish(true)
+      submit()
     }
 
     setStep(nextStep)
   }, [step, ageRange, fever, height, weight, riskFactors, riskFactorsRadios, postalCode, tiredness])
+
+  useEffect(() => {
+    const {iframe} = router.query
+
+    setIsIframe(Boolean(iframe === '1'))
+  }, [router])
 
   // Orderered steps
   const steps = [
@@ -399,19 +439,29 @@ function App() {
   ]
 
   return (
-    <Page>
+    <Page iframe={isIframe}>
       <div id='parcours'>
-        <article className='step' id='message-attente'>
-          <div className='card message start-message'>
-            <p className='icon'><i className='fas fa-viruses' /></p>
-            <p className='primary-message'>Vous pensez avoir des symptômes du Covid-19 et vous voulez savoir quoi faire ?<br />Ce questionnaire est là pour vous orienter.
-            </p>
-          </div>
-        </article>
+        {!consent && (
+          <>
+            <article className='step' id='message-attente'>
+              <div className='card message start-message'>
+                <p className='primary-message'>Vous pensez avoir des symptômes du Covid-19 et vous voulez savoir quoi faire ?<br />Ce questionnaire est là pour vous orienter.
+                </p>
+              </div>
+            </article>
 
-        {!consent && <Consent handleConsent={handleConsent} />}
+            <Consent handleConsent={handleConsent} />
+          </>
+        )}
 
-        {end && <End end={end} isFinish={isFinish} />}
+        {end && (
+          <End
+            end={end}
+            isFinish={isFinish}
+            showUrgentMessage={showUrgentMessage}
+            hideUrgentMessage={() => setShowUrgenteMessage(false)}
+          />
+        )}
 
         {displayForm && !isFinish && (
           <Question

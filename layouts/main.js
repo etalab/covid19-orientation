@@ -13,7 +13,7 @@ class Layout extends React.Component {
   }
 
   render() {
-    const {children} = this.props
+    const {iframe, children} = this.props
 
     return (
       <>
@@ -23,9 +23,23 @@ class Layout extends React.Component {
             {children}
           </main>
         </div>
+
+        <style jsx global>{`
+            body {
+              overflow: ${iframe ? 'hidden' : 'inherit'};
+            }
+          `}</style>
       </>
     )
   }
+}
+
+Layout.defaultProps = {
+  iframe: false
+}
+
+Layout.propTypes = {
+  iframe: PropTypes.bool
 }
 
 export default Layout
