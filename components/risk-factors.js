@@ -96,6 +96,14 @@ function RiskFactors({handleRiskFactors}) {
           </button>
         </form>
       </div>
+
+      <style jsx>{`
+        .complement-infos ul li {
+            display: grid;
+            grid-template-columns: 40px 1fr 20px;
+            align-items: center;
+        }
+        `}</style>
     </article>
   )
 }
