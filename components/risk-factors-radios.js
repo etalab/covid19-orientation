@@ -222,7 +222,7 @@ function RiskFactors({handleRiskFactors}) {
                         {title: 'Je ne sais pas', value: 999}
                       ]}
                     >
-                      Prenez-vous un traitement immunosuppresseur ? C’est un traitement qui diminue vos défenses contre les infections. Voici quelques exemples : corticoïdes, méthotrexate, ciclosporine, tacrolimus, azathioprine, cyclophosphamide (liste non exhaustive).
+                      Prenez-vous un traitement immunosuppresseur ? C’est un traitement qui diminue vos défenses contre les infections : corticoïdes, méthotrexate, ciclosporine, tacrolimus, azathioprine, cyclophosphamide, etc.
                     </RadioChoices>
                   </li>
                 </>
