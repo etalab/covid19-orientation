@@ -1,19 +1,6 @@
-// Application d'orientation des appels pour la crise COVID-19
-// Réalisée avec le concours de l'Agence du Numérique de la Sécurité Civile
-
-// # ÉQUIPE
-
-// Julien Dubedout
-// Benoit Frattini
-// Nicolas Mathieu
-// David Vigier
-// Toute l'Agence du Numérique de la Sécurité civile
-
-// # REMERCIEMENTS
-
-// Renaud Chaput
-// Missak Kéloglanian
-// Soizic Pénicaud
+// Copyright (c) 2020 ANSC, DINUM
+// SPDX-License-Identifier: MIT
+// License-Filename: LICENSE
 
 import React, {useState, useCallback, useEffect} from 'react'
 import {useRouter} from 'next/router'
@@ -40,7 +27,6 @@ import RiskFactorsRadios from '../components/risk-factors-radios'
 import StartMessage from '../components/start-message'
 
 // Compute end based on some parameters
-// Replica of arbre_décisions.txt
 // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org
 const chooseEnd = ({
   ageRange,
