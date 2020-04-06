@@ -20,6 +20,7 @@ import {useRouter} from 'next/router'
 
 import symptomsQuestions from '../symptoms-questions.json'
 import respondentQuestions from '../respondent-questions.json'
+import ends from '../fins.json'
 
 import {getToken, submitForm, getDuration} from '../lib/api'
 import {anonymize} from '../lib/codes-postaux'
@@ -133,6 +134,7 @@ function App() {
   const [displayForm, setDisplayForm] = useState(false)
   const [end, setEnd] = useState(null)
   const [step, setStep] = useState(0)
+  const [showUrgentMessage, setShowUrgenteMessage] = useState(false)
   const [isFinish, setIsFinish] = useState(false)
 
   // Counters
@@ -355,10 +357,20 @@ function App() {
     setEnd(newEnd)
   }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, ageRange, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
 
+  // Check if end is a emergency
+  useEffect(() => {
+    if (end) {
+      const {urgent} = ends[end]
+      if (urgent) {
+        setShowUrgenteMessage(true)
+      }
+    }
+  }, [end])
+
   // Show/hide Form
   useEffect(() => {
-    setDisplayForm(Boolean(consent && end !== 1))
-  }, [consent, ageRange, end])
+    setDisplayForm(Boolean(consent && end !== 1 && !showUrgentMessage))
+  }, [consent, ageRange, end, showUrgentMessage])
 
   // Get step
   useEffect(() => {
@@ -374,7 +386,7 @@ function App() {
     }
 
     // When not tired, skip to cough
-    if (step == 6 && tiredness === false) {
+    if (step === 6 && tiredness === false) {
       nextStep = 7
     }
 
@@ -442,7 +454,14 @@ function App() {
           </>
         )}
 
-        {end && <End end={end} isFinish={isFinish} />}
+        {end && (
+          <End
+            end={end}
+            isFinish={isFinish}
+            showUrgentMessage={showUrgentMessage}
+            hideUrgentMessage={() => setShowUrgenteMessage(false)}
+          />
+        )}
 
         {displayForm && !isFinish && (
           <Question

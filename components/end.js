@@ -4,11 +4,11 @@ import reactHtmlParser from 'react-html-parser'
 
 import fins from '../fins.json'
 
-function End({end, isFinish}) {
+function End({end, isFinish, showUrgentMessage, hideUrgentMessage}) {
   const {icon, primary, secondary, urgent} = fins[end]
 
-  if (isFinish || urgent) {
-    const text = isFinish ? secondary : urgent;
+  if (isFinish || (urgent && showUrgentMessage)) {
+    const text = isFinish ? secondary : urgent
     return (
       <>
         <article className='step message-fin'>
@@ -17,6 +17,13 @@ function End({end, isFinish}) {
             <p className='icon'><i className={`fas ${icon} ${end === 5 ? '' : 'anim-pulse'}`} /></p>
             <p className='primary-message'>{reactHtmlParser(primary)}</p>
             {text && <p className='secondary-message'>{reactHtmlParser(text)}</p>}
+            {urgent && (
+              <div className='centered'>
+                <div className='gouv-button-container'>
+                  <a className='gouv-button' onClick={hideUrgentMessage}><i className='fas fa-check' aria-hidden='true' />Continuer le formulaire</a>
+                </div>
+              </div>
+            )}
           </div>
         </article>
 
@@ -29,6 +36,13 @@ function End({end, isFinish}) {
             </div>
           </article>
         )}
+
+        <style jsx>{`
+          .centered {
+            display: flex;
+            justify-content: center;
+          }
+          `}</style>
       </>
     )
   }
@@ -37,11 +51,14 @@ function End({end, isFinish}) {
 }
 
 End.defaultProps = {
-  isFinish: false
+  isFinish: false,
+  showUrgentMessage: false
 }
 
 End.propTypes = {
   end: PropTypes.number.isRequired,
+  showUrgentMessage: PropTypes.bool,
+  hideUrgentMessage: PropTypes.func.isRequired,
   isFinish: PropTypes.bool
 }
 
