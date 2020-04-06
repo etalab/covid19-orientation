@@ -193,10 +193,10 @@ function App() {
   }, [setSymptomsCount, setPronosticFactorsCount, setMajorSeverityFactorsCount, setMinorSeverityFactorsCount])
 
   const handleConsent = useCallback(async () => {
-    const token = await getToken()
-
-    setToken(token)
     setConsent(true)
+
+    const token = await getToken()
+    setToken(token)
   }, [])
 
   // Boolean risks : count of truthy riskFactors
@@ -263,7 +263,7 @@ function App() {
       ...riskFactorsRadiosValues
     } = riskFactorsRadios
 
-    submitForm({
+    submitForm(token, {
       metadata: {
         orientation: orientations[newEnd - 1],
         algo_version: '2020-03-30',
