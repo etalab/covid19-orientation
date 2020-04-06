@@ -51,8 +51,15 @@ function RadioChoices({icon, choices, name, value, onChange, children}) {
 
 function MandatoryFieldsMessage() {
   return (
-    <div className='card message' style={{backgroundColor: 'var(--warning-bg)'}}>
+    <div className='message'>
       <div className='primary-message'>Tous les champs sont obligatoires</div>
+      <style jsx>{`
+          .primary-message {
+            margin: 0.5em 0;
+            text-align: center;
+            color: var(--alert-dark);
+          }
+        `}</style>
     </div>
   )
 }
