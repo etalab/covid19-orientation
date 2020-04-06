@@ -444,7 +444,6 @@ function App() {
           <>
             <article className='step' id='message-attente'>
               <div className='card message start-message'>
-                <p className='icon'><i className='fas fa-viruses' /></p>
                 <p className='primary-message'>Vous pensez avoir des symptômes du Covid-19 et vous voulez savoir quoi faire ?<br />Ce questionnaire est là pour vous orienter.
                 </p>
               </div>
