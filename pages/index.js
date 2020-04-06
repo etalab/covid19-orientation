@@ -309,6 +309,7 @@ function App() {
     // App
     setEnd(null)
     setStep(0)
+    setShowUrgenteMessage(false)
     setIsFinish(false)
 
     // Counters
