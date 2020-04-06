@@ -741,7 +741,7 @@ div.call form input[type="checkbox"] {
 
 .complement-infos ul li {
   display: flex;
-  padding: var(--size-smaller);
+  padding: var(--size-small) var(--size-medium);
   height: 100%;
   flex-direction: column;
 }
@@ -914,16 +914,16 @@ div.call form input[type="checkbox"] {
   color: var(--text-dark);
 }
 
-#parcours .card.start-message {
+#message-attente .card.start-message {
   margin: 0;
   background-color: var(--global-ui-darker);
 }
 
-#parcours .card.start-message .icon {
+#message-attente .card.start-message .icon {
   color: #fff;
 }
 
-#parcours .card.start-message img {
+#message-attente .card.start-message img {
   display: block;
   margin: var(--size-small) 0;
 }
