@@ -26,7 +26,7 @@ class Layout extends React.Component {
 
         <style jsx global>{`
             body {
-              overflow: ${iframe ? 'hidden' : 'initial'};
+              overflow: ${iframe ? 'hidden' : 'inherit'};
             }
           `}</style>
       </>
