@@ -444,7 +444,6 @@ header .call-status .text {
 
 #appel main {
   margin: var(--size-medium);
-  padding: var(--size-big) 0;
 }
 
 #home main {
