@@ -741,7 +741,7 @@ div.call form input[type="checkbox"] {
 
 .complement-infos ul li {
   display: flex;
-  padding: var(--size-smaller);
+  padding: var(--size-small) var(--size-medium);
   height: 100%;
   flex-direction: column;
 }

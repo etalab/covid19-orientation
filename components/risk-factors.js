@@ -100,7 +100,7 @@ function RiskFactors({handleRiskFactors}) {
       <style jsx>{`
         .complement-infos ul li {
             display: grid;
-            grid-template-columns: 40px 1fr 20px;
+            grid-template-columns: 40px 1fr 30px;
             align-items: center;
         }
         `}</style>
