@@ -1,19 +1,6 @@
-// Application d'orientation des appels pour la crise COVID-19
-// Réalisée avec le concours de l'Agence du Numérique de la Sécurité Civile
-
-// # ÉQUIPE
-
-// Julien Dubedout
-// Benoit Frattini
-// Nicolas Mathieu
-// David Vigier
-// Toute l'Agence du Numérique de la Sécurité civile
-
-// # REMERCIEMENTS
-
-// Renaud Chaput
-// Missak Kéloglanian
-// Soizic Pénicaud
+// Copyright (c) 2020 ANSC, DINUM
+// SPDX-License-Identifier: MIT
+// License-Filename: LICENSE
 
 import React, {useState, useCallback, useEffect} from 'react'
 import {useRouter} from 'next/router'
@@ -37,9 +24,9 @@ import Consent from '../components/consent'
 import Question from '../components/question'
 import RiskFactors from '../components/risk-factors'
 import RiskFactorsRadios from '../components/risk-factors-radios'
+import StartMessage from '../components/start-message'
 
 // Compute end based on some parameters
-// Replica of arbre_décisions.txt
 // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org
 const chooseEnd = ({
   ageRange,
@@ -266,8 +253,8 @@ function App() {
     submitForm(token, {
       metadata: {
         orientation: orientations[newEnd - 1],
-        algo_version: '2020-03-30',
-        form_version: '2020-03-30'
+        algo_version: '2020-04-06',
+        form_version: '2020-04-06'
       },
       respondent: {
         age_range: ageRange,
@@ -443,13 +430,7 @@ function App() {
       <div id='parcours'>
         {!consent && (
           <>
-            <article className='step' id='message-attente'>
-              <div className='card message start-message'>
-                <p className='primary-message'>Vous pensez avoir des symptômes du Covid-19 et vous voulez savoir quoi faire ?<br />Ce questionnaire est là pour vous orienter.
-                </p>
-              </div>
-            </article>
-
+            <StartMessage />
             <Consent handleConsent={handleConsent} />
           </>
         )}
