@@ -267,8 +267,8 @@ function App() {
     submitForm({
       metadata: {
         orientation: orientations[newEnd - 1],
-        algo_version: '2020-03-30',
-        form_version: '2020-03-30'
+        algo_version: '2020-04-06',
+        form_version: '2020-04-06'
       },
       respondent: {
         age_range: ageRange,
