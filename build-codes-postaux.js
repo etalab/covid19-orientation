@@ -1,3 +1,7 @@
+// Copyright (c) 2020 ANSC, DINUM
+// SPDX-License-Identifier: MIT
+// License-Filename: LICENSE
+
 const {writeFileSync} = require('fs')
 const {chain} = require('lodash')
 const communes = require('@etalab/decoupage-administratif/data/communes.json')

@@ -1,3 +1,7 @@
+// Copyright (c) 2020 ANSC, DINUM
+// SPDX-License-Identifier: MIT
+// License-Filename: LICENSE
+
 import React from 'react'
 
 import Page from '../layouts/main'
