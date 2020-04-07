@@ -9,7 +9,7 @@ import symptomsQuestions from '../symptoms-questions.json'
 import respondentQuestions from '../respondent-questions.json'
 import ends from '../fins.json'
 
-import {getToken, submitForm, getDuration} from '../lib/api'
+import {getToken, submitForm} from '../lib/api'
 import {anonymize} from '../lib/codes-postaux'
 
 import Page from '../layouts/main'
