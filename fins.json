@@ -1,8 +1,8 @@
 {
   "1": {
     "icon": "fa-calendar",
-    "primary": "Cette application n’est pas adaptée aux personnes de moins de 15 ans",
-    "secondary": "Prenez contact avec votre médecin généraliste au moindre doute. En cas d’urgence, appelez le <a href='tel:15'>15</a> (ou contactez le 114 par SMS si vous êtes sourd ou malentendant)."
+    "primary": "Ce questionnaire n’est pas adapté aux personnes de moins de 15 ans",
+    "secondary": "L’algorithme servant à vous orienter n’a pas été médicalement validé pour des populations de moins de 15 ans. Prenez contact avec votre médecin généraliste au moindre doute. En cas d’urgence, appelez le <a href='tel:15'>15</a> (ou contactez le 114 par SMS si vous êtes sourd ou malentendant)."
   },
   "2": {
     "icon": "fa-house-user",

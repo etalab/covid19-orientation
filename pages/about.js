@@ -23,8 +23,10 @@ function About() {
         </p>
         <p>
           Si vous avez moins de 15 ans, un message est affiché indiquant que
-	  l’application n’est pas adaptée à votre situation et aucune donnée
-	  n'est collectée.
+          l’application n’est pas adaptée à votre situation, car l’algorithme
+          servant à vous orienter n’a pas été médicalement validé pour des
+          populations de moins de 15 ans.  Dans ce cas, aucune donnée n'est
+	  collectée.
         </p>
 
         <div className='gouv-button-container'>
