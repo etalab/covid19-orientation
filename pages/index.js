@@ -419,10 +419,11 @@ function App() {
     {step: 7, question: symptomsQuestions.cough, setSymptom: setCough},
     {step: 8, question: symptomsQuestions.agueusia_anosmia, setSymptom: setAgueusiaAnosmia},
     {step: 9, question: symptomsQuestions.sore_throat_aches, setSymptom: setSoreThroatAches},
-    {step: 10, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
-    {step: 11, component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />},
-    {step: 12, component: () => <RiskFactorsRadios handleRiskFactors={handleRiskFactorsRadios} />},
-    {step: 13, component: () => <PostalCode handlePostalCode={setPostalCode} />}
+    {step: 10, question: symptomsQuestions.diarrhea, setSymptom: setDiarrhea},
+    {step: 11, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
+    {step: 12, component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />},
+    {step: 13, component: () => <RiskFactorsRadios handleRiskFactors={handleRiskFactorsRadios} />},
+    {step: 14, component: () => <PostalCode handlePostalCode={setPostalCode} />}
   ]
 
   return (
