@@ -14,7 +14,7 @@ function RiskFactors({handleRiskFactors}) {
     event.preventDefault()
 
     handleRiskFactors({
-      breathing_desease: breathingDisease,
+      breathing_disease: breathingDisease,
       cancer,
       diabetes,
       kidney_disease: kidneyDisease,
