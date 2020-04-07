@@ -20,7 +20,7 @@ function End({end, isFinish, showUrgentMessage, hideUrgentMessage}) {
             {urgent && !isFinish && (
               <div className='centered'>
                 <div className='gouv-button-container'>
-                  <a className='gouv-button' onClick={hideUrgentMessage}><i className='fas fa-check' aria-hidden='true' />Continuer le formulaire</a>
+                  <a className='gouv-button' onClick={hideUrgentMessage}><i className='fas fa-check' aria-hidden='true' />Je veux aider la recherche et finir le questionnaire</a>
                 </div>
               </div>
             )}
