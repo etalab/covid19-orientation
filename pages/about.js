@@ -18,8 +18,13 @@ function About() {
           à des communes de plus de 10 000 habitants. Pour les communes de moins
           de 10 000 habitants, un processus d’agrégation est mis en œuvre et
           seules les données agrégées sont conservées. Dans ce même but, seules
-          les tranches d’âge et l'indice de masse corporelle sont conservés,
+          les tranches d’âge et l’indice de masse corporelle sont conservés,
           non l’âge exact ni la taille et le poids.
+        </p>
+        <p>
+          Si vous avez moins de 15 ans, un message est affiché indiquant que
+	  l’application n’est pas adaptée à votre situation et aucune donnée
+	  n'est collectée.
         </p>
 
         <div className='gouv-button-container'>
