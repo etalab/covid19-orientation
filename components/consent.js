@@ -6,7 +6,7 @@ function Consent({handleConsent}) {
     <article>
       <p>Ce questionnaire a uniquement pour objectif de vous orienter en fonction de votre état de santé et des symptômes que vous déclarez. L’avis qu'il fournit n’a pas de valeur médicale.</p>
 
-      <p>L’algorithme mis en oeuvre pour vous proposer une orientation est conforme à la <span><a target='new' target='_top' title='Accéder à la documentation dans un nouvel onglet' href='https://delegation-numerique-en-sante.github.io/covid19-algorithme-orientation/index.html'>documentation publiée par le ministère des Solidarités et de la Santé</a>,</span> qui référence aussi les autres solutions qui s’y conforment.  Vos réponses serviront à aider la recherche et la compréhension de l’épidémie de COVID-19.</p>
+      <p>L’algorithme mis en oeuvre pour vous proposer une orientation est conforme à la <span><a target='new' target='_top' title='Accéder à la documentation dans un nouvel onglet' href='https://delegation-numerique-en-sante.github.io/covid19-algorithme-orientation/index.html'>documentation publiée par le ministère des Solidarités et de la Santé</a>,</span> qui <span><a target='new' target='_top' href='https://sante.fr/covid-numerique'>référence aussi les autres solutions</a></span> qui s’y conforment.  Vos réponses serviront à aider la recherche et la compréhension de l’épidémie de COVID-19.</p>
 
       <p>Aucune information permettant de vous identifier, directement ou indirectement, n’est collectée. Voyez nos <span><a href='/about'>explications</a></span> à ce sujet.</p>
 
