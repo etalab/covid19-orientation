@@ -251,38 +251,40 @@ function App() {
     } = riskFactorsRadios
 
     submitForm(token, {
-      metadata: {
-        orientation: orientations[newEnd - 1],
-        algo_version: '2020-04-06',
-        form_version: '2020-04-06'
-      },
-      respondent: {
-        age_range: ageRange,
-        imc,
-        postal_code: anonymize(postalCode)
-      },
-      risk_factors: {
-        ...riskFactors,
-        ...riskFactorsRadiosValues
-      },
-      // Set false if undefined
-      symptoms: {
-        agueusia_anosmia: agueusiaAnosmia || false,
-        breathlessness: breathlessness || false,
-        cough: cough || false,
-        diarrhea: diarrhea || false,
-        feeding_day: feedingDay || false,
-        fever,
-        sore_throat_aches: soreThroatAches || false,
-        temperature_cat: temperature || false,
-        tiredness: tiredness || false,
-        tiredness_details: tirednessDetails || false
-      },
-      calculations: {
-        heart_disease_algo,
-        immunosuppressant_disease_algo,
-        immunosuppressant_drug_algo,
-        fever_algo: feverAlgo
+      questionnaire: {
+        metadata: {
+          orientation: orientations[newEnd - 1],
+          algo_version: '2020-04-06',
+          form_version: '2020-04-06'
+        },
+        respondent: {
+          age_range: ageRange,
+          imc,
+          postal_code: anonymize(postalCode)
+        },
+        risk_factors: {
+          ...riskFactors,
+          ...riskFactorsRadiosValues
+        },
+        // Set false if undefined
+        symptoms: {
+          agueusia_anosmia: agueusiaAnosmia || false,
+          breathlessness: breathlessness || false,
+          cough: cough || false,
+          diarrhea: diarrhea || false,
+          feeding_day: feedingDay || false,
+          fever,
+          sore_throat_aches: soreThroatAches || false,
+          temperature_cat: temperature || false,
+          tiredness: tiredness || false,
+          tiredness_details: tirednessDetails || false
+        },
+        calculations: {
+          heart_disease_algo,
+          immunosuppressant_disease_algo,
+          immunosuppressant_drug_algo,
+          fever_algo: feverAlgo
+        }
       }
     })
   }
