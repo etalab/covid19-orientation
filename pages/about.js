@@ -20,9 +20,9 @@ function About() {
             title='Accéder à la documentation dans un nouvel onglet'
             href='https://delegation-numerique-en-sante.github.io/covid19-algorithme-orientation/index.html'
           >
-            documentation officielle
-          </a>{' '}
-          publiée par le ministère des Solidarités et de la Santé.
+              documentation officielle publiée par le ministère des Solidarités et de la Santé
+	  </a>{' '}
+	    . Le ministère référence les solutions qui s'y conforment.
         </p>
         <p>
           Afin de rendre impossible toute réidentification des personnes
@@ -35,8 +35,7 @@ function About() {
 
         <div className='gouv-button-container'>
           <a className='gouv-button' href='/'>
-            <i className='fas fa-arrow-left' aria-hidden='true' /> Retour au
-            formulaire
+            <i className='fas fa-arrow-left' aria-hidden='true' /> Retour à la page principale
           </a>
         </div>
       </article>
