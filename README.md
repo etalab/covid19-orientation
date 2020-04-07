@@ -1,4 +1,4 @@
-# Applicadtion d'orientation COVID19
+# Application d'orientation COVID19
 
 Ce dépôt contient l'application d'orientation COVID19 développé par la [Direction interministérielle du numérique](https://www.numerique.gouv.fr/).
 
