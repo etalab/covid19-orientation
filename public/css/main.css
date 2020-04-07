@@ -470,6 +470,10 @@ header .call-status .text {
   padding: var(--size-medium) 0.4em var(--size-medium) 0;
 }
 
+.step .card li {
+  cursor: pointer;
+}
+
 /* ==========================================================================
    Home layout
    ========================================================================== */
