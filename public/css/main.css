@@ -23,7 +23,7 @@
   font-family: "Marianne";
   font-style: normal;
   font-weight: normal;
-  src: url(../fonts/Marianne-Regular.woff2) format("woff2");
+  src: url(../fonts/Marianne-Regular.woff2) format("woff2"), url(../fonts/Marianne-Regular.woff) format("woff");
 }
 
 @font-face {
