@@ -5,10 +5,10 @@ import reactHtmlParser from 'react-html-parser'
 import fins from '../fins.json'
 
 function End({end, isFinish, showUrgentMessage, hideUrgentMessage}) {
-  const {icon, primary, secondary} = fins[end]
+  const {icon, primary, secondary, urgent} = fins[end]
 
-  if (isFinish || showUrgentMessage) {
-    const text = isFinish ? secondary
+  if (isFinish || (urgent && showUrgentMessage)) {
+    const text = isFinish ? secondary : urgent
     return (
       <>
         <article className='step message-fin'>
@@ -17,10 +17,10 @@ function End({end, isFinish, showUrgentMessage, hideUrgentMessage}) {
             <p className='icon'><i className={`fas ${icon} ${end === 5 ? '' : 'anim-pulse'}`} /></p>
             <p className='primary-message'>{reactHtmlParser(primary)}</p>
             {text && <p className='secondary-message'>{reactHtmlParser(text)}</p>}
-            {!isFinish && (
+            {urgent && !isFinish && (
               <div className='centered'>
                 <div className='gouv-button-container'>
-                  <a className='gouv-button' onClick={hideUrgentMessage}><i className='fas fa-check' aria-hidden='true' />Je veux aider la recherche et finir le questionnaire</a>
+                  <a className='gouv-button' onClick={hideUrgentMessage}><i className='fas fa-check' aria-hidden='true' />Continuer le formulaire</a>
                 </div>
               </div>
             )}

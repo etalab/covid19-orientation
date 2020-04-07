@@ -22,6 +22,7 @@
   "5": {
     "icon": "fa-phone",
     "primary": "Appelez le SAMU en composant le <a href='tel:15'>15</a><br />(ou contactez le 114 par SMS si vous êtes sourd ou malentendant).",
+    "urgent": "Si vous en avez la possibilité, merci de continuer à remplir le questionnaire jusqu’au bout."
   },
   "6": {
     "icon": "fa-user-md",
