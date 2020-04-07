@@ -275,7 +275,7 @@ function App() {
           feeding_day: feedingDay || false,
           fever,
           sore_throat_aches: soreThroatAches || false,
-          temperature_cat: temperature || false,
+          temperature_cat: temperature || "NSP",
           tiredness: tiredness || false,
           tiredness_details: tirednessDetails || false
         },
