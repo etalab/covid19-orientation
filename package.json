@@ -1,9 +1,9 @@
 {
-  "name": "app112",
+  "name": "covid19-orientation",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/judbd/app112.git",
-  "author": "judbd <julien@judbd.com>",
+  "repository": "https://github.com/etalab/covid19-orientation.git",
+  "author": "ANSC/DINUM",
   "license": "MIT",
   "browserslist": [
     "> 0.25% in FR",
