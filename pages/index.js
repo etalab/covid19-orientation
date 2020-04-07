@@ -379,15 +379,15 @@ function App() {
     }
 
     if (height && weight) {
-      nextStep = 11
-    }
-
-    if (riskFactors) {
       nextStep = 12
     }
 
-    if (riskFactorsRadios) {
+    if (riskFactors) {
       nextStep = 13
+    }
+
+    if (riskFactorsRadios) {
+      nextStep = 14
     }
 
     if (postalCode) {
