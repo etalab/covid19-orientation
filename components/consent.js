@@ -16,8 +16,6 @@ function Consent({handleConsent}) {
 
       <style jsx>{`
         a {
-          margin: 1em 0;
-          display: block;
           text-decoration: underline;
         }
         `}</style>
