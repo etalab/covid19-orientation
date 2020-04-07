@@ -135,7 +135,7 @@ function App() {
   const [breathlessness, setBreathlessness] = useState(false)
   const [fever, setFever] = useState(false)
   const [feverAlgo, setFeverAlgo] = useState(false)
-  const [temperature, setTemperature] = useState(null)
+  const [temperature, setTemperature] = useState("NSP")
   const [tiredness, setTiredness] = useState(null)
   const [tirednessDetails, setTirednessDetails] = useState(null)
   const [cough, setCough] = useState(false)
@@ -274,7 +274,7 @@ function App() {
         feeding_day: feedingDay || false,
         fever,
         sore_throat_aches: soreThroatAches || false,
-        temperature_cat: temperature || false,
+        temperature_cat: temperature,
         tiredness: tiredness || false,
         tiredness_details: tirednessDetails || false
       },
@@ -310,7 +310,7 @@ function App() {
     setBreathlessness(false)
     setFever(false)
     setFeverAlgo(false)
-    setTemperature(null)
+    setTemperature("NSP")
     setTiredness(null)
     setTirednessDetails(null)
     setCough(false)
