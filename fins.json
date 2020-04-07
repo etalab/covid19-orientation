@@ -6,17 +6,17 @@
   },
   "2": {
     "icon": "fa-house-user",
-    "primary": "Votre situation peut relever d’un COVID 19 qu’il faut surveiller.",
+    "primary": "Votre situation peut relever d’un COVID-19 qu’il faut surveiller.",
     "secondary": "Si de nouveaux symptômes apparaissent, refaites le test ou consultez votre médecin. Nous vous conseillons de rester à votre domicile."
   },
   "3": {
     "icon": "fa-user-md",
-    "primary": "Votre situation peut relever d’un COVID 19, consultez un médecin",
+    "primary": "Votre situation peut relever d’un COVID-19, consultez un médecin",
     "secondary": "Demandez une téléconsultation, un médecin généraliste ou une visite à domicile.<br />Appelez le <a href='tel:15'>15</a> si une gêne respiratoire ou des difficultés importantes pour vous alimenter ou boire apparaissent pendant plus de 24 heures."
   },
   "4": {
     "icon": "fa-user-md",
-    "primary": "Votre situation peut relever d’un COVID 19, consultez un médecin",
+    "primary": "Votre situation peut relever d’un COVID-19, consultez un médecin",
     "secondary": "Demandez une téléconsultation, un médecin généraliste ou une visite à domicile. Si vous n’arrivez pas à obtenir de consultation, appelez le <a href='tel:15'>15</a> (ou contactez le 114 par SMS si vous êtes sourd ou malentendant)."
   },
   "5": {
@@ -26,17 +26,17 @@
   },
   "6": {
     "icon": "fa-user-md",
-    "primary": "Votre situation peut relever d’un COVID 19, consultez un médecin",
+    "primary": "Votre situation peut relever d’un COVID-19, consultez un médecin",
     "secondary": "Consultez votre médecin généraliste, un médecin en téléconsultation ou demandez une visite à domicile (SOS médecins…)."
   },
   "7": {
     "icon": "fa-virus-slash",
-    "primary": "Votre situation peut relever d’un COVID 19",
+    "primary": "Votre situation peut relever d’un COVID-19",
     "secondary": "Un avis médical est recommandé. Au moindre doute, appelez le <a href='tel:15'>15</a> (ou contactez le 114 par SMS si vous êtes sourd ou malentendant). Nous vous conseillons de rester à votre domicile."
   },
   "8": {
     "icon": "fa-virus-slash",
-    "primary": "Votre situation ne relève probablement pas du COVID 19",
-    "secondary": "N’hésitez pas à contacter votre médecin en cas de doute.<br />Vous pouvez refaire le test en cas de nouveau symptôme pour réévaluer la situation.<br />Pour toute information concernant le COVID 19, composez le <a href='tel:0800130000'>0 800 130 000</a>."
+    "primary": "Votre situation ne relève probablement pas du COVID-19",
+    "secondary": "N’hésitez pas à contacter votre médecin en cas de doute.<br />Vous pouvez refaire le test en cas de nouveau symptôme pour réévaluer la situation.<br />Pour toute information concernant le COVID-19, composez le <a href='tel:0800130000'>0 800 130 000</a>."
   }
 }
