@@ -39,3 +39,5 @@ Merci à :
 Le dépôt est publié sous [licence MIT](LICENSE).
 
 Les auteurs sont l'[Agence du Numérique de la Sécurité civile](https://www.interieur.gouv.fr/Le-ministere/Securite-civile), la [Direction interministérielle du numérique](https://www.numerique.gouv.fr/) et l'ensemble des contributeurs du dépôt.
+
+Les questions, réponses et messages d'orientation présentés à l'utilisateur sont publiés sous [licence Ouverte 2.0](https://spdx.org/licenses/etalab-2.0.html) via [le dépôt de documentation](https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/) de l'algorithme.
