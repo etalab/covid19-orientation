@@ -289,7 +289,7 @@ function App() {
     })
   }
 
-  const reset = () => {
+  const reset = async () => {
     resetSymptomsCount()
     resetMajorSeverityFactorsCount()
     resetMinorSeverityFactorsCount()
