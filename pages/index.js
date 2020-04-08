@@ -289,7 +289,7 @@ function App() {
     })
   }
 
-  const reset = () => {
+  const reset = async () => {
     resetSymptomsCount()
     resetMajorSeverityFactorsCount()
     resetMinorSeverityFactorsCount()
@@ -328,6 +328,10 @@ function App() {
 
     setRiskFactors(null)
     setRiskFactorsRadios(null)
+    
+    // get a new token
+    const token = await getToken()
+    setToken(token)
   }
 
   // Get end
