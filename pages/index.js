@@ -329,7 +329,9 @@ function App() {
     setRiskFactors(null)
     setRiskFactorsRadios(null)
     
-    setToken(null)
+    // get a new token
+    const token = await getToken()
+    setToken(token)
   }
 
   // Get end
