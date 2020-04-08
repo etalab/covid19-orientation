@@ -328,6 +328,8 @@ function App() {
 
     setRiskFactors(null)
     setRiskFactorsRadios(null)
+    
+    setToken(null)
   }
 
   // Get end
