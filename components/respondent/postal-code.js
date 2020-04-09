@@ -29,7 +29,7 @@ function PostalCode({handlePostalCode}) {
                   name='postal-code'
                   type='text'
                   inputMode='numeric'
-                  title='Ce code postal semble incorrecte'
+                  title='Ce code postal semble incorrect'
                   onChange={event => setInput(event.target.value)}
                 />
               </li>
