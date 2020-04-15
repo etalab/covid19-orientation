@@ -54,7 +54,7 @@ function IMC({handleHeight, handleWeight}) {
           </div>
           {height && weight && (
             <button className='mainbutton' type='submit'>
-              <span>Valider ces informations et continuer</span><i className='fas fa-check' aria-hidden='true' />
+              <span>Je mesure {height} cm et je pèse {weight} kilos.</span><i className='fas fa-check' aria-hidden='true' />
             </button>)}
         </form>
       </div>
