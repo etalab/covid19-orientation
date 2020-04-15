@@ -50,7 +50,7 @@ function IMC({handleHeight, handleWeight}) {
                 />
               </li>
             </ul>
-            <p>* Le remplissage de ces 2 champs est obligatoire.</p>
+            <p>* La saisie de ces deux champs est obligatoire.</p>
           </div>
           {height && weight && (
             <button className='mainbutton' type='submit'>
