@@ -19,17 +19,6 @@ function End({end, isFinish}) {
             {text && <p className='secondary-message'>{reactHtmlParser(text)}</p>}
           </div>
         </article>
-
-        {isFinish && (
-          <article>
-            <div className='card message'>
-              <p className='icon'><i className='fa fa-check' /></p>
-              <p className='primary-message'>Merci d’avoir utilisé l’algorithme d’orientation COVID-19</p>
-              <p className='secondary-message'>Cet algorithme est potentiellement modifiable après étude de cas et veille scientifique.</p>
-            </div>
-          </article>
-        )}
-
         <style jsx>{`
           .centered {
             display: flex;
