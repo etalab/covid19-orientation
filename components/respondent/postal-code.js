@@ -34,12 +34,11 @@ function PostalCode({handlePostalCode}) {
                 />
               </li>
             </ul>
-	    <p>* Pour préserver votre anonymat, le code postal n'est retenu que s’il correspond à des communes de plus de 10 000 habitants.</p>
+	    <p>* Saisissez 00000 si vous ne souhaitez pas indiquer le code postal ou si vous ne le connaissez pas.  Celui-ci ne sera retenu que s’il correspond à des communes de plus de 10 000 habitants.</p>
           </div>
-
           {isValid && (
             <button className='mainbutton' type='submit'>
-              <span>Valider ces informations et continuer</span><i className='fas fa-check' aria-hidden='true' />
+              <span>Valider et terminer</span><i className='fas fa-check' aria-hidden='true' />
             </button>
           )}
         </form>
