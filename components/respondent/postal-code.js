@@ -23,7 +23,7 @@ function PostalCode({handlePostalCode}) {
           <div className='complement-infos'>
             <ul>
               <li>
-                <label>Code postal</label>
+                <label>Code postal de votre résidence actuelle *</label>
                 <input
                   id='postal-code'
                   name='postal-code'
@@ -34,6 +34,7 @@ function PostalCode({handlePostalCode}) {
                 />
               </li>
             </ul>
+	    <p>* Pour préserver votre anonymat, le code postal n'est retenu que s’il correspond à des communes de plus de 10 000 habitants.</p>
           </div>
 
           {isValid && (
