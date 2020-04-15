@@ -121,7 +121,6 @@ function App() {
   const [displayForm, setDisplayForm] = useState(false)
   const [end, setEnd] = useState(null)
   const [step, setStep] = useState(0)
-  const [showUrgentMessage, setShowUrgenteMessage] = useState(false)
   const [isFinish, setIsFinish] = useState(false)
 
   // Counters
@@ -298,7 +297,6 @@ function App() {
     // App
     setEnd(null)
     setStep(0)
-    setShowUrgenteMessage(false)
     setIsFinish(false)
 
     // Counters
@@ -351,20 +349,10 @@ function App() {
     setEnd(newEnd)
   }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, ageRange, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
 
-  // Check if end is a emergency
-  useEffect(() => {
-    if (end) {
-      const {urgent} = ends[end]
-      if (urgent) {
-        setShowUrgenteMessage(true)
-      }
-    }
-  }, [end])
-
   // Show/hide Form
   useEffect(() => {
-    setDisplayForm(Boolean(consent && end !== 1 && !showUrgentMessage))
-  }, [consent, ageRange, end, showUrgentMessage])
+    setDisplayForm(Boolean(consent && end !== 1))
+  }, [consent, ageRange, end])
 
   // Get step
   useEffect(() => {
@@ -446,8 +434,6 @@ function App() {
           <End
             end={end}
             isFinish={isFinish}
-            showUrgentMessage={showUrgentMessage}
-            hideUrgentMessage={() => setShowUrgenteMessage(false)}
           />
         )}
 

@@ -4,7 +4,7 @@ import reactHtmlParser from 'react-html-parser'
 
 import fins from '../fins.json'
 
-function End({end, isFinish, showUrgentMessage, hideUrgentMessage}) {
+function End({end, isFinish}) {
   const {icon, primary, secondary} = fins[end]
 
   if (isFinish) {
@@ -17,13 +17,6 @@ function End({end, isFinish, showUrgentMessage, hideUrgentMessage}) {
             <p className='icon'><i className={`fas ${icon} ${end === 5 ? '' : 'anim-pulse'}`} /></p>
             <p className='primary-message'>{reactHtmlParser(primary)}</p>
             {text && <p className='secondary-message'>{reactHtmlParser(text)}</p>}
-            {!isFinish && (
-              <div className='centered'>
-                <div className='gouv-button-container'>
-                  <a className='gouv-button' onClick={hideUrgentMessage}><i className='fas fa-check' aria-hidden='true' />Je veux aider la recherche et finir le questionnaire</a>
-                </div>
-              </div>
-            )}
           </div>
         </article>
 
@@ -52,13 +45,10 @@ function End({end, isFinish, showUrgentMessage, hideUrgentMessage}) {
 
 End.defaultProps = {
   isFinish: false,
-  showUrgentMessage: false
 }
 
 End.propTypes = {
   end: PropTypes.number.isRequired,
-  showUrgentMessage: PropTypes.bool,
-  hideUrgentMessage: PropTypes.func.isRequired,
   isFinish: PropTypes.bool
 }
 
