@@ -27,9 +27,9 @@ function IMC({handleHeight, handleWeight}) {
                   id='add-taille'
                   value={height}
                   data-check-number data-check-number-min='50'
-                  data-check-number-max='300'
+                  data-check-number-max='246'
                   data-check-number-error='Ce nombre ne semble pas être une taille valide en centimètres.'
-                  placeholder='ex : 165'
+                  placeholder='Par ex. 165'
                   inputMode='numeric'
                   onChange={event => setHeight(event.target.value)}
                 />
@@ -41,10 +41,10 @@ function IMC({handleHeight, handleWeight}) {
                   required pattern='[0-9,.]+'
                   id='add-poids'
                   value={weight}
-                  data-check-number data-check-number-min='10'
-                  data-check-number-max='500'
+                  data-check-number data-check-number-min='25'
+                  data-check-number-max='400'
                   data-check-number-error='Ce nombre ne semble pas être un poids valide en kilogrammes.'
-                  placeholder='ex : 70'
+                  placeholder='Par ex. 70'
                   inputMode='decimal'
                   onChange={event => setWeight(event.target.value)}
                 />
