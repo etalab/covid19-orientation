@@ -32,7 +32,7 @@ const chooseEnd = ({
   ageRange,
   minorSeverityFactorsCount,
   majorSeverityFactorsCount,
-  fever,
+  feverAlgo,
   cough,
   diarrhea,
   soreThroatAches,
@@ -49,7 +49,7 @@ const chooseEnd = ({
     end = 1
   } else if (majorSeverityFactorsCount >= 1) {
     end = 5
-  } else if (fever && cough) {
+  } else if (feverAlgo && cough) {
     if (pronosticFactorsCount === 0) {
       end = 6
     }
@@ -63,7 +63,7 @@ const chooseEnd = ({
         end = 4
       }
     }
-  } else if (fever || (!fever && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
+  } else if (feverAlgo || (!feverAlgo && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
     if (pronosticFactorsCount === 0) {
       if (minorSeverityFactorsCount === 0) {
         if (ageRange === 'inf_15' || ageRange === 'from_15_to_49') {
@@ -132,7 +132,6 @@ function App() {
   // Symptoms
   const [feedingDay, setFeedingDay] = useState(false)
   const [breathlessness, setBreathlessness] = useState(false)
-  const [fever, setFever] = useState(false)
   const [feverAlgo, setFeverAlgo] = useState(false)
   const [temperature, setTemperature] = useState(null)
   const [tiredness, setTiredness] = useState(null)
@@ -152,11 +151,7 @@ function App() {
   const [riskFactorsRadios, setRiskFactorsRadios] = useState(null)
 
   const getFeverAlgo = temperature => {
-    if (fever === 999) {
-      return true
-    }
-
-    if (fever === 1 && (temperature === 'inf_35.5' || temperature === 'sup_39')) {
+    if (temperature === 'inf_35.5' || temperature === 'sup_39' || temperature === 'NSP') {
       return true
     }
 
@@ -234,7 +229,7 @@ function App() {
       ageRange,
       minorSeverityFactorsCount,
       majorSeverityFactorsCount,
-      fever,
+      feverAlgo,
       cough,
       diarrhea,
       soreThroatAches,
@@ -272,7 +267,6 @@ function App() {
           cough: cough || false,
           diarrhea: diarrhea || false,
           feeding_day: feedingDay || false,
-          fever,
           sore_throat_aches: soreThroatAches || false,
           temperature_cat: temperature || 'NSP',
           tiredness: tiredness || false,
@@ -308,7 +302,6 @@ function App() {
     // Symptoms
     setFeedingDay(false)
     setBreathlessness(false)
-    setFever(false)
     setFeverAlgo(false)
     setTemperature(null)
     setTiredness(null)
@@ -339,7 +332,6 @@ function App() {
       ageRange,
       minorSeverityFactorsCount,
       majorSeverityFactorsCount,
-      fever,
       cough,
       diarrhea,
       soreThroatAches,
@@ -347,7 +339,7 @@ function App() {
       pronosticFactorsCount
     })
     setEnd(newEnd)
-  }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, ageRange, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
+  }, [cough, agueusiaAnosmia, diarrhea, soreThroatAches, ageRange, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
 
   // Show/hide Form
   useEffect(() => {
@@ -362,26 +354,21 @@ function App() {
       setIsFinish(true)
     }
 
-    // When no fever, skip temperature
-    if (fever !== 1 && step === 4) {
-      nextStep = 5
-    }
-
     // When not tired, skip to cough
-    if (step === 6 && tiredness === false) {
-      nextStep = 7
+    if (step === 5 && tiredness === false) {
+      nextStep = 6
     }
 
     if (height && weight) {
-      nextStep = 12
+      nextStep = 11
     }
 
     if (riskFactors) {
-      nextStep = 13
+      nextStep = 12
     }
 
     if (riskFactorsRadios) {
-      nextStep = 14
+      nextStep = 13
     }
 
     if (postalCode) {
@@ -390,7 +377,7 @@ function App() {
     }
 
     setStep(nextStep)
-  }, [step, ageRange, fever, height, weight, riskFactors, riskFactorsRadios, postalCode, tiredness])
+  }, [step, ageRange, height, weight, riskFactors, riskFactorsRadios, postalCode, tiredness])
 
   useEffect(() => {
     const {iframe} = router.query
@@ -403,21 +390,20 @@ function App() {
     {step: 0, question: respondentQuestions.ageRange, setSymptom: setAgeRange},
     {step: 1, question: symptomsQuestions.feeding_day, setSymptom: setFeedingDay},
     {step: 2, question: symptomsQuestions.breathlessness, setSymptom: setBreathlessness},
-    {step: 3, question: symptomsQuestions.fever, setSymptom: setFever},
-    {step: 4, question: symptomsQuestions.temperature, setSymptom: temperature => {
+    {step: 3, question: symptomsQuestions.temperature, setSymptom: temperature => {
       setTemperature(temperature)
       setFeverAlgo(getFeverAlgo(temperature))
     }},
-    {step: 5, question: symptomsQuestions.tiredness, setSymptom: setTiredness},
-    {step: 6, question: symptomsQuestions.tiredness_details, setSymptom: setTirednessDetails},
-    {step: 7, question: symptomsQuestions.cough, setSymptom: setCough},
-    {step: 8, question: symptomsQuestions.agueusia_anosmia, setSymptom: setAgueusiaAnosmia},
-    {step: 9, question: symptomsQuestions.sore_throat_aches, setSymptom: setSoreThroatAches},
-    {step: 10, question: symptomsQuestions.diarrhea, setSymptom: setDiarrhea},
-    {step: 11, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
-    {step: 12, component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />},
-    {step: 13, component: () => <RiskFactorsRadios handleRiskFactors={handleRiskFactorsRadios} />},
-    {step: 14, component: () => <PostalCode handlePostalCode={setPostalCode} />}
+    {step: 4, question: symptomsQuestions.tiredness, setSymptom: setTiredness},
+    {step: 5, question: symptomsQuestions.tiredness_details, setSymptom: setTirednessDetails},
+    {step: 6, question: symptomsQuestions.cough, setSymptom: setCough},
+    {step: 7, question: symptomsQuestions.agueusia_anosmia, setSymptom: setAgueusiaAnosmia},
+    {step: 8, question: symptomsQuestions.sore_throat_aches, setSymptom: setSoreThroatAches},
+    {step: 9, question: symptomsQuestions.diarrhea, setSymptom: setDiarrhea},
+    {step: 10, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
+    {step: 11, component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />},
+    {step: 12, component: () => <RiskFactorsRadios handleRiskFactors={handleRiskFactorsRadios} />},
+    {step: 13, component: () => <PostalCode handlePostalCode={setPostalCode} />}
   ]
 
   return (
