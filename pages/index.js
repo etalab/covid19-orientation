@@ -83,7 +83,9 @@ const chooseEnd = ({
         end = 4
       }
     }
-  } else if (cough || soreThroatAches || agueusiaAnosmia) {
+  } else if ((cough && !soreThroatAches && !agueusiaAnosmia) ||
+	     (!cough && soreThroatAches && !agueusiaAnosmia) ||
+	     (!cough && !soreThroatAches && !agueusiaAnosmia)) {
     if (pronosticFactorsCount === 0) {
       end = 2
     } else if (pronosticFactorsCount >= 1) {
