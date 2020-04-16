@@ -23,7 +23,7 @@ function PostalCode({handlePostalCode}) {
           <div className='complement-infos'>
             <ul>
               <li>
-                <label>Code postal de votre résidence actuelle *</label>
+                <label>Code postal du lieu de confinement actuel *</label>
                 <input
                   id='postal-code'
                   name='postal-code'
