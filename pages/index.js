@@ -248,8 +248,8 @@ function App() {
       questionnaire: {
         metadata: {
           orientation: orientations[newEnd - 1],
-          algo_version: '2020-04-06',
-          form_version: '2020-04-06'
+          algo_version: '2020-04-16',
+          form_version: '2020-04-16'
         },
         respondent: {
           age_range: ageRange,
