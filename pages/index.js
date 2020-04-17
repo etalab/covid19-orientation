@@ -63,7 +63,7 @@ const chooseEnd = ({
         end = 4
       }
     }
-  } else if (feverAlgo || (!feverAlgo && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
+  } else if (feverAlgo || (!feverAlgo && (diarrhea || (cough && soreThroatAches) || (agueusiaAnosmia && soreThroatAches) || (cough && agueusiaAnosmia)))) {
     if (pronosticFactorsCount === 0) {
       if (minorSeverityFactorsCount === 0) {
         if (ageRange === 'inf_15' || ageRange === 'from_15_to_49') {
