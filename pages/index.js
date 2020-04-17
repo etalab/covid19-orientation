@@ -5,6 +5,8 @@
 import React, {useState, useCallback, useEffect} from 'react'
 import {useRouter} from 'next/router'
 
+import {chooseEnd} from '../utils'
+
 import symptomsQuestions from '../symptoms-questions.json'
 import respondentQuestions from '../respondent-questions.json'
 import ends from '../fins.json'
@@ -26,78 +28,10 @@ import RiskFactors from '../components/risk-factors'
 import RiskFactorsRadios from '../components/risk-factors-radios'
 import StartMessage from '../components/start-message'
 
-// Compute end based on some parameters
-// https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org
-const chooseEnd = ({
-  ageRange,
-  minorSeverityFactorsCount,
-  majorSeverityFactorsCount,
-  fever,
-  cough,
-  diarrhea,
-  soreThroatAches,
-  agueusiaAnosmia,
-  pronosticFactorsCount
-}) => {
-  let end = 8
-  // Dont try to compute end when no age defined
-  if (!ageRange) {
-    return 8
-  }
-
-  if (ageRange === 'inf_15') {
-    end = 1
-  } else if (majorSeverityFactorsCount >= 1) {
-    end = 5
-  } else if (fever && cough) {
-    if (pronosticFactorsCount === 0) {
-      end = 6
-    }
-
-    if (pronosticFactorsCount >= 1) {
-      if (minorSeverityFactorsCount < 2) {
-        end = 6
-      }
-
-      if (minorSeverityFactorsCount >= 2) {
-        end = 4
-      }
-    }
-  } else if (fever || (!fever && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
-    if (pronosticFactorsCount === 0) {
-      if (minorSeverityFactorsCount === 0) {
-        if (ageRange === 'inf_15' || ageRange === 'from_15_to_49') {
-          end = 2
-        } else {
-          end = 3
-        }
-      } else if (minorSeverityFactorsCount >= 1) {
-        end = 3
-      }
-    }
-
-    if (pronosticFactorsCount >= 1) {
-      if (minorSeverityFactorsCount < 2) {
-        end = 3
-      } else if (minorSeverityFactorsCount >= 2) {
-        end = 4
-      }
-    }
-  } else if (cough || soreThroatAches || agueusiaAnosmia) {
-    if (pronosticFactorsCount === 0) {
-      end = 2
-    } else if (pronosticFactorsCount >= 1) {
-      end = 7
-    }
-  } else if (!cough && !soreThroatAches && !agueusiaAnosmia) {
-    end = 8
-  }
-
-  return end
-}
-
 // Rounded IMC at 1 decimal
-const computeIMC = (weight, height) => (Math.round(parseInt(weight, 10) / ((parseInt(height, 10) / 100) ** 2) * 10) / 10)
+const computeIMC = (weight, height) =>
+  Math.round((parseInt(weight, 10) / (parseInt(height, 10) / 100) ** 2) * 10) /
+  10
 
 // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-qui-correspondent-%C3%A0-lorientation-affich%C3%A9e
 const orientations = [
@@ -126,9 +60,21 @@ function App() {
 
   // Counters
   const [symptomsCount, setSymptomsCount, resetSymptomsCount] = useCount(0)
-  const [majorSeverityFactorsCount, setMajorSeverityFactorsCount, resetMajorSeverityFactorsCount] = useCount(0)
-  const [minorSeverityFactorsCount, setMinorSeverityFactorsCount, resetMinorSeverityFactorsCount] = useCount(0)
-  const [pronosticFactorsCount, setPronosticFactorsCount, resetPronosticFactorsCount] = useCount(0)
+  const [
+    majorSeverityFactorsCount,
+    setMajorSeverityFactorsCount,
+    resetMajorSeverityFactorsCount
+  ] = useCount(0)
+  const [
+    minorSeverityFactorsCount,
+    setMinorSeverityFactorsCount,
+    resetMinorSeverityFactorsCount
+  ] = useCount(0)
+  const [
+    pronosticFactorsCount,
+    setPronosticFactorsCount,
+    resetPronosticFactorsCount
+  ] = useCount(0)
 
   // Symptoms
   const [feedingDay, setFeedingDay] = useState(false)
@@ -157,27 +103,44 @@ function App() {
       return true
     }
 
-    if (fever === 1 && (temperature === 'inf_35.5' || temperature === 'sup_39')) {
+    if (
+      fever === 1 &&
+      (temperature === 'inf_35.5' || temperature === 'sup_39')
+    ) {
       return true
     }
 
     return false
   }
 
-  const handleResponse = useCallback((response, setSymptom) => {
-    const {isSymptom, isMajorSeverityFactor, isMinorSeverityFactor, isPronosticFactors, value} = response
+  const handleResponse = useCallback(
+    (response, setSymptom) => {
+      const {
+        isSymptom,
+        isMajorSeverityFactor,
+        isMinorSeverityFactor,
+        isPronosticFactors,
+        value
+      } = response
 
-    // Counters
-    setSymptomsCount(isSymptom)
-    setPronosticFactorsCount(isPronosticFactors)
-    setMajorSeverityFactorsCount(isMajorSeverityFactor)
-    setMinorSeverityFactorsCount(isMinorSeverityFactor)
+      // Counters
+      setSymptomsCount(isSymptom)
+      setPronosticFactorsCount(isPronosticFactors)
+      setMajorSeverityFactorsCount(isMajorSeverityFactor)
+      setMinorSeverityFactorsCount(isMinorSeverityFactor)
 
-    // The value can be false
-    setSymptom(value !== undefined ? value : isSymptom)
+      // The value can be false
+      setSymptom(value !== undefined ? value : isSymptom)
 
-    setStep(step => step + 1)
-  }, [setSymptomsCount, setPronosticFactorsCount, setMajorSeverityFactorsCount, setMinorSeverityFactorsCount])
+      setStep(step => step + 1)
+    },
+    [
+      setSymptomsCount,
+      setPronosticFactorsCount,
+      setMajorSeverityFactorsCount,
+      setMinorSeverityFactorsCount
+    ]
+  )
 
   const handleConsent = useCallback(async () => {
     setConsent(true)
@@ -187,7 +150,8 @@ function App() {
   }, [])
 
   // Boolean risks : count of truthy riskFactors
-  const getPronosticFactorsCount = riskFactors => Object.keys(riskFactors).filter(risk => Boolean(riskFactors[risk])).length
+  const getPronosticFactorsCount = riskFactors =>
+    Object.keys(riskFactors).filter(risk => Boolean(riskFactors[risk])).length
 
   // Radio risks : count of truthy *algo or pregnant=1
   const getPronosticFactorsCountRadios = riskFactorsRadios => {
@@ -218,13 +182,19 @@ function App() {
 
   const handleRiskFactors = riskFactors => {
     // Increase pronosticFactorsCount by 1 for each true risk factor
-    setPronosticFactorsCount(getPronosticFactorsCount(riskFactors) + getPronosticFactorsCountRadios(riskFactorsRadios))
+    setPronosticFactorsCount(
+      getPronosticFactorsCount(riskFactors) +
+        getPronosticFactorsCountRadios(riskFactorsRadios)
+    )
     setRiskFactors(riskFactors)
   }
 
   const handleRiskFactorsRadios = riskFactorsRadios => {
     // Increase pronosticFactorsCount by 1 for each true risk factor
-    setPronosticFactorsCount(getPronosticFactorsCount(riskFactors) + getPronosticFactorsCountRadios(riskFactorsRadios))
+    setPronosticFactorsCount(
+      getPronosticFactorsCount(riskFactors) +
+        getPronosticFactorsCountRadios(riskFactorsRadios)
+    )
     setRiskFactorsRadios(riskFactorsRadios)
   }
 
@@ -328,8 +298,8 @@ function App() {
 
     setRiskFactors(null)
     setRiskFactorsRadios(null)
-    
-    // get a new token
+
+    // Get a new token
     const token = await getToken()
     setToken(token)
   }
@@ -349,7 +319,17 @@ function App() {
       pronosticFactorsCount
     })
     setEnd(newEnd)
-  }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, ageRange, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
+  }, [
+    cough,
+    fever,
+    agueusiaAnosmia,
+    diarrhea,
+    soreThroatAches,
+    ageRange,
+    minorSeverityFactorsCount,
+    majorSeverityFactorsCount,
+    pronosticFactorsCount
+  ])
 
   // Check if end is a emergency
   useEffect(() => {
@@ -402,7 +382,17 @@ function App() {
     }
 
     setStep(nextStep)
-  }, [step, ageRange, fever, height, weight, riskFactors, riskFactorsRadios, postalCode, tiredness])
+  }, [
+    step,
+    ageRange,
+    fever,
+    height,
+    weight,
+    riskFactors,
+    riskFactorsRadios,
+    postalCode,
+    tiredness
+  ])
 
   useEffect(() => {
     const {iframe} = router.query
@@ -412,24 +402,72 @@ function App() {
 
   // Orderered steps
   const steps = [
-    {step: 0, question: respondentQuestions.ageRange, setSymptom: setAgeRange},
-    {step: 1, question: symptomsQuestions.feeding_day, setSymptom: setFeedingDay},
-    {step: 2, question: symptomsQuestions.breathlessness, setSymptom: setBreathlessness},
+    {
+      step: 0,
+      question: respondentQuestions.ageRange,
+      setSymptom: setAgeRange
+    },
+    {
+      step: 1,
+      question: symptomsQuestions.feeding_day,
+      setSymptom: setFeedingDay
+    },
+    {
+      step: 2,
+      question: symptomsQuestions.breathlessness,
+      setSymptom: setBreathlessness
+    },
     {step: 3, question: symptomsQuestions.fever, setSymptom: setFever},
-    {step: 4, question: symptomsQuestions.temperature, setSymptom: temperature => {
-      setTemperature(temperature)
-      setFeverAlgo(getFeverAlgo(temperature))
-    }},
-    {step: 5, question: symptomsQuestions.tiredness, setSymptom: setTiredness},
-    {step: 6, question: symptomsQuestions.tiredness_details, setSymptom: setTirednessDetails},
+    {
+      step: 4,
+      question: symptomsQuestions.temperature,
+      setSymptom: temperature => {
+        setTemperature(temperature)
+        setFeverAlgo(getFeverAlgo(temperature))
+      }
+    },
+    {
+      step: 5,
+      question: symptomsQuestions.tiredness,
+      setSymptom: setTiredness
+    },
+    {
+      step: 6,
+      question: symptomsQuestions.tiredness_details,
+      setSymptom: setTirednessDetails
+    },
     {step: 7, question: symptomsQuestions.cough, setSymptom: setCough},
-    {step: 8, question: symptomsQuestions.agueusia_anosmia, setSymptom: setAgueusiaAnosmia},
-    {step: 9, question: symptomsQuestions.sore_throat_aches, setSymptom: setSoreThroatAches},
+    {
+      step: 8,
+      question: symptomsQuestions.agueusia_anosmia,
+      setSymptom: setAgueusiaAnosmia
+    },
+    {
+      step: 9,
+      question: symptomsQuestions.sore_throat_aches,
+      setSymptom: setSoreThroatAches
+    },
     {step: 10, question: symptomsQuestions.diarrhea, setSymptom: setDiarrhea},
-    {step: 11, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
-    {step: 12, component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />},
-    {step: 13, component: () => <RiskFactorsRadios handleRiskFactors={handleRiskFactorsRadios} />},
-    {step: 14, component: () => <PostalCode handlePostalCode={setPostalCode} />}
+    {
+      step: 11,
+      component: () => (
+        <Imc handleHeight={setHeight} handleWeight={setWeight} />
+      )
+    },
+    {
+      step: 12,
+      component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />
+    },
+    {
+      step: 13,
+      component: () => (
+        <RiskFactorsRadios handleRiskFactors={handleRiskFactorsRadios} />
+      )
+    },
+    {
+      step: 14,
+      component: () => <PostalCode handlePostalCode={setPostalCode} />
+    }
   ]
 
   return (
@@ -460,7 +498,10 @@ function App() {
 
         {(step > 0 || isFinish) && (
           <div className='gouv-button-container'>
-            <a className='gouv-button' onClick={() => reset()}><i className='fas fa-arrow-left' aria-hidden='true' /> Retour au début</a>
+            <a className='gouv-button' onClick={() => reset()}>
+              <i className='fas fa-arrow-left' aria-hidden='true' /> Retour au
+              début
+            </a>
           </div>
         )}
       </div>
