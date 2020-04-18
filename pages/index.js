@@ -66,7 +66,7 @@ const chooseEnd = ({
   } else if (feverAlgo || (!feverAlgo && (diarrhea || (cough && soreThroatAches) || (agueusiaAnosmia && soreThroatAches) || (cough && agueusiaAnosmia)))) {
     if (pronosticFactorsCount === 0) {
       if (minorSeverityFactorsCount === 0) {
-        if (ageRange === 'inf_15' || ageRange === 'from_15_to_49') {
+        if (ageRange === 'from_15_to_49') {
           end = 2
         } else {
           end = 3
