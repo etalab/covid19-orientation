@@ -822,9 +822,6 @@ div.call form input[type="checkbox"] {
 .card .mainbutton {
   border: 0;
   border-radius: 0 0 5px 5px;
-} bold;
-  box-shadow: none;
-  border: 1px solid var(--validate-non-text);
 }
 
 /* ==========================================================================
