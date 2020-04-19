@@ -152,12 +152,12 @@ function App() {
   const [riskFactors, setRiskFactors] = useState(null)
   const [riskFactorsRadios, setRiskFactorsRadios] = useState(null)
 
-  const getFeverAlgo = temperature => {
+  const getFeverAlgo = (fever, temperature) => {
     if (fever === 999) {
       return true
     }
 
-    if (fever === 1 && (temperature === 'inf_35.5' || temperature === 'sup_39')) {
+    if (fever === 1 && (temperature === 'inf_35.5' || temperature === 'sup_39' || temperature === 'NSP')) {
       return true
     }
 
@@ -415,10 +415,13 @@ function App() {
     {step: 0, question: respondentQuestions.ageRange, setSymptom: setAgeRange},
     {step: 1, question: symptomsQuestions.feeding_day, setSymptom: setFeedingDay},
     {step: 2, question: symptomsQuestions.breathlessness, setSymptom: setBreathlessness},
-    {step: 3, question: symptomsQuestions.fever, setSymptom: setFever},
+    {step: 3, question: symptomsQuestions.fever, setSymptom: fever => {
+      setFever(fever);
+      setFeverAlgo(getFeverAlgo(fever, temperature))
+    }},
     {step: 4, question: symptomsQuestions.temperature, setSymptom: temperature => {
       setTemperature(temperature)
-      setFeverAlgo(getFeverAlgo(temperature))
+      setFeverAlgo(getFeverAlgo(fever, temperature))
     }},
     {step: 5, question: symptomsQuestions.tiredness, setSymptom: setTiredness},
     {step: 6, question: symptomsQuestions.tiredness_details, setSymptom: setTirednessDetails},
