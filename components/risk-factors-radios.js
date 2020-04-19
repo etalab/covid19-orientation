@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 function RadioChoices({icon, choices, name, value, onChange, children}) {
@@ -81,6 +81,24 @@ const deriveAlgoValue = (key, value) => {
   return false
 }
 
+function checkIfFormIsValid (
+  part,
+  heartDisease,
+  pregnant,
+  immunosuppressantDisease,
+  immunosuppressantDrug
+) {
+  if (part === 0) return (
+    heartDisease !== false &&
+    pregnant !== false
+  )
+  if (part === 1) return (
+    immunosuppressantDisease !== false &&
+    immunosuppressantDrug !== false
+  )
+  return false;
+}
+
 function RiskFactors({handleRiskFactors}) {
   const [heartDisease, setHeartDisease] = useState(false)
   const [immunosuppressantDisease, setImmunosuppressantDisease] = useState(false)
@@ -89,37 +107,41 @@ function RiskFactors({handleRiskFactors}) {
   const [immunosuppressantDiseaseAlgo, setImmunosuppressantDiseaseAlgo] = useState(false)
   const [immunosuppressantDrugAlgo, setImmunosuppressantDrugAlgo] = useState(false)
   const [pregnant, setPregnant] = useState(false)
-  const [isValid, setIsValid] = useState(null)
+  const [isValid, setIsValid] = useState(false)
+  const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
 
   const [part, setPart] = useState(0)
 
+  useEffect(() => {
+    const validValue = checkIfFormIsValid (
+      part,
+      heartDisease,
+      pregnant,
+      immunosuppressantDisease,
+      immunosuppressantDrug
+    )
+    setIsValid(validValue)
+  });
+
   const handleSubmit = event => {
     event.preventDefault()
-    let isValid
-
-    if (part === 0) {
-      isValid = (heartDisease !== false && pregnant !== false)
-    } else {
-      isValid = (immunosuppressantDisease !== false && immunosuppressantDrug !== false)
-    }
-
-    if (isValid) {
-      setIsValid(true)
-      if (part === 0) {
-        setPart(1)
-      } else {
-        handleRiskFactors({
-          heart_disease: heartDisease,
-          immunosuppressant_disease: immunosuppressantDisease,
-          immunosuppressant_drug: immunosuppressantDrug,
-          heart_disease_algo: heartDiseaseAlgo,
-          immunosuppressant_disease_algo: immunosuppressantDiseaseAlgo,
-          immunosuppressant_drug_algo: immunosuppressantDrugAlgo,
-          pregnant
-        })
-      }
-    } else {
+    setHasBeenSubmitted(true)
+    if (isValid && part === 0) {
+      // avance dans le form, reset des variables de validation/submit
+      setHasBeenSubmitted(false)
       setIsValid(false)
+      setPart(1)
+    } else if (isValid && part === 1){
+      // soumet les reponses des `form part 0` et `form part 1`
+      handleRiskFactors({
+        heart_disease: heartDisease,
+        immunosuppressant_disease: immunosuppressantDisease,
+        immunosuppressant_drug: immunosuppressantDrug,
+        heart_disease_algo: heartDiseaseAlgo,
+        immunosuppressant_disease_algo: immunosuppressantDiseaseAlgo,
+        immunosuppressant_drug_algo: immunosuppressantDrugAlgo,
+        pregnant
+      })
     }
   }
 
@@ -229,9 +251,10 @@ function RiskFactors({handleRiskFactors}) {
               )}
             </ul>
           </div>
-          { isValid === false && <MandatoryFieldsMessage /> }
-          <button className='mainbutton' type='submit'>
-            <span>Valider ces informations et continuer</span><i className='fas fa-check' aria-hidden='true' />
+          {hasBeenSubmitted && !isValid && <MandatoryFieldsMessage /> }
+          <button className={`mainbutton ${isValid ? '' : 'required'}`} type='submit'>
+            <span>Valider ces informations et continuer</span>
+            <i className='fas fa-check' aria-hidden='true' />
           </button>
         </form>
       </div>

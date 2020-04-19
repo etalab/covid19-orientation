@@ -618,100 +618,6 @@ div.call form input[type="checkbox"] {
   padding: 0;
 }
 
-.card button {
-  border: 1px solid var(--text-default);
-  color: var(--text-default);
-  background-color: #ebfbff;
-  border-radius: 5px;
-  padding: var(--size-small);
-  transition: all 200ms;
-  cursor: pointer;
-  box-shadow: 0px 2px 2px rgb(53, 117, 133, 0.3);
-  width: 100%;
-  margin: var(--size-small) 0 0 0;
-}
-
-.card button:hover {
-  background-color: #fff;
-  border-radius: 5px;
-  transition: all 200ms;
-  box-shadow: none;
-  position: relative;
-  top: 2px;
-}
-
-.card button:active,
-.card button:focus {
-  border: 1px solid var(--text-default);
-  color: #fff;
-  background-color: var(--text-default);
-  transition: all 200ms;
-  position: relative;
-  top: 2px;
-  box-shadow: none;
-}
-
-.card button.secondary {
-  border: 1px solid var(--text-light);
-  color: var(--text-default);
-  background-color: var(--global-ui-light-alpha);
-  box-shadow: none;
-  width: 100%;
-}
-
-.card button.secondary:hover {
-  background-color: #fff;
-  border-radius: 5px;
-  transition: all 200ms;
-  box-shadow: none;
-  position: static;
-}
-
-.card button.secondary:active,
-.card button.secondary:focus {
-  border: 1px solid var(--text-default);
-  color: #fff;
-  background-color: var(--text-default);
-  transition: all 200ms;
-  position: static;
-  box-shadow: none;
-}
-
-.card button.active {
-  background-color: var(--validate);
-  transition: all 200ms ease-in;
-  color: var(--text-default);
-  font-weight: bold;
-  box-shadow: none;
-  border: 1px solid var(--validate-non-text);
-}
-
-.card button.active:hover,
-.card button.active:active,
-.card button.active:focus {
-  position: static;
-}
-
-.card .mainbutton {
-  display: flex;
-  background-color: #fff;
-  font-size: 1var (--size-bigger);
-  padding: 0.7em;
-}
-
-.card .mainbutton span {
-  flex: 2 2 auto;
-  font-weight: bold;
-}
-
-.card .mainbutton i {
-  margin: auto;
-}
-
-.card button.mainbutton {
-  border: none;
-}
-
 .sub-card {
   background-color: #fff;
   padding: var(--size-small) 0;
@@ -875,38 +781,50 @@ div.call form input[type="checkbox"] {
   text-align: center;
 }
 
-.card .mainbutton,
-.card button.mainbutton {
+/* ==========================================================================
+   MainButton Submit Questions
+   ========================================================================== */
+
+.mainbutton:focus,
+.mainbutton:active,
+.mainbutton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0.7em;
+  margin: var(--size-small) 0 0 0;
+  font-weight: bold;
+  font-size: 1var (--size-bigger);
   color: var(--text-dark);
   background-color: var(--validate);
   box-shadow: 3px 3px 0px var(--validate-non-text);
-  border-radius: 0 0 5px 5px;
+  border-radius: 5px;
   transition: all 200ms ease-in;
 }
 
-.card .mainbutton:focus,
-.card .mainbutton:hover,
-.card .mainbutton:active {
+.mainbutton.required,
+.mainbutton:hover {
   background-color: var(--global-ui-darker);
   color: #fff;
   box-shadow: none;
-  transition: all 200ms ease-in;
 }
 
-.card button.mainbutton:focus,
-.card button.mainbutton:hover,
-.card button.mainbutton:active,
-.card .mainbutton:focus,
-.card .mainbutton:hover,
-.card .mainbutton:active {
-  background-color: var(--global-ui-darker);
-  color: #fff;
-  box-shadow: none;
-  transition: all 200ms ease-in;
+.mainbutton span {
+  flex: 1;
+}
+
+.mainbutton .fa-check {
+  flex: 0;
 }
 
 .card .mainbutton {
-  color: var(--text-dark);
+  border: 0;
+  border-radius: 0 0 5px 5px;
+} bold;
+  box-shadow: none;
+  border: 1px solid var(--validate-non-text);
 }
 
 /* ==========================================================================
@@ -1004,20 +922,6 @@ div.call form input[type="checkbox"] {
 .card.message .secondary-message {
   margin: var(--size-medium);
   color: var(--text-default);
-}
-
-.card.message .mainbutton {
-  background-color: #fff;
-  box-shadow: none;
-}
-
-.card.message .mainbutton:focus,
-.card.message .mainbutton:hover,
-.card.message .mainbutton:active {
-  background-color: var(--validate);
-  color: var(--text-dark);
-  box-shadow: none;
-  transition: all 200ms ease-in;
 }
 
 /* ==========================================================================
