@@ -6,11 +6,13 @@
       {
         "label": "Oui",
         "icon": "fa-check",
-        "isMajorSeverityFactor": true
+        "isMajorSeverityFactor": true,
+        "value": true
       },
       {
         "label": "Non",
-        "icon": "fa-times"
+        "icon": "fa-times",
+        "value": false
       }
     ]
   },
@@ -21,11 +23,13 @@
       {
         "label": "Oui",
         "icon": "fa-check",
-        "isMajorSeverityFactor": true
+        "isMajorSeverityFactor": true,
+        "value": true
       },
       {
         "label": "Non",
-        "icon": "fa-times"
+        "icon": "fa-times",
+        "value": false
       }
     ]
   },
@@ -107,7 +111,8 @@
       },
       {
         "label": "Non, aucune toux n'est apparue ou ma toux n'a pas augmenté",
-        "icon": "fa-times"
+        "icon": "fa-times",
+        "value": false
       }
     ]
   },
@@ -122,7 +127,8 @@
       },
       {
         "label": "Non, mon goût et mon odorat n’ont pas diminué",
-        "icon": "fa-times"
+        "icon": "fa-times",
+        "value": false
       }
     ]
   },
@@ -137,7 +143,8 @@
       },
       {
         "label": "Non, je n’ai aucun de ces symptômes",
-        "icon": "fa-times"
+        "icon": "fa-times",
+        "value": false
       }
     ]
   },
@@ -152,7 +159,8 @@
       },
       {
         "label": "Non, je n’ai pas de diarrhée",
-        "icon": "fa-times"
+        "icon": "fa-times",
+        "value": false
       }
     ]
   }

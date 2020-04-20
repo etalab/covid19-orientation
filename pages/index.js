@@ -325,7 +325,7 @@ function App() {
     {step: 2, question: symptomsQuestions.breathlessness, setSymptom: setBreathlessness},
     {step: 3, question: symptomsQuestions.temperature, setSymptom: temperature => {
       setTemperature(temperature)
-      setFeverAlgo(getFeverAlgo(temperature))
+      setFeverAlgo(getFeverAlgo(fever, temperature))
     }},
     {step: 4, question: symptomsQuestions.tiredness, setSymptom: setTiredness},
     {step: 5, question: symptomsQuestions.tiredness_details, setSymptom: setTirednessDetails},
