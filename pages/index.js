@@ -26,11 +26,7 @@ import RiskFactors from '../components/risk-factors'
 import RiskFactorsRadios from '../components/risk-factors-radios'
 import StartMessage from '../components/start-message'
 
-import { chooseEnd } from '../utils'
-
-
-// Rounded IMC at 1 decimal
-const computeIMC = (weight, height) => (Math.round(parseInt(weight, 10) / ((parseInt(height, 10) / 100) ** 2) * 10) / 10)
+import { chooseEnd, computeIMC } from '../utils'
 
 // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-qui-correspondent-%C3%A0-lorientation-affich%C3%A9e
 const orientations = [
@@ -325,7 +321,7 @@ function App() {
     {step: 2, question: symptomsQuestions.breathlessness, setSymptom: setBreathlessness},
     {step: 3, question: symptomsQuestions.temperature, setSymptom: temperature => {
       setTemperature(temperature)
-      setFeverAlgo(getFeverAlgo(temperature))
+      setFeverAlgo(getFeverAlgo(fever, temperature))
     }},
     {step: 4, question: symptomsQuestions.tiredness, setSymptom: setTiredness},
     {step: 5, question: symptomsQuestions.tiredness_details, setSymptom: setTirednessDetails},
