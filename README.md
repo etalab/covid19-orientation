@@ -1,4 +1,4 @@
-# Application d'orientation COVID19
+## Application d'orientation COVID19
 
 Ce dépôt contient l'application d'orientation COVID19 développé par la [Direction interministérielle du numérique](https://www.numerique.gouv.fr/).
 
@@ -6,11 +6,11 @@ L'application elle-même est destinée à être publiée sur une page du site [h
 
 L'implémentation proposée est conforme à la [documentation](https://delegation-numerique-en-sante.github.io/covid19-algorithme-orientation/) publiée par le ministère des Solidarités et de la Santé pour l'algorithme d'orientation COVID19.
 
-# Contributions
+## Contributions
 
 Vos remarques et contributions sont les bienvenues.  Vous pouvez pour cela [ouvrir un ticket](https://github.com/etalab/covid19-orientation/issues).
 
-## Contributeurs et remerciements
+### Contributeurs et remerciements
 
 Première version :
 
@@ -34,7 +34,15 @@ Merci à :
 - Renaud Chaput
 - Soizic Pénicaud
 
-# Licence
+## Tester sur sa machine
+
+	~$ git clone https://github.com/etalab/covid19-orientation.git
+	~$ cd covid19-orientation/
+	~$ yarn install
+	~$ yarn dev
+	~$ xdg-open http://localhost:3000
+
+## Licence
 
 Le dépôt est publié sous [licence MIT](LICENSE).
 
