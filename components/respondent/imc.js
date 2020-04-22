@@ -27,9 +27,9 @@ function IMC({handleHeight, handleWeight}) {
                   id='add-taille'
                   value={height}
                   data-check-number data-check-number-min='50'
-                  data-check-number-max='300'
-                  data-check-number-error='Ce nombre ne semble pas être une taille en centimètres valide.'
-                  placeholder='ex : 165'
+                  data-check-number-max='246'
+                  data-check-number-error='Ce nombre ne semble pas être une taille valide en centimètres.'
+                  placeholder='Par ex. 165'
                   inputMode='numeric'
                   onChange={event => setHeight(event.target.value)}
                 />
@@ -41,20 +41,20 @@ function IMC({handleHeight, handleWeight}) {
                   required pattern='[0-9,.]+'
                   id='add-poids'
                   value={weight}
-                  data-check-number data-check-number-min='10'
-                  data-check-number-max='500'
-                  data-check-number-error='Ce nombre ne semble pas être un poids en kilogrammes valide.'
-                  placeholder='ex : 70'
+                  data-check-number data-check-number-min='25'
+                  data-check-number-max='400'
+                  data-check-number-error='Ce nombre ne semble pas être un poids valide en kilogrammes.'
+                  placeholder='Par ex. 70'
                   inputMode='decimal'
                   onChange={event => setWeight(event.target.value)}
                 />
               </li>
             </ul>
-            <p>* Le remplissage de ces 2 champs est obligatoire.</p>
+            <p>* La saisie de ces deux champs est obligatoire.</p>
           </div>
           {height && weight && (
             <button className='mainbutton' type='submit'>
-              <span>Valider ces informations et continuer</span><i className='fas fa-check' aria-hidden='true' />
+              <span>Je mesure {height} cm et je pèse {weight} kilos.</span><i className='fas fa-check' aria-hidden='true' />
             </button>)}
         </form>
       </div>

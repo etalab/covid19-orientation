@@ -17,7 +17,8 @@
     "build:codes-postaux": "node build-codes-postaux",
     "export": "next export",
     "start": "serve out",
-    "lint": "xo"
+    "lint": "xo",
+    "test": "jest"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
@@ -38,6 +39,7 @@
     "eslint-config-xo-nextjs": "^1.6.0",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
+    "jest": "^25.3.0",
     "lodash": "^4.17.15",
     "xo": "^0.28.2"
   },
@@ -46,7 +48,8 @@
     "semicolon": false,
     "space": 2,
     "env": [
-      "browser"
+      "browser",
+      "jest"
     ],
     "rules": {
       "unicorn/catch-error-name": "off",

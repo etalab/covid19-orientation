@@ -26,78 +26,7 @@ import RiskFactors from '../components/risk-factors'
 import RiskFactorsRadios from '../components/risk-factors-radios'
 import StartMessage from '../components/start-message'
 
-// Compute end based on some parameters
-// https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/pseudo-code.org
-const chooseEnd = ({
-  ageRange,
-  minorSeverityFactorsCount,
-  majorSeverityFactorsCount,
-  fever,
-  cough,
-  diarrhea,
-  soreThroatAches,
-  agueusiaAnosmia,
-  pronosticFactorsCount
-}) => {
-  let end = 8
-  // Dont try to compute end when no age defined
-  if (!ageRange) {
-    return 8
-  }
-
-  if (ageRange === 'inf_15') {
-    end = 1
-  } else if (majorSeverityFactorsCount >= 1) {
-    end = 5
-  } else if (fever && cough) {
-    if (pronosticFactorsCount === 0) {
-      end = 6
-    }
-
-    if (pronosticFactorsCount >= 1) {
-      if (minorSeverityFactorsCount < 2) {
-        end = 6
-      }
-
-      if (minorSeverityFactorsCount >= 2) {
-        end = 4
-      }
-    }
-  } else if (fever || (!fever && (diarrhea || (cough && soreThroatAches) || (cough && agueusiaAnosmia)))) {
-    if (pronosticFactorsCount === 0) {
-      if (minorSeverityFactorsCount === 0) {
-        if (ageRange === 'inf_15' || ageRange === 'from_15_to_49') {
-          end = 2
-        } else {
-          end = 3
-        }
-      } else if (minorSeverityFactorsCount >= 1) {
-        end = 3
-      }
-    }
-
-    if (pronosticFactorsCount >= 1) {
-      if (minorSeverityFactorsCount < 2) {
-        end = 3
-      } else if (minorSeverityFactorsCount >= 2) {
-        end = 4
-      }
-    }
-  } else if (cough || soreThroatAches || agueusiaAnosmia) {
-    if (pronosticFactorsCount === 0) {
-      end = 2
-    } else if (pronosticFactorsCount >= 1) {
-      end = 7
-    }
-  } else if (!cough && !soreThroatAches && !agueusiaAnosmia) {
-    end = 8
-  }
-
-  return end
-}
-
-// Rounded IMC at 1 decimal
-const computeIMC = (weight, height) => (Math.round(parseInt(weight, 10) / ((parseInt(height, 10) / 100) ** 2) * 10) / 10)
+import { chooseEnd, computeIMC } from '../utils'
 
 // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-qui-correspondent-%C3%A0-lorientation-affich%C3%A9e
 const orientations = [
@@ -121,7 +50,6 @@ function App() {
   const [displayForm, setDisplayForm] = useState(false)
   const [end, setEnd] = useState(null)
   const [step, setStep] = useState(0)
-  const [showUrgentMessage, setShowUrgenteMessage] = useState(false)
   const [isFinish, setIsFinish] = useState(false)
 
   // Counters
@@ -133,7 +61,6 @@ function App() {
   // Symptoms
   const [feedingDay, setFeedingDay] = useState(false)
   const [breathlessness, setBreathlessness] = useState(false)
-  const [fever, setFever] = useState(false)
   const [feverAlgo, setFeverAlgo] = useState(false)
   const [temperature, setTemperature] = useState(null)
   const [tiredness, setTiredness] = useState(null)
@@ -152,12 +79,8 @@ function App() {
   const [riskFactors, setRiskFactors] = useState(null)
   const [riskFactorsRadios, setRiskFactorsRadios] = useState(null)
 
-  const getFeverAlgo = (fever, temperature) => {
-    if (fever === 999) {
-      return true
-    }
-
-    if (fever === 1 && (temperature === 'inf_35.5' || temperature === 'sup_39' || temperature === 'NSP')) {
+  const getFeverAlgo = temperature => {
+    if (temperature === 'inf_35.5' || temperature === 'sup_39' || temperature === 'NSP') {
       return true
     }
 
@@ -235,7 +158,7 @@ function App() {
       ageRange,
       minorSeverityFactorsCount,
       majorSeverityFactorsCount,
-      fever,
+      feverAlgo,
       cough,
       diarrhea,
       soreThroatAches,
@@ -254,8 +177,8 @@ function App() {
       questionnaire: {
         metadata: {
           orientation: orientations[newEnd - 1],
-          algo_version: '2020-04-06',
-          form_version: '2020-04-20'
+          algo_version: '2020-04-17',
+          form_version: '2020-04-22'
         },
         respondent: {
           age_range: ageRange,
@@ -273,7 +196,6 @@ function App() {
           cough: cough || false,
           diarrhea: diarrhea || false,
           feeding_day: feedingDay || false,
-          fever,
           sore_throat_aches: soreThroatAches || false,
           temperature_cat: temperature || 'NSP',
           tiredness: tiredness || false,
@@ -298,7 +220,6 @@ function App() {
     // App
     setEnd(null)
     setStep(0)
-    setShowUrgenteMessage(false)
     setIsFinish(false)
 
     // Counters
@@ -310,7 +231,6 @@ function App() {
     // Symptoms
     setFeedingDay(false)
     setBreathlessness(false)
-    setFever(false)
     setFeverAlgo(false)
     setTemperature(null)
     setTiredness(null)
@@ -328,7 +248,7 @@ function App() {
 
     setRiskFactors(null)
     setRiskFactorsRadios(null)
-    
+
     // get a new token
     const token = await getToken()
     setToken(token)
@@ -341,7 +261,6 @@ function App() {
       ageRange,
       minorSeverityFactorsCount,
       majorSeverityFactorsCount,
-      fever,
       cough,
       diarrhea,
       soreThroatAches,
@@ -349,22 +268,12 @@ function App() {
       pronosticFactorsCount
     })
     setEnd(newEnd)
-  }, [cough, fever, agueusiaAnosmia, diarrhea, soreThroatAches, ageRange, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
-
-  // Check if end is a emergency
-  useEffect(() => {
-    if (end) {
-      const {urgent} = ends[end]
-      if (urgent) {
-        setShowUrgenteMessage(true)
-      }
-    }
-  }, [end])
+  }, [cough, agueusiaAnosmia, diarrhea, soreThroatAches, ageRange, minorSeverityFactorsCount, majorSeverityFactorsCount, pronosticFactorsCount])
 
   // Show/hide Form
   useEffect(() => {
-    setDisplayForm(Boolean(consent && end !== 1 && !showUrgentMessage))
-  }, [consent, ageRange, end, showUrgentMessage])
+    setDisplayForm(Boolean(consent && end !== 1))
+  }, [consent, ageRange, end])
 
   // Get step
   useEffect(() => {
@@ -374,26 +283,21 @@ function App() {
       setIsFinish(true)
     }
 
-    // When no fever, skip temperature
-    if (fever !== 1 && step === 4) {
-      nextStep = 5
-    }
-
     // When not tired, skip to cough
-    if (step === 6 && tiredness === false) {
-      nextStep = 7
+    if (step === 5 && tiredness === false) {
+      nextStep = 6
     }
 
     if (height && weight) {
-      nextStep = 12
+      nextStep = 11
     }
 
     if (riskFactors) {
-      nextStep = 13
+      nextStep = 12
     }
 
     if (riskFactorsRadios) {
-      nextStep = 14
+      nextStep = 13
     }
 
     if (postalCode) {
@@ -402,7 +306,7 @@ function App() {
     }
 
     setStep(nextStep)
-  }, [step, ageRange, fever, height, weight, riskFactors, riskFactorsRadios, postalCode, tiredness])
+  }, [step, ageRange, height, weight, riskFactors, riskFactorsRadios, postalCode, tiredness])
 
   useEffect(() => {
     const {iframe} = router.query
@@ -415,24 +319,20 @@ function App() {
     {step: 0, question: respondentQuestions.ageRange, setSymptom: setAgeRange},
     {step: 1, question: symptomsQuestions.feeding_day, setSymptom: setFeedingDay},
     {step: 2, question: symptomsQuestions.breathlessness, setSymptom: setBreathlessness},
-    {step: 3, question: symptomsQuestions.fever, setSymptom: fever => {
-      setFever(fever);
-      setFeverAlgo(getFeverAlgo(fever, temperature))
-    }},
-    {step: 4, question: symptomsQuestions.temperature, setSymptom: temperature => {
+    {step: 3, question: symptomsQuestions.temperature, setSymptom: temperature => {
       setTemperature(temperature)
-      setFeverAlgo(getFeverAlgo(fever, temperature))
+      setFeverAlgo(getFeverAlgo(temperature))
     }},
-    {step: 5, question: symptomsQuestions.tiredness, setSymptom: setTiredness},
-    {step: 6, question: symptomsQuestions.tiredness_details, setSymptom: setTirednessDetails},
-    {step: 7, question: symptomsQuestions.cough, setSymptom: setCough},
-    {step: 8, question: symptomsQuestions.agueusia_anosmia, setSymptom: setAgueusiaAnosmia},
-    {step: 9, question: symptomsQuestions.sore_throat_aches, setSymptom: setSoreThroatAches},
-    {step: 10, question: symptomsQuestions.diarrhea, setSymptom: setDiarrhea},
-    {step: 11, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
-    {step: 12, component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />},
-    {step: 13, component: () => <RiskFactorsRadios handleRiskFactors={handleRiskFactorsRadios} />},
-    {step: 14, component: () => <PostalCode handlePostalCode={setPostalCode} />}
+    {step: 4, question: symptomsQuestions.tiredness, setSymptom: setTiredness},
+    {step: 5, question: symptomsQuestions.tiredness_details, setSymptom: setTirednessDetails},
+    {step: 6, question: symptomsQuestions.cough, setSymptom: setCough},
+    {step: 7, question: symptomsQuestions.agueusia_anosmia, setSymptom: setAgueusiaAnosmia},
+    {step: 8, question: symptomsQuestions.sore_throat_aches, setSymptom: setSoreThroatAches},
+    {step: 9, question: symptomsQuestions.diarrhea, setSymptom: setDiarrhea},
+    {step: 10, component: () => <Imc handleHeight={setHeight} handleWeight={setWeight} />},
+    {step: 11, component: () => <RiskFactors handleRiskFactors={handleRiskFactors} />},
+    {step: 12, component: () => <RiskFactorsRadios handleRiskFactors={handleRiskFactorsRadios} />},
+    {step: 13, component: () => <PostalCode handlePostalCode={setPostalCode} />}
   ]
 
   return (
@@ -449,8 +349,6 @@ function App() {
           <End
             end={end}
             isFinish={isFinish}
-            showUrgentMessage={showUrgentMessage}
-            hideUrgentMessage={() => setShowUrgenteMessage(false)}
           />
         )}
 

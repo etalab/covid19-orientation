@@ -33,28 +33,6 @@
       }
     ]
   },
-  "fever": {
-    "title": "Pensez-vous avoir eu de la fièvre ces derniers jours (frissons, sueurs) ?",
-    "icon": "fa-temperature-up",
-    "responses": [
-      {
-        "label": "Oui",
-        "icon": "fa-check",
-        "isSymptom": true,
-        "value": 1
-      },
-      {
-        "label": "Non",
-        "icon": "fa-times",
-        "value": 0
-      },
-      {
-        "label": "Je ne sais pas",
-        "icon": "fa-question-circle",
-        "value": 999
-      }
-    ]
-  },
   "temperature": {
     "title": "Quelle a été votre température la plus élevée ces dernières 48 heures ?",
     "icon": "fa-temperature-up",

@@ -4,11 +4,11 @@ import reactHtmlParser from 'react-html-parser'
 
 import fins from '../fins.json'
 
-function End({end, isFinish, showUrgentMessage, hideUrgentMessage}) {
-  const {icon, primary, secondary, urgent} = fins[end]
+function End({end, isFinish}) {
+  const {icon, primary, secondary} = fins[end]
 
-  if (isFinish || (urgent && showUrgentMessage)) {
-    const text = isFinish ? secondary : urgent
+  if (isFinish) {
+    const text = secondary
     return (
       <>
         <article className='step message-fin'>
@@ -17,26 +17,8 @@ function End({end, isFinish, showUrgentMessage, hideUrgentMessage}) {
             <p className='icon'><i className={`fas ${icon} ${end === 5 ? '' : 'anim-pulse'}`} /></p>
             <p className='primary-message'>{reactHtmlParser(primary)}</p>
             {text && <p className='secondary-message'>{reactHtmlParser(text)}</p>}
-            {urgent && !isFinish && (
-              <div className='centered'>
-                <div className='gouv-button-container'>
-                  <a className='gouv-button' onClick={hideUrgentMessage}><i className='fas fa-check' aria-hidden='true' />Je veux aider la recherche et finir le questionnaire</a>
-                </div>
-              </div>
-            )}
           </div>
         </article>
-
-        {isFinish && (
-          <article>
-            <div className='card message'>
-              <p className='icon'><i className='fa fa-check' /></p>
-              <p className='primary-message'>Merci d’avoir utilisé l’algorithme d’orientation COVID-19</p>
-              <p className='secondary-message'>Cet algorithme est potentiellement modifiable après étude de cas et veille scientifique.</p>
-            </div>
-          </article>
-        )}
-
         <style jsx>{`
           .centered {
             display: flex;
@@ -52,13 +34,10 @@ function End({end, isFinish, showUrgentMessage, hideUrgentMessage}) {
 
 End.defaultProps = {
   isFinish: false,
-  showUrgentMessage: false
 }
 
 End.propTypes = {
   end: PropTypes.number.isRequired,
-  showUrgentMessage: PropTypes.bool,
-  hideUrgentMessage: PropTypes.func.isRequired,
   isFinish: PropTypes.bool
 }
 
