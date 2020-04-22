@@ -178,7 +178,7 @@ function App() {
         metadata: {
           orientation: orientations[newEnd - 1],
           algo_version: '2020-04-17',
-          form_version: '2020-04-17'
+          form_version: '2020-04-22'
         },
         respondent: {
           age_range: ageRange,
