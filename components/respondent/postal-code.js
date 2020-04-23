@@ -19,9 +19,14 @@ function PostalCode({handlePostalCode}) {
   }
 
   useEffect(() => {
-    const regex = /^\d{5}$/
-    setIsValid(input.match(regex))
-  }, [input])
+    if (userDoNotConsent) {
+      setIsValid(true)
+    } else {
+      const regex = /^\d{5}$/
+      const matches = input.match(regex);
+      setIsValid(matches)
+    }
+  }, [input, userDoNotConsent])
 
   return (
     <article className='step'>
