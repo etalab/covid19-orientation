@@ -4,7 +4,7 @@ Ce dépôt contient l'application d'orientation COVID19 développé par la [Dire
 
 L'application elle-même est destinée à être publiée sur une page du site [https://www.gouvernement.fr](www.gouvernement.fr).
 
-L'implémentation proposée est conforme à la version `2020-04-17` de la [documentation](https://delegation-numerique-en-sante.github.io/covid19-algorithme-orientation/) publiée par le ministère des Solidarités et de la Santé pour l'algorithme d'orientation COVID19.
+L'implémentation proposée est conforme à la version `2020-04-29` de la [documentation](https://delegation-numerique-en-sante.github.io/covid19-algorithme-orientation/) publiée par le ministère des Solidarités et de la Santé pour l'algorithme d'orientation COVID19.
 
 ## Contributions
 
