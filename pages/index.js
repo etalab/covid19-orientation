@@ -30,14 +30,14 @@ import { chooseEnd, computeIMC } from '../utils'
 
 // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-qui-correspondent-%C3%A0-lorientation-affich%C3%A9e
 const orientations = [
-  'orientation_moins_de_15_ans',
-  'orientation_domicile_surveillance_1',
-  'orientation_consultation_surveillance_1',
-  'orientation_consultation_surveillance_2',
-  'orientation_SAMU',
-  'orientation_consultation_surveillance_3',
-  'orientation_consultation_surveillance_4',
-  'orientation_surveillance'
+  'less_15',
+  'home_surveillance',
+  'consultation_surveillance_1',
+  'consultation_surveillance_2',
+  'SAMU',
+  'consultation_surveillance_3',
+  'consultation_surveillance_4',
+  'surveillance'
 ]
 
 function App() {
@@ -177,8 +177,8 @@ function App() {
       questionnaire: {
         metadata: {
           orientation: orientations[newEnd - 1],
-          algo_version: '2020-04-17',
-          form_version: '2020-04-23'
+          algo_version: '2020-04-29',
+          form_version: '2020-04-29'
         },
         respondent: {
           age_range: ageRange,
