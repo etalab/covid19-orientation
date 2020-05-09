@@ -10,7 +10,6 @@ import respondentQuestions from '../respondent-questions.json'
 import ends from '../fins.json'
 
 import {getToken, submitForm} from '../lib/api'
-import {anonymize} from '../lib/codes-postaux'
 
 import Page from '../layouts/main'
 
@@ -183,7 +182,7 @@ function App() {
         respondent: {
           age_range: ageRange,
           imc,
-          postal_code: anonymize(postalCode)
+          postal_code: postalCode
         },
         risk_factors: {
           ...riskFactors,
