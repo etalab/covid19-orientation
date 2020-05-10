@@ -46,7 +46,7 @@ const chooseEnd = ({
     if (pronosticFactorsCount === 0) {
       if (minorSeverityFactorsCount === 0) {
         if (ageRange === 'from_15_to_49') {
-          end = 2
+          end = 6
         } else {
           end = 3
         }
@@ -68,7 +68,7 @@ const chooseEnd = ({
     (!cough && !soreThroatAches && agueusiaAnosmia)
   ) {
     if (pronosticFactorsCount === 0) {
-      end = 2
+      end = 6
     } else if (pronosticFactorsCount >= 1) {
       end = 7
     }

@@ -30,7 +30,6 @@ import { chooseEnd, computeIMC } from '../utils'
 // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-qui-correspondent-%C3%A0-lorientation-affich%C3%A9e
 const orientations = [
   'less_15',
-  'home_surveillance',
   'consultation_surveillance_1',
   'consultation_surveillance_2',
   'SAMU',
