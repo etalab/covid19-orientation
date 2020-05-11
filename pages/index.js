@@ -10,7 +10,6 @@ import respondentQuestions from '../respondent-questions.json'
 import ends from '../fins.json'
 
 import {getToken, submitForm} from '../lib/api'
-import {anonymize} from '../lib/codes-postaux'
 
 import Page from '../layouts/main'
 
@@ -31,7 +30,6 @@ import { chooseEnd, computeIMC } from '../utils'
 // https://github.com/Delegation-numerique-en-sante/covid19-algorithme-orientation/blob/master/implementation.org#variables-qui-correspondent-%C3%A0-lorientation-affich%C3%A9e
 const orientations = [
   'less_15',
-  'home_surveillance',
   'consultation_surveillance_1',
   'consultation_surveillance_2',
   'SAMU',
@@ -177,13 +175,13 @@ function App() {
       questionnaire: {
         metadata: {
           orientation: orientations[newEnd - 1],
-          algo_version: '2020-04-29',
-          form_version: '2020-04-29'
+          algo_version: '2020-05-10',
+          form_version: '2020-05-10'
         },
         respondent: {
           age_range: ageRange,
           imc,
-          postal_code: anonymize(postalCode)
+          postal_code: postalCode
         },
         risk_factors: {
           ...riskFactors,

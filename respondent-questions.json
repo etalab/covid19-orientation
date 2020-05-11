@@ -12,12 +12,12 @@
         "value": "from_15_to_49"
       },
       {
-        "label": "Entre 50 et 69 ans",
-        "value": "from_50_to_69"
+        "label": "Entre 50 et 64 ans",
+        "value": "from_50_to_64"
       },
       {
-        "label": "70 ans ou plus",
-        "value": "sup_70",
+        "label": "65 ans ou plus",
+        "value": "sup_65",
         "isPronosticFactors": true
       }
     ]

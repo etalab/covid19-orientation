@@ -74,19 +74,19 @@ doit retourner un type number (> 1 & <= 8)', () => {
         expect(result).toBeGreaterThan(1)
         expect(result).toBeLessThanOrEqual(8)
       })
-      it('Entre 50 et 69 ans', () => {
+      it('Entre 50 et 64 ans', () => {
         value = {
           ...parameters,
-          ageRange: 'from_50_to_69'
+          ageRange: 'from_50_to_64'
         }
         result = chooseEnd(value)
         expect(result).toBeGreaterThan(1)
         expect(result).toBeLessThanOrEqual(8)
       })
-      it('70 ans ou plus', () => {
+      it('65 ans ou plus', () => {
         value = {
           ...parameters,
-          ageRange: 'sup_70'
+          ageRange: 'sup_65'
         }
         result = chooseEnd(value)
         expect(result).toBeGreaterThan(1)
