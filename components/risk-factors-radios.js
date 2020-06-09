@@ -74,10 +74,6 @@ const deriveAlgoValue = (key, value) => {
     return true
   }
 
-  if (key === 'immunosuppressantDrug' && value === 1) {
-    return true
-  }
-
   return false
 }
 
@@ -85,16 +81,14 @@ function checkIfFormIsValid (
   part,
   heartDisease,
   pregnant,
-  immunosuppressantDisease,
-  immunosuppressantDrug
+  immunosuppressantDisease
 ) {
   if (part === 0) return (
     heartDisease !== false &&
     pregnant !== false
   )
   if (part === 1) return (
-    immunosuppressantDisease !== false &&
-    immunosuppressantDrug !== false
+    immunosuppressantDisease !== false
   )
   return false;
 }
@@ -102,10 +96,8 @@ function checkIfFormIsValid (
 function RiskFactors({handleRiskFactors}) {
   const [heartDisease, setHeartDisease] = useState(false)
   const [immunosuppressantDisease, setImmunosuppressantDisease] = useState(false)
-  const [immunosuppressantDrug, setImmunosuppressantDrug] = useState(false)
   const [heartDiseaseAlgo, setHeartDiseaseAlgo] = useState(false)
   const [immunosuppressantDiseaseAlgo, setImmunosuppressantDiseaseAlgo] = useState(false)
-  const [immunosuppressantDrugAlgo, setImmunosuppressantDrugAlgo] = useState(false)
   const [pregnant, setPregnant] = useState(false)
   const [isValid, setIsValid] = useState(false)
   const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
@@ -117,8 +109,7 @@ function RiskFactors({handleRiskFactors}) {
       part,
       heartDisease,
       pregnant,
-      immunosuppressantDisease,
-      immunosuppressantDrug
+      immunosuppressantDisease
     )
     setIsValid(validValue)
   });
@@ -136,10 +127,8 @@ function RiskFactors({handleRiskFactors}) {
       handleRiskFactors({
         heart_disease: heartDisease,
         immunosuppressant_disease: immunosuppressantDisease,
-        immunosuppressant_drug: immunosuppressantDrug,
         heart_disease_algo: heartDiseaseAlgo,
         immunosuppressant_disease_algo: immunosuppressantDiseaseAlgo,
-        immunosuppressant_drug_algo: immunosuppressantDrugAlgo,
         pregnant
       })
     }
@@ -169,7 +158,7 @@ function RiskFactors({handleRiskFactors}) {
                         {title: 'Non applicable', value: 888}
                       ]}
                     >
-                      Êtes-vous enceinte ?
+                      Êtes-vous enceinte au 3ème trimestre de votre grossesse ?
                     </RadioChoices>
                   </li>
                   <li
@@ -194,11 +183,10 @@ function RiskFactors({handleRiskFactors}) {
                         {title: 'Je ne sais pas', value: 999}
                       ]}
                     >
-                      Avez-vous une hypertension artérielle mal équilibrée ?
-                      <br />
-                      Ou une maladie cardiaque ou vasculaire ?
-                      <br />
-                      Ou prenez-vous un traitement à visée cardiologique ?
+			Avez-vous des antécédents de maladie cardiovasculaire :
+			hypertension artérielle compliquée (avec complications cardiaques, rénales), 
+			accident vasculaire cérébral, maladie coronaire (infarctus), chirurgie cardiaque, 
+			insuffisance cardiaque avec essoufflement au moindre effort ?
                     </RadioChoices>
                   </li>
                 </>
@@ -222,29 +210,11 @@ function RiskFactors({handleRiskFactors}) {
                         {title: 'Je ne sais pas', value: 999}
                       ]}
                     >
-                      Avez-vous une maladie connue pour diminuer vos défenses
-                      immunitaires ?
-                    </RadioChoices>
-                  </li>
-                  <li style={{display: 'block'}}>
-                    <RadioChoices
-                      icon='fa-procedures'
-                      name='immunosuppressantDrug'
-                      value={immunosuppressantDrug}
-                      onChange={value => {
-                        setImmunosuppressantDrug(value)
-                        setImmunosuppressantDrugAlgo(deriveAlgoValue('immunosuppressantDrug', value))
-                      }}
-                      choices={[
-                        {
-                          title: 'Oui',
-                          value: 1
-                        },
-                        {title: 'Non', value: 0},
-                        {title: 'Je ne sais pas', value: 999}
-                      ]}
-                    >
-                      Prenez-vous un traitement immunosuppresseur ? C’est un traitement qui diminue vos défenses contre les infections : corticoïdes, méthotrexate, ciclosporine, tacrolimus, azathioprine, cyclophosphamide, etc.
+			Avez-vous une immunodépression, par exemple : médicamenteuse (chimiothérapie
+			anti cancéreuse, traitement immunosuppresseur, biothérapie et/ou corticothérapie
+			à dose immunosuppressive depuis plus de 15 jours) ; infection à VIH non contrôlée
+			ou avec des CD4 &lt;200/mm3 ; consécutive à une greffe d'organe solide ou de cellules
+			souches hématopoïétiques ; liée à une hémopathie maligne en cours de traitement ?
                     </RadioChoices>
                   </li>
                 </>
