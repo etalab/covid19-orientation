@@ -18,24 +18,28 @@ function Pronostic({handlePronostic}) {
           </li>
           <li onClick={() => handlePronostic(true)} >
             <a id='circ-cancer'>
-              <span>J\J’ai un cancer ou j’ai déjà eu un cancer\n dans les 3 dernières annéesJ</span><i className='fas fa-procedures' />
+              <span>J\J’ai un cancer évolutif sous traitement (hors hormonothérapie)J</span><i className='fas fa-procedures' />
             </a>
           </li>
           <li onClick={() => handlePronostic(true)} >
             <a id='circ-pneumo'>
-              <span>J\J’ai une maladie respiratoire ou je suis\n suivi par un pneumologueJ</span><i className='fas fa-lungs-virus' /></a>
+              <span>J\J’ai une maladie respiratoire chroniqueJ</span><i className='fas fa-lungs-virus' /></a>
           </li>
           <li onClick={() => handlePronostic(true)} >
             <a id='circ-fievre'>
-              <span>J\J’ai une insuffisance rénale chronique\n dialyséeJ</span><i className='fas fa-kidneys' /></a>
+              <span>J\J’ai une insuffisance rénale chronique chronique avec besoin de faire de la dialyseJ</span><i className='fas fa-kidneys' /></a>
           </li>
           <li onClick={() => handlePronostic(true)} >
             <a id='circ-foie'>
-              <span>J\J’ai une maladie chronique du\n foieJ</span><i className='fas fa-procedures' /></a>
+              <span>J\J’ai une cirrhoseJ</span><i className='fas fa-procedures' /></a>
+          </li>
+          <li onClick={() => handlePronostic(true)} >
+            <a id='circ-sickle'>
+              <span>J\J’ai une drépanocytoseJ</span><i className='fas fa-procedures' /></a>
           </li>
           <li onClick={() => handlePronostic(true)} >
             <a id='circ-enceinte'>
-              <span>Je suis enceinte</span><i className='fas fa-baby'/></a>
+              <span>Je suis enceinte au 3ème trimestre de ma grossesse</span><i className='fas fa-baby'/></a>
           </li>
           <li onClick={() => handlePronostic(true)} >
             <a id='circ-immu'>
