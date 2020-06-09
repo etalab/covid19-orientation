@@ -28,7 +28,7 @@ const chooseEnd = ({
 
     if (pronosticFactorsCount >= 1) {
       if (minorSeverityFactorsCount < 2) {
-        end = 6
+        end = 7
       }
 
       if (minorSeverityFactorsCount >= 2) {
