@@ -126,10 +126,6 @@ function App() {
       count++
     }
 
-    if (riskFactorsRadios.immunosuppressant_drug_algo) {
-      count++
-    }
-
     if (riskFactorsRadios.pregnant === 1) {
       count++
     }
@@ -167,7 +163,6 @@ function App() {
     const {
       heart_disease_algo,
       immunosuppressant_disease_algo,
-      immunosuppressant_drug_algo,
       ...riskFactorsRadiosValues
     } = riskFactorsRadios
 
@@ -202,7 +197,6 @@ function App() {
         calculations: {
           heart_disease_algo,
           immunosuppressant_disease_algo,
-          immunosuppressant_drug_algo,
           fever_algo: feverAlgo
         }
       }
