@@ -101,23 +101,23 @@
     ]
   },
   "cough": {
-    "title": "Avez-vous une toux ou une augmentation de votre toux habituelle ces derniers jours ?",
+    "title": "Avez-vous une toux ou votre toux habituelle s’est-elle modifiée ces derniers jours ?",
     "icon": "fa-head-side-cough",
     "responses": [
       {
-        "label": "Oui, une toux est apparue ou a augmenté ces derniers jours",
+        "label": "Oui, une toux est apparue ou ma toux habituelle a augmenté ces derniers jours",
         "icon": "fa-check",
         "isSymptom": true
       },
       {
-        "label": "Non, aucune toux n'est apparue ou ma toux n'a pas augmenté",
+        "label": "Non, aucune toux n'est apparue et ma toux habituelle n'a pas augmenté",
         "icon": "fa-times",
         "value": false
       }
     ]
   },
   "agueusia_anosmia": {
-    "title": "Avez-vous noté une forte diminution de votre goût ou de votre odorat ces derniers jours ?",
+    "title": "Avez-vous noté une perte ou une forte diminution de votre goût ou de votre odorat ces derniers jours ?",
     "icon": "fa-soup",
     "responses": [
       {
@@ -133,11 +133,11 @@
     ]
   },
   "sore_throat_aches": {
-    "title": "Avez-vous un mal de gorge ou des douleurs musculaires ou des courbatures inhabituelles ces derniers jours ?",
+    "title": "Avez-vous un mal de gorge ou des douleurs musculaires ou des courbatures inhabituelles ou des maux de tête inhabituels ces derniers jours ?",
     "icon": "fa-scarf",
     "responses": [
       {
-        "label": "Oui, j’ai mal à la gorge, des douleurs musculaires ou des courbatures depuis quelques jours",
+        "label": "Oui, j’ai mal à la gorge, des douleurs musculaires, des courbatures ou des maux de tête inhabituels depuis quelques jours",
         "icon": "fa-check",
         "isSymptom": true
       },
