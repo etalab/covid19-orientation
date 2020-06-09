@@ -1,5 +1,5 @@
 {
-  "1": {
+  "2": {
     "icon": "fa-calendar",
     "primary": "Ce questionnaire n’est pas adapté aux personnes de moins de 15 ans",
     "secondary": "L’algorithme servant à vous orienter n’a pas été médicalement validé pour des populations de moins de 15 ans. Prenez contact avec votre médecin généraliste au moindre doute. En cas d’urgence, appelez le <a href='tel:15'>15</a> (ou contactez le 114 par SMS si vous êtes sourd ou malentendant)."

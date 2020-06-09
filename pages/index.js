@@ -169,7 +169,7 @@ function App() {
     submitForm(token, {
       questionnaire: {
         metadata: {
-          orientation: orientations[newEnd - 1],
+          orientation: orientations[newEnd - 2],
           algo_version: '2020-06-09',
           form_version: '2020-06-09'
         },

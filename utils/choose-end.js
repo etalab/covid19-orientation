@@ -18,7 +18,7 @@ const chooseEnd = ({
   }
 
   if (ageRange === 'inf_15') {
-    end = 1
+    end = 2
   } else if (majorSeverityFactorsCount >= 1) {
     end = 5
   } else if (feverAlgo && cough) {
