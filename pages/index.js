@@ -126,10 +126,6 @@ function App() {
       count++
     }
 
-    if (riskFactorsRadios.immunosuppressant_drug_algo) {
-      count++
-    }
-
     if (riskFactorsRadios.pregnant === 1) {
       count++
     }
@@ -167,16 +163,15 @@ function App() {
     const {
       heart_disease_algo,
       immunosuppressant_disease_algo,
-      immunosuppressant_drug_algo,
       ...riskFactorsRadiosValues
     } = riskFactorsRadios
 
     submitForm(token, {
       questionnaire: {
         metadata: {
-          orientation: orientations[newEnd - 1],
-          algo_version: '2020-05-10',
-          form_version: '2020-05-10'
+          orientation: orientations[newEnd - 2],
+          algo_version: '2020-06-09',
+          form_version: '2020-06-09'
         },
         respondent: {
           age_range: ageRange,
@@ -202,7 +197,6 @@ function App() {
         calculations: {
           heart_disease_algo,
           immunosuppressant_disease_algo,
-          immunosuppressant_drug_algo,
           fever_algo: feverAlgo
         }
       }

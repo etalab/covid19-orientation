@@ -7,8 +7,9 @@ function RiskFactors({handleRiskFactors}) {
   const [diabetes, setDiabetes] = useState(false)
   const [kidneyDisease, setKidneyDisease] = useState(false)
   const [liverDisease, setLiverDisease] = useState(false)
+  const [sickleCell, setSickleCell] = useState(false)
 
-  const selectionCount = [breathingDisease, cancer, diabetes, kidneyDisease, liverDisease].filter(Boolean).length;
+  const selectionCount = [breathingDisease, cancer, diabetes, kidneyDisease, liverDisease, sickleCell].filter(Boolean).length;
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -18,7 +19,8 @@ function RiskFactors({handleRiskFactors}) {
       cancer,
       diabetes,
       kidney_disease: kidneyDisease,
-      liver_disease: liverDisease
+      liver_disease: liverDisease,
+      sickle_cell: sickleCell
     })
   }
 
@@ -31,7 +33,7 @@ function RiskFactors({handleRiskFactors}) {
             <ul>
               <li>
                 <i className='fas fa-heartbeat' aria-hidden='true' />
-                <label htmlFor='diabetes'>Êtes-vous diabétique ?</label>
+                <label htmlFor='diabetes'>Avez-vous un diabète mal équilibré ou avec des complications (yeux, reins) ?</label>
                 <input
                   id='diabetes'
                   name='diabetes'
@@ -42,7 +44,7 @@ function RiskFactors({handleRiskFactors}) {
               </li>
               <li>
                 <i className='fas fa-procedures' aria-hidden='true' />
-                <label htmlFor='cancer'>Avez-vous ou avez-vous eu un cancer dans les 3 dernières années ?</label>
+                <label htmlFor='cancer'>Avez-vous un cancer évolutif sous traitement (hors hormonothérapie) ?</label>
                 <input
                   id='cancer'
                   name='cancer'
@@ -53,7 +55,7 @@ function RiskFactors({handleRiskFactors}) {
               </li>
               <li>
                 <i className='fas fa-lungs-virus' aria-hidden='true' />
-                <label htmlFor='breathingDisease'>Avez-vous une maladie respiratoire ? Ou êtes-vous suivi par un pneumologue ?</label>
+                <label htmlFor='breathingDisease'>Avez-vous une maladie respiratoire chronique (bronchopneumopathie obstructive, asthme sévère, fibrose pulmonaire, syndrome d’apnées du sommeil, mucoviscidose) ou êtes-vous suivi par un pneumologue ?</label>
                 <input
                   id='breathingDisease'
                   name='breathingDisease'
@@ -64,7 +66,7 @@ function RiskFactors({handleRiskFactors}) {
               </li>
               <li>
                 <i className='fas fa-kidneys' aria-hidden='true' />
-                <label htmlFor='kidneyDisease'>Avez-vous une insuffisance rénale chronique dialysée ?</label>
+                <label htmlFor='kidneyDisease'>Avez-vous une insuffisance rénale chronique avec besoin de faire de la dialyse ?</label>
                 <input
                   id='kidneyDisease'
                   name='kidneyDisease'
@@ -75,13 +77,24 @@ function RiskFactors({handleRiskFactors}) {
               </li>
               <li>
                 <i className='fas fa-procedures' aria-hidden='true' />
-                <label htmlFor='liverDisease'>Avez-vous une maladie chronique du foie ?</label>
+                <label htmlFor='liverDisease'>Avez-vous une cirrhose ?</label>
                 <input
                   id='liverDisease'
                   name='liverDisease'
                   type='checkbox'
                   checked={liverDisease}
                   onChange={() => setLiverDisease(!liverDisease)}
+                />
+              </li>
+              <li>
+                <i className='fas fa-procedures' aria-hidden='true' />
+                <label htmlFor='sickleCell'>Avez-vous une drépanocytose homozygote (forme majeure) ou avez-vous bénéficié d’une splénectomie (ablation de la rate) à cause de la drépanocytose ?</label>
+                <input
+                  id='sickleCell'
+                  name='sickleCell'
+                  type='checkbox'
+                  checked={sickleCell}
+                  onChange={() => setSickleCell(!sickleCell)}
                 />
               </li>
             </ul>

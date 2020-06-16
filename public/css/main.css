@@ -1165,7 +1165,7 @@ footer button:active {
   }
   .complement-infos label,
   .complement-infos input {
-    width: 50%;
+    width: 70%;
   }
   .message-box input[type="text"] {
     height: 3rem;
