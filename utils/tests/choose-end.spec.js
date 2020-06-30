@@ -294,7 +294,7 @@ doit retourner 2, 3 ou  4', () => {
     describe('IF 0 facteur pronostique', () => {
       describe('IF 0 facteur de gravité mineur', () => {
         describe('IF moins de 50 ans => FIN2', () => {
-          it('doit retourner 2', () => {
+          it('doit retourner 6', () => {
             value = {
               ...parameters,
               cough: true,
@@ -306,7 +306,7 @@ doit retourner 2, 3 ou  4', () => {
               minorSeverityFactorsCount: 0,
             };
             result = chooseEnd(value);
-            expect(result).toBe(2);
+            expect(result).toBe(6);
           });
         });
         describe('IF plus de 50 ans => FIN3', () => {
@@ -438,7 +438,7 @@ doit retourner 2 ou 7', () => {
     });
 
     describe('IF 0 facteur pronostique => FIN2', () => {
-      it('doit retourner 2', () => {
+      it('doit retourner 6', () => {
         value = {
           ...parameters,
           cough: false,
@@ -447,7 +447,7 @@ doit retourner 2 ou 7', () => {
           pronosticFactorsCount: 0,
         };
         result = chooseEnd(value);
-        expect(result).toBe(2);
+        expect(result).toBe(6);
       });
     });
 
