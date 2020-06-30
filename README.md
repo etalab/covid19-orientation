@@ -8,7 +8,7 @@ L'implémentation proposée est conforme à la version `2020-04-29` de la [docum
 
 ## Contributions
 
-Vos remarques et contributions sont les bienvenues.  Vous pouvez pour cela [ouvrir un ticket](https://github.com/etalab/covid19-orientation/issues).
+Vos remarques et contributions sont les bienvenues. Vous pouvez pour cela [ouvrir un ticket](https://github.com/etalab/covid19-orientation/issues).
 
 ### Contributeurs et remerciements
 
@@ -36,11 +36,30 @@ Merci à :
 
 ## Tester sur sa machine
 
-	~$ git clone https://github.com/etalab/covid19-orientation.git
-	~$ cd covid19-orientation/
-	~$ yarn install
-	~$ yarn dev
-	~$ xdg-open http://localhost:3000
+    ~$ git clone https://github.com/etalab/covid19-orientation.git
+    ~$ cd covid19-orientation/
+    ~$ yarn install
+    ~$ yarn dev
+    ~$ xdg-open http://localhost:3000
+
+## Lancer les tests unitaires
+
+L'application utilise la librairie [Jest](https://jestjs.io/) pour l'écriture des tests unitaires.
+
+Les fichiers de tests doivent être placés dans un dossier nommé `tests` adjacent au fichier qui doit être testé et doit porter l'extension `.spec.js(x)`.
+
+**Commande pour lancer l'ensemble des tests unitaires**
+
+```bash
+yarn test
+```
+
+**Commande pour lancer les tests unitaires sur les fichiers modifiés depuis le dernier commit en mode watch durant l'écriture des tests**
+
+```bash
+yarn test --watch
+# utiliser l'option --watchAll pour lancer sur l'ensemble des fichiers
+```
 
 ## Licence
 
