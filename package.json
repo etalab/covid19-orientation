@@ -40,7 +40,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
     "jest": "^25.3.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "xo": "^0.28.2"
   },
   "xo": {
